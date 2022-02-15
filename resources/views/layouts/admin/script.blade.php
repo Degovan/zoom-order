@@ -1,0 +1,9 @@
+<script src="/vendor/popperjs/popper.min.js"></script>
+<script src="/vendor/bootstrap/bootstrap.min.js"></script>
+<script src="/vendor/onscreen/on-screen.umd.min.js"></script>
+<script src="/vendor/nouislider/nouislider.min.js"></script>
+<script src="/vendor/smooth-scroll/smooth-scroll.polyfills.min.js"></script>
+<script src="/vendor/chartist/chartist.min.js"></script>
+<script src="/vendor/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js"></script>
+<script src="/vendor/sweetalert2/sweetalert2.min.js"></script>
+<script src="/vendor/volt/volt.js"></script>
