@@ -1,0 +1,13 @@
+<script src="/vendor/popperjs/popper.min.js"></script>
+<script src="/vendor/bootstrap/bootstrap.min.js"></script>
+<script src="/vendor/onscreen/on-screen.umd.min.js"></script>
+<script src="/vendor/nouislider/nouislider.min.js"></script>
+<script src="/vendor/smooth-scroll/smooth-scroll.polyfills.min.js"></script>
+<script src="/vendor/chartist/chartist.min.js"></script>
+<script src="/vendor/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js"></script>
+<script src="/vendor/sweetalert2/sweetalert2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+<script src="/vendor/vanillajs-datepicker/js/datepicker.min.js"></script>
+<script src="/vendor/notyf/notyf.min.js"></script>
+<script src="/vendor/simplebar/simplebar.min.js"></script>
+<script src="/vendor/volt/volt.js"></script>
