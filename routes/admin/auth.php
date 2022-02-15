@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function() {
     Route::get('verify-email', EmailVerificationPromptController::class)
             ->name('verification.notice');
     
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+    Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])
             ->name('logout');
 
     Route::controller(ConfirmablePasswordController::class)->group(function() {
