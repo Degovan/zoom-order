@@ -22,26 +22,10 @@
     </div>
 
     <div class="card">
-        <form action="{{ route('admin.zoom-credentials.store') }}" method="POST">
+        <form action="{{ route('admin.zoom-credentials.store') }}" method="POST" autocomplete="off">
             @csrf
-            <div class="card-body">
-                <div class="row mb-4">
-                    <div class="col-lg-6 col-sm-6">
-                        <div class="mb-4">
-                            <label for="">SDK key</label>
-                            <input type="text" class="form-control" id="key" name="sdk_key">
-                        </div>
-                        <div class="">
-                            <label for="">SDK secret</label>
-                            <input type="text" class="form-control" id="secret" name="sdk_secret">
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer">
-                <button class="btn btn-primary">Submit</button>
-            </div>
+                {{-- form-control --}}
+                @include('admin.zoom-credentials.partials.form-control', ['btn' => 'Submit'])
         </form>
     </div>
 @endsection

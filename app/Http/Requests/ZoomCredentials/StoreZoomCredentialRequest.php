@@ -24,7 +24,8 @@ class StoreZoomCredentialRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'sdk_key' => 'required',
+            'sdk_secret' => 'required'
         ];
     }
 }

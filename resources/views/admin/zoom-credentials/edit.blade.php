@@ -13,7 +13,7 @@
                     <li class="breadcrumb-item" aria-current="page">Zoom Credentials</li>
                 </ol>
             </nav>
-            <h2 class="h4">Create Orders Credentials {{$zoomCredential->id}}</h2>
+            <h2 class="h4">Edit Orders Credentials</h2>
             <p class="mb-0">Your web analytics dashboard template.</p>
         </div>
         <div class="btn-toolbar mb-2 mb-md-0">
@@ -22,28 +22,10 @@
     </div>
 
     <div class="card">
-        <form action="{{ route('admin.zoom-credentials.update', $zoomCredential->id) }}" method="POST">
+        <form action="{{ route('admin.zoom-credentials.update', $zoomCredential->id) }}" method="POST" autocomplete="off">
             @csrf
             @method('PUT')
-            <div class="card-body">
-                <div class="row mb-4">
-                    <div class="col-lg-6 col-sm-6">
-                        <div class="mb-4">
-                            <input type="hidden" value="{{$zoomCredential->id}}" name="id">
-                            <label for="">SDK key</label>
-                            <input type="text" class="form-control" id="key" value="{{$zoomCredential->sdk_key}}" name="sdk_key">
-                        </div>
-                        <div class="">
-                            <label for="">SDK secret</label>
-                            <input type="text" class="form-control" id="secret" value="{{$zoomCredential->sdk_secret}}" name="sdk_secret">
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer">
-                <button class="btn btn-primary">Submit</button>
-            </div>
+                @include('admin.zoom-credentials.partials.form-control')
         </form>
     </div>
 @endsection
