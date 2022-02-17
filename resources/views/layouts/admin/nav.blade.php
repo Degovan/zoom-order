@@ -18,14 +18,22 @@
                 </a>
             </div>
         </div>
-        
+
         <ul class="nav flex-column pt-3 pt-md-0">
             <li class="nav-item @active('admin.dashboard')">
                 <a href="{{ route('admin.dashboard') }}" class="nav-link">
                     <span class="sidebar-icon">
                         <i class="fas fa-fire"></i>
-                    </span> 
+                    </span>
                     <span class="sidebar-text">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item @active('admin.zoom-credentials.index')">
+                <a href="{{ route('admin.zoom-credentials.index') }}" class="nav-link">
+                    <span class="sidebar-icon">
+                        <i class="fas fa-fire"></i>
+                    </span>
+                    <span class="sidebar-text">Zoom Credentials</span>
                 </a>
             </li>
         </ul>
