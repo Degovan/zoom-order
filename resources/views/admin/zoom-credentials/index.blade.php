@@ -49,7 +49,7 @@
                                 </button>
 
                                 <div class="dropdown-menu py-0">
-                                    <a class="dropdown-item" href="#"><span class="fas fa-edit me-2"></span>Edit</a>
+                                    <a class="dropdown-item" href="{{ route('admin.zoom-credentials.edit', $item->id) }}"><span class="fas fa-edit me-2"></span>Edit</a>
                                     <form action="{{route('admin.zoom-credentials.destroy', $item->id)}}" method="POST">
                                     @method('DELETE')
                                     @csrf

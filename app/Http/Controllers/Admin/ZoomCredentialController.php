@@ -64,7 +64,7 @@ class ZoomCredentialController extends Controller
      */
     public function edit(ZoomCredential $zoomCredential)
     {
-        //
+        return view('admin.zoom-credentials.edit', compact('zoomCredential'));
     }
 
     /**
@@ -76,7 +76,10 @@ class ZoomCredentialController extends Controller
      */
     public function update(UpdateZoomCredentialRequest $request, ZoomCredential $zoomCredential)
     {
-        //
+        $attr = $request->all();
+        $zoomCredential->update($attr);
+
+        return back();
     }
 
     /**
