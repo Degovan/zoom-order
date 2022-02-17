@@ -15,7 +15,8 @@ class ZoomCredentialController extends Controller
      */
     public function index()
     {
-        return view('admin.zoom-credentials.index');
+        $data = ZoomCredential::orderBy('created_at', 'desc')->get();
+        return view('admin.zoom-credentials.index', compact('data'));
     }
 
     /**
@@ -86,6 +87,7 @@ class ZoomCredentialController extends Controller
      */
     public function destroy(ZoomCredential $zoomCredential)
     {
-        //
+        $zoomCredential->delete();
+        return back();
     }
 }
