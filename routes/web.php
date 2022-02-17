@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FrontRedirectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::name('login')->get('login', function() {
-   return redirect('/');
-});
+Route::get('/login', FrontRedirectController::class)->name('login');
