@@ -28,8 +28,8 @@ class ZoomRepository implements ZoomRepositoryInterface
     {
         $oldConfig = $this->get();
         $newConfig = [
-            'app_id' => $data['app_id'] ?? $oldConfig->app_id,
-            'app_secret' => $data['app_secret'] ?? $oldConfig->app_secret,
+            'client_id' => $data['client_id'] ?? $oldConfig->client_id,
+            'client_secret' => $data['client_secret'] ?? $oldConfig->client_secret,
             'redirect_url' => route('zoom.app')
         ];
 
@@ -39,8 +39,8 @@ class ZoomRepository implements ZoomRepositoryInterface
     private function createIfEmpty()
     {
         $blueprint = [
-            'app_id' => '',
-            'app_secret' => '',
+            'client_id' => '',
+            'client_secret' => '',
             'redirect_url' => route('zoom.app')
         ];
 

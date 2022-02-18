@@ -26,8 +26,8 @@ class ZoomAppRequest extends FormRequest
     public function rules()
     {
         return [
-            'app_id' => 'required|string',
-            'app_secret' => 'required|string'
+            'client_id' => 'required|string',
+            'client_secret' => 'required|string'
         ];
     }
 }

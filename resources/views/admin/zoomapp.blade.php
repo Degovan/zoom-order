@@ -18,27 +18,27 @@
                 <form action="{{ route('admin.zoom-app.store') }}" method="post">
                 @csrf
                 <div class="mb-3">
-                    <label for="appid">App ID</label>
+                    <label for="appid">Client ID</label>
                     <div class="input-group">
                         <div class="input-group-text">
                             <i class="fas fa-file-alt"></i>
                         </div>
-                        <input type="text" name="app_id" id="appid" class="form-control @error('app_id') is-invalid @enderror" value="{{ $zoom->app_id }}" autofocus>
+                        <input type="text" name="client_id" id="appid" class="form-control @error('client_id') is-invalid @enderror" value="{{ $zoom->client_id }}" autofocus>
                     </div>
-                    @error('app_id')
+                    @error('client_id')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
 
                 <div class="mb-3">
-                    <label for="appsecret">App Secret</label>
+                    <label for="appsecret">Client Secret</label>
                     <div class="input-group">
                         <div class="input-group-text">
                             <i class="fas fa-key"></i>
                         </div>
-                        <input type="password" name="app_secret" id="appsecret" class="form-control @error('app_secret') is-invalid @enderror" value="{{ $zoom->app_secret }}">
+                        <input type="password" name="client_secret" id="appsecret" class="form-control @error('client_secret') is-invalid @enderror" value="{{ $zoom->client_secret }}">
                     </div>
-                    @error('app_secret')
+                    @error('client_secret')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
