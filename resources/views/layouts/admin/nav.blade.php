@@ -28,6 +28,14 @@
                     <span class="sidebar-text">Dashboard</span>
                 </a>
             </li>
+            <li class="nav-item @active('admin.zoom-app')">
+                <a href="{{ route('admin.zoom-app.index') }}" class="nav-link">
+                    <span class="sidebar-icon">
+                        <i class="fas fa-box"></i>
+                    </span> 
+                    <span class="sidebar-text">Zoom App</span>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>
