@@ -18,4 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/zoom/add', fn() => null)->name('zoom.app');
+
 Route::get('/login', FrontRedirectController::class)->name('login');

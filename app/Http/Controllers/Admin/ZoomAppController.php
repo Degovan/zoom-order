@@ -3,10 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\ZoomAppRequest;
+use App\Repository\ZoomRepository;
 
 class ZoomAppController extends Controller
 {
+    protected ZoomRepository $zoom;
+
+    public function __construct()
+    {
+        $this->zoom = new ZoomRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,9 @@ class ZoomAppController extends Controller
      */
     public function index()
     {
-        return view('admin.zoomapp');
+        return view('admin.zoomapp', [
+            'zoom' => $this->zoom->get()
+        ]);
     }
 
     /**
@@ -23,8 +33,10 @@ class ZoomAppController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ZoomAppRequest $request)
     {
-        //
+        $this->zoom->store($request->all());
+
+        return redirect()->back()->with('alert_s', 'Data berhasil disimpan');
     }
 }
