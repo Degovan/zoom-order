@@ -18,4 +18,10 @@ interface ZoomRepositoryInterface
      * @return void
      */
     public function store(array $data): void;
+
+    /**
+     * Store the user access token
+     * 
+     * @param 
+     */
 }

@@ -28,13 +28,24 @@
                     <span class="sidebar-text">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item @active('admin.zoom-app')">
-                <a href="{{ route('admin.zoom-app.index') }}" class="nav-link">
-                    <span class="sidebar-icon">
-                        <i class="fas fa-box"></i>
-                    </span> 
-                    <span class="sidebar-text">Zoom App</span>
-                </a>
+            <li class="nav-item">
+                <span class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" data-bs-target="#zoom-submenu">
+                    <span>
+                        <span class="sidebar-icon"><i class="fas fa-box"></i></span>
+                        <span class="sidebar-text">Zoom</span>
+                    </span>
+                    <span class="link-arrow"><i class="fas fa-angle-right"></i></span>
+                </span>
+                <div class="multi-level collapse @active('admin.zoom', 'show')" id="zoom-submenu" aria-expanded="false">
+                    <ul class="flex-column nav">
+                        <li class="nav-item @active('admin.zoom.app.index')">
+                            <a href="{{ route('admin.zoom.app.index') }}" class="nav-link">Aplikasi</a>
+                        </li>
+                        <li class="nav-item @active('admin.zoom.account.index')">
+                            <a href="{{ route('admin.zoom.account.index') }}" class="nav-link">Akun</a>
+                        </li>
+                    </ul>
+                </div>
             </li>
         </ul>
     </div>

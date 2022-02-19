@@ -15,7 +15,7 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('admin.zoom-app.store') }}" method="post">
+                <form action="{{ route('admin.zoom.app.store') }}" method="post">
                 @csrf
                 <div class="mb-3">
                     <label for="appid">Client ID</label>
