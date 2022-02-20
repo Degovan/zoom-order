@@ -26,7 +26,7 @@ class PricingController extends Controller
      */
     public function create()
     {
-        //
+        return view('member.pricing.create');
     }
 
     /**

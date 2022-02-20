@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/vendor/voler/css/bootstrap.css">
     <link rel="stylesheet" href="/vendor/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="/vendor/voler/css/app.css">
+    @stack('style')
 </head>
 <body>
     <div id="app">
@@ -17,7 +18,7 @@
             @include('layouts.member.topbar')
 
             @yield('content')
-            
+
             @include('layouts.member.footer')
         </div>
     </div>
@@ -25,5 +26,6 @@
     <script src="/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/vendor/voler/js/app.js"></script>
     <script src="/vendor/voler/js/main.js"></script>
+    @stack('script')
 </body>
 </html>
