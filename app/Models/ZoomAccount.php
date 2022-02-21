@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ZoomAccount extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'email',
+        'auth_filename'
+    ];  
 }

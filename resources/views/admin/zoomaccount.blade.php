@@ -12,6 +12,11 @@
     <div class="col-md-8">
         <div class="card">
             <div class="card-body">
+                <div class="d-flex justify-content-end mb-4">
+                    <a href="{{ $auth_url }}" class="btn btn-sm btn-primary">
+                        <i class="fas fa-paperclip"></i> Hubungkan akun baru
+                    </a>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover" id="zoom-account-table">
                         <thead>

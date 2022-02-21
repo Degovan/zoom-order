@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Factory\ZoomAuthFactory;
 use App\Http\Controllers\Controller;
 use App\Models\ZoomAccount;
 use Illuminate\Http\Request;
@@ -10,7 +11,9 @@ class ZoomAccountController extends Controller
 {
     public function index()
     {
-        return view('admin.zoomaccount');
+        return view('admin.zoomaccount', [
+            'auth_url' => (new ZoomAuthFactory)->generateAuthUrl()
+        ]);
     }
 
     public function destroy($id)

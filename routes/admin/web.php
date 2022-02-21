@@ -18,10 +18,6 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
         Route::get('/account/dt', [ZoomAccountController::class, 'datatables'])
             ->name('account.datatables');
     });
-    
-    Route::get('/jelas', function() {
-        dd((new ZoomAuthFactory)->generateAuthUrl());
-    });
 });
 
 include __DIR__ . '/auth.php';
