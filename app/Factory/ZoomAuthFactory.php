@@ -8,12 +8,17 @@ use Illuminate\Support\Facades\Http;
 class ZoomAuthFactory implements ZoomAuthFactoryContract
 {
     public const AUTHURL = 'https://zoom.us/oauth';
+    public const APIURL = 'https://api.zoom.us/v2';
+
+    private array $tokenHeaders;
 
     public function __construct()
     {
-        $zoomRepo = new ZoomAppRepository;
-        
-        $this->zoomapp = $zoomRepo->get();
+        $this->zoomapp = (new ZoomAppRepository)->get();
+        $this->tokenHeaders = [
+            'Content-Type'=> 'application/x-www-form-urlencoded',
+            'Authorization' => "Basic {$this->accessTokenAuth()}"
+        ];
     }
 
     public function generateAuthUrl(): string
@@ -27,22 +32,41 @@ class ZoomAuthFactory implements ZoomAuthFactoryContract
         return self::AUTHURL . '/authorize?' . http_build_query($queries);
     }
 
-    public function requestAccessToken(string $grantType, string $code = null): array
+    public function requestAccessToken(string $code = null): array
     {
-        match($grantType) {
-            'authorization_code' => $body = $this->authorizationCodeBody($code),
-            'refresh_token' => $body = $this->refreshTokenBody()
-        };
-
-        $headers = [
-            'Content-Type'=> 'application/x-www-form-urlencoded',
-            'Authorization' => "Basic {$this->accessTokenAuth()}"
+        $url = self::AUTHURL . '/token';
+        $body = [
+            'code' => $code,
+            'grant_type' => 'authorization_code',
+            'redirect_uri' => $this->zoomapp->redirect_url,
         ];
 
-        $url = self::AUTHURL . '/token';
-        $response = Http::withHeaders($headers)->asForm()->post($url, $body);
-        
+        $response = Http::withHeaders($this->tokenHeaders)->asForm()->post($url, $body);
         return $response->json();
+    }
+
+    public function refreshAccessToken(object $token): array
+    {
+        $url = self::AUTHURL . '/token';
+        $body = [
+            'grant_type' => 'refresh_token',
+            'refresh_token' => $token->refresh_token
+        ];
+
+        $response = Http::withHeaders($this->tokenHeaders)->asForm()->post($url, $body);
+        return $response->json();
+    }
+
+    public function getAccount(object $token): array
+    {
+        $headers = [
+            'Content-Type' => 'application/x-www-form-urlencoded',
+            'Authorization' => "Bearer {$token->access_token}"
+        ];
+
+        return Http::withHeaders($headers)
+                    ->get(self::APIURL . '/users/me')
+                    ->json();
     }
 
     /**
@@ -52,22 +76,5 @@ class ZoomAuthFactory implements ZoomAuthFactoryContract
     private function accessTokenAuth(): string
     {
         return base64_encode("{$this->zoomapp->client_id}:{$this->zoomapp->client_secret}");
-    }
-
-    private function authorizationCodeBody(string $code): array
-    {
-        return [
-            'code' => $code,
-            'grant_type' => 'authorization_code',
-            'redirect_uri' => $this->zoomapp->redirect_url,
-        ];
-    }
-
-    private function refreshTokenBody(): array
-    {
-        return [
-            'grant_type' => 'refresh_token',
-            'refresh_token' => $this->zoomToken->access_token
-        ];
     }
 }

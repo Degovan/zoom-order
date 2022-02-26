@@ -12,5 +12,5 @@ class ZoomAccount extends Model
     protected $fillable = [
         'email',
         'auth_filename'
-    ];  
+    ];
 }

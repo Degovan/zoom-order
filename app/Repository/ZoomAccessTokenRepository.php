@@ -14,21 +14,25 @@ class ZoomAccessTokenRepository extends ZoomRepositoryAbstract
         $this->createIfEmpty();
     }
 
+    public function get(ZoomAccount $account): object
+    {
+        $location = self::TOKENLOCATION . "/{$account->auth_filename}";
+        return json_decode($this->storage->get($location));
+    }
+
     /**
      * Store the access token
      * @param string $email
      * @param array $data
      * @return string $filename
      */
-    public function store(string $email, array $data): ZoomAccount
+    public function store(string $email, array $data): string
     {
         $filename = self::TOKENLOCATION . "/{$email}.json";
+        $data['expires_in'] = time() + $data['expires_in'];
+        
         $this->storage->put($filename, json_encode($data));
-
-        return ZoomAccount::create([
-                'email' => $email,
-                'auth_filename' => "{$email}.json"
-            ]);
+        return "{$email}.json";
     }
 
     /**

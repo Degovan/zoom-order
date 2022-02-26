@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Factory\ZoomAuthFactory;
 use App\Http\Controllers\Controller;
 use App\Models\ZoomAccount;
-use Illuminate\Http\Request;
 
 class ZoomAccountController extends Controller
 {

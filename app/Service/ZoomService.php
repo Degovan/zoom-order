@@ -7,44 +7,34 @@ use App\Factory\ZoomAuthFactory;
 use App\Models\ZoomAccount;
 use App\Repository\ZoomAccessTokenRepository;
 use App\Service\Contract\ZoomServiceContract;
-use Illuminate\Support\Facades\Http;
+use App\Service\Zoom\Account;
 
 class ZoomService implements ZoomServiceContract
 {
     private ZoomAuthFactory $factory;
-
-    public const ZOOMAPIURL = 'https://api.zoom.us/v2';
+    private ZoomAccessTokenRepository $tokenRepo;
 
     public function __construct(ZoomAccount $account = null)
     {
         $this->factory = new ZoomAuthFactory;
+        $this->tokenRepo = new ZoomAccessTokenRepository;
 
-        if(!is_null($account)) $this->setDefaultAccount($account);
+        if(!is_null($account)) Account::verify($account);
     }
 
-    public function linkAccount(string $code)
+    public function linkAccount(string $code): void
     {
-        $token = $this->factory->requestAccessToken('authorization_code', $code);
+        $token = $this->factory->requestAccessToken($code);
         if(isset($token['error'])) throw new ZoomServiceException('Invalid auth code');
 
-        $user = Http::withHeaders([
-                        'Authorization' => "Bearer" . $token['access_token']
-                    ])->get(self::ZOOMAPIURL . "/users/me")->json();
-        
-        (new ZoomAccessTokenRepository)->store($user['email'], $token);
-    }
+        $user = $this->factory->getAccount((object)$token);
+        $location = $this->tokenRepo->store($user['email'], $token);
 
-    public function account(): object
-    {
-        $response = Http::withHeaders([
-                'Authorization' => "Bearer {$this->token_access_token}"
-            ])->get(self::ZOOMAPIURL . "/users/me");
-
-        return (object)$response->json();
-    }
-
-    private function setDefaultAccount(ZoomAccount $account)
-    {
-
+        if(!Account::exist($user['email'])) {
+            ZoomAccount::create([
+                'email' => $user['email'],
+                'auth_filename' => $location
+            ]);
+        }
     }
 }

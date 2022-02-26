@@ -1,9 +1,10 @@
 <?php
 
-use App\Factory\ZoomAuthFactory;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ZoomAccountController;
 use App\Http\Controllers\Admin\ZoomAppController;
+use App\Models\ZoomAccount;
+use App\Service\ZoomService;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'role:admin'])->group(function() {
@@ -18,6 +19,10 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
         Route::get('/account/dt', [ZoomAccountController::class, 'datatables'])
             ->name('account.datatables');
     });
+});
+
+Route::get('/testing', function() {
+    (new ZoomService(ZoomAccount::first()));
 });
 
 include __DIR__ . '/auth.php';
