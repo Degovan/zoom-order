@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Pricing extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'summary',
+        'items'
+    ];
+
+    protected $casts = [
+        'items' => 'array'
+    ];
 }

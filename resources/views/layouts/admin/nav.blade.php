@@ -23,15 +23,23 @@
             <li class="nav-item @active('admin.dashboard')">
                 <a href="{{ route('admin.dashboard') }}" class="nav-link">
                     <span class="sidebar-icon">
-                        <i class="fas fa-fire"></i>
+                        <i class="fas fa-fw fa-fire"></i>
                     </span> 
                     <span class="sidebar-text">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item @active('admin.dashboard')">
+                <a href="{{ route('admin.dashboard') }}" class="nav-link">
+                    <span class="sidebar-icon">
+                        <i class="fas fa-fw fa-hand-holding-usd"></i>
+                    </span> 
+                    <span class="sidebar-text">Paket</span>
                 </a>
             </li>
             <li class="nav-item">
                 <span class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" data-bs-target="#zoom-submenu">
                     <span>
-                        <span class="sidebar-icon"><i class="fas fa-box"></i></span>
+                        <span class="sidebar-icon"><i class="fas fa-fw fa-box"></i></span>
                         <span class="sidebar-text">Zoom</span>
                     </span>
                     <span class="link-arrow"><i class="fas fa-angle-right"></i></span>
