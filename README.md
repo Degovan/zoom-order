@@ -14,7 +14,9 @@
 - Copy environment variable<br>
 ``cp .env.example .env``
 - Buat kunci aplikasi baru untuk kemanan<br>
-``php artisan key:generate``
+``php artisan key:generate`` lalu sesuaikan konfigurasi yang anda gunakan seperti database dan lainnya
+- Jalankan migrasi<br>
+``php artisan migrate --seed``
 - Aplikasi siap dijalankan!<br>
 ``php artisan serve``
 
