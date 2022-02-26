@@ -20,6 +20,8 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
             ->name('account.datatables');
     });
 
+    Route::get('pricings/dt', [PricingController::class, 'datatables'])
+        ->name('pricings.datatables');
     Route::resource('pricings', PricingController::class);
     
     // Profile

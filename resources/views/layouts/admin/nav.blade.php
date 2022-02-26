@@ -28,8 +28,8 @@
                     <span class="sidebar-text">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item @active('admin.dashboard')">
-                <a href="{{ route('admin.dashboard') }}" class="nav-link">
+            <li class="nav-item @active('admin.pricings')">
+                <a href="{{ route('admin.pricings.index') }}" class="nav-link">
                     <span class="sidebar-icon">
                         <i class="fas fa-fw fa-hand-holding-usd"></i>
                     </span> 
