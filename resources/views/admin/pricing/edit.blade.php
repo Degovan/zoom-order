@@ -5,7 +5,9 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
-                <x-admin.pricing.form/>
+                <form action="{{ route('admin.pricings.update', $pricing->id) }}" method="post">
+                    <x-admin.pricing.form :pricing="$pricing" method="put" />
+                </form>
             </div>
         </div>
     </div>

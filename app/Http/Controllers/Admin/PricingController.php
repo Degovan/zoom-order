@@ -60,7 +60,9 @@ class PricingController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pricing = Pricing::findOrFail($id);
+
+        return view('admin.pricing.edit', compact('pricing'));
     }
 
     /**
@@ -70,9 +72,11 @@ class PricingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PricingRequest $request, $id)
     {
-        //
+        Pricing::findOrFail($id)->update($request->all());
+
+        return back()->with('alert_s', 'Berhasil mengubah paket');
     }
 
     /**
