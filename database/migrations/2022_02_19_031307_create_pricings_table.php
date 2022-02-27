@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('pricings', function (Blueprint $table) {
             $table->id();
+            $table->string('title', 50);
+            $table->string('summary', 100);
+            $table->integer('cost');
+            $table->integer('discount');
+            $table->json('items');
             $table->timestamps();
         });
     }
