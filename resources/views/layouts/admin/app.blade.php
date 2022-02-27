@@ -23,6 +23,7 @@
     </main>
 
     @include('layouts.admin.script')
+    <x-sweetalert/>
     @stack('script')
 </body>
 </html>
