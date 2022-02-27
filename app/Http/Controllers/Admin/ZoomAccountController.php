@@ -19,7 +19,7 @@ class ZoomAccountController extends Controller
     {
         ZoomAccount::destroy($id);
 
-        return redirect()->back()->with('flash_s', 'Berhasil menghapus akun');
+        return redirect()->back()->with('alert_s', 'Berhasil menghapus akun');
     }
 
     public function datatables()

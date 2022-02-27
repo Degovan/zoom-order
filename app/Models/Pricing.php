@@ -12,6 +12,8 @@ class Pricing extends Model
     protected $fillable = [
         'title',
         'summary',
+        'cost',
+        'discount',
         'items'
     ];
 

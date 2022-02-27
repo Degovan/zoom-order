@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\PricingRequest;
 use App\Models\Pricing;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,7 @@ class PricingController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pricing.create');
     }
 
     /**
@@ -34,9 +35,10 @@ class PricingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PricingRequest $request)
     {
-        //
+        Pricing::create($request->all());
+        return back()->with('alert_s', 'Berhasil menambahkan paket');
     }
 
     /**
@@ -81,7 +83,8 @@ class PricingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Pricing::destroy($id);
+        return back()->with('alert_s', 'Berhasil menghapus paket');
     }
 
     public function datatables()
