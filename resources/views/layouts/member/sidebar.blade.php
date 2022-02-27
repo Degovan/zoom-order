@@ -11,12 +11,6 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-            <li class="sidebar-item @active('member.pricing.index')">
-                <a href="{{ route('member.pricing.index')}}" class="sidebar-link">
-                    <i data-feather="command" width="20"></i>
-                    <span>Pricing</span>
-                </a>
-            </li>
         </ul>
     </div>
     <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
