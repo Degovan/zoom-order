@@ -31,7 +31,7 @@ class ZoomAppRepository extends ZoomRepositoryAbstract
         $newConfig = [
             'client_id' => $data['client_id'] ?? $oldConfig->client_id,
             'client_secret' => $data['client_secret'] ?? $oldConfig->client_secret,
-            'redirect_url' => route('zoom.app')
+            'redirect_url' => route('zoom.add')
         ];
 
         $this->storage->put(self::CONFIGFILE, json_encode($newConfig));
