@@ -1,6 +1,10 @@
 <?php
 
+use App\Exceptions\ZoomServiceException;
 use App\Http\Controllers\FrontRedirectController;
+use App\Http\Controllers\ZoomController;
+use App\Service\ZoomService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +20,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::middleware(['auth', 'role:admin'])->group(function() {
+    Route::get('/zoom/add', [ZoomController::class, 'linkAccount'])->name('zoom.add');
 });
 
 Route::get('/login', FrontRedirectController::class)->name('login');

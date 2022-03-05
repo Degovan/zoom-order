@@ -11,6 +11,7 @@
                     <span>Dashboard</span>
                 </a>
             </li>
+
             <li class="sidebar-item @active('member.pricing.index')">
                 <a href="{{ route('member.pricing.index')}}" class="sidebar-link">
                     <i data-feather="command" width="20"></i>

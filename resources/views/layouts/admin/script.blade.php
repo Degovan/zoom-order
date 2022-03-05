@@ -1,3 +1,4 @@
+<script src="/vendor/jquery/jquery.min.js"></script>
 <script src="/vendor/popperjs/popper.min.js"></script>
 <script src="/vendor/bootstrap/bootstrap.min.js"></script>
 <script src="/vendor/onscreen/on-screen.umd.min.js"></script>

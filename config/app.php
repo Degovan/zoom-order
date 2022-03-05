@@ -178,6 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         \Irsyadulibad\LaravelActivehelper\ActiveHelperServiceProvider::class,
+        \Yajra\DataTables\DataTablesServiceProvider::class
     ],
 
     /*
@@ -192,7 +193,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // ...
+        'DataTables' => \Yajra\DataTables\Facades\DataTables::class,
     ])->toArray(),
 
 ];

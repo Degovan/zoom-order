@@ -5,19 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pricing extends Model
+class ZoomAccount extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'summary',
-        'cost',
-        'discount',
-        'items'
-    ];
-
-    protected $casts = [
-        'items' => 'array'
+        'email',
+        'auth_filename'
     ];
 }
