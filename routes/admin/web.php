@@ -1,15 +1,11 @@
 <?php
 
-
-
-use App\Http\Controllers\Admin\{DashboardController, ProfileController, InvoiceController};
-
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\PricingController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ZoomAccountController;
 use App\Http\Controllers\Admin\ZoomAppController;
-
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'role:admin'])->group(function() {
@@ -25,8 +21,6 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
             ->name('account.datatables');
     });
 
-
-    // Route::resource('/zoom-credentials', ZoomCredentialController::class);
     Route::resource('/invoice', InvoiceController::class);
     Route::get('pricings/dt', [PricingController::class, 'datatables'])
         ->name('pricings.datatables');
