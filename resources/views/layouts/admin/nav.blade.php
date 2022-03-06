@@ -24,7 +24,7 @@
                 <a href="{{ route('admin.dashboard') }}" class="nav-link">
                     <span class="sidebar-icon">
 
-                        <i class="fas fa-fire"></i>
+                        <i class="fas fa-fw fa-fire"></i>
                     </span>
                     <span class="sidebar-text">Dashboard</span>
                 </a>
@@ -32,14 +32,9 @@
             <li class="nav-item @active('admin.invoice.index')">
                 <a href="{{route('admin.invoice.index')}}" class="nav-link">
                     <span class="sidebar-icon">
-                        <i class="fas fa-fire"></i>
+                        <i class="fas fa-fw fa-file-invoice"></i>
                     </span>
                     <span class="sidebar-text">invoice</span>
-                </a>
-            </li>
-                        <i class="fas fa-fw fa-fire"></i>
-                    </span> 
-                    <span class="sidebar-text">Dashboard</span>
                 </a>
             </li>
             <li class="nav-item @active('admin.pricings')">
