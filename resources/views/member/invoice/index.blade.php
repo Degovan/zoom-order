@@ -25,42 +25,12 @@
         </div>
     </div>
 </div>
-
-
-<section class="section">
-    <div class="card">
-        <div class="card-header">
-            <a href="{{ route('member.pricing.create')}}" class="btn btn-primary"> Tambah</a>
-        </div>
-        <div class="card-body">
-            <table class='table table-striped' id="table1">
-                <thead>
-                    <tr>
-                        <th>Invoice #</th>
-                        <th>Invoice Date</th>
-                        <th>Due Date</th>
-                        <th>Total</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>901024</td>
-                        <td>05/01/2022</td>
-                        <td>12/01/2022</td>
-                        <td>Rp.231.000,00</td>
-                        <td>
-                            <span class="badge bg-success">Paid</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
 </section>
 @endsection
 
 @push('script')
     <script src="/vendor/simple-datatables/simple-datatables.js"></script>
+    <script>
+        
+    </script>
 @endpush

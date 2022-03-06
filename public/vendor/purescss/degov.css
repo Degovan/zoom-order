@@ -1,0 +1,37 @@
+.background-gold {
+  background-color: gold !important;
+}
+
+.mt-5 {
+  margin-top: 5rem;
+}
+
+.item-meeting {
+  display: none;
+}
+
+.item-meeting.on {
+  display: block;
+}
+
+.item-webinar {
+  display: none;
+}
+
+.item-webinar.on {
+  display: block;
+}
+
+.item-zoompro {
+  display: none;
+}
+
+.item-zoompro.on {
+  display: block;
+}
+
+input[type=radio] {
+  cursor: pointer !important;
+}
+
+/*# sourceMappingURL=degov.css.map */
