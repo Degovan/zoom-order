@@ -34,4 +34,28 @@ input[type=radio] {
   cursor: pointer !important;
 }
 
+.tr-mt-5 {
+  margin-top: 2rem;
+}
+
+.text-wrapper p {
+  max-width: 300px !important;
+  width: 100%;
+  box-sizing: border-box;
+  margin-left: 0;
+}
+
+.bg-custom-light {
+  background-color: #f2f2f2;
+}
+
+.button {
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  color: #5a8dee;
+  border-radius: 4px;
+}
+
 /*# sourceMappingURL=degov.css.map */
