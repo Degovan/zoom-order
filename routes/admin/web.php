@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\PricingController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ZoomAccountController;
 use App\Http\Controllers\Admin\ZoomAppController;
 use Illuminate\Support\Facades\Route;
