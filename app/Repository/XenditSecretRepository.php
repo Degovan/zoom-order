@@ -4,7 +4,8 @@ namespace App\Repository;
 
 use Illuminate\Support\Facades\Storage;
 
-class XenditSecretRepository {
+class XenditSecretRepository
+{
     private static $config = 'xendit_secret.txt';
 
     public static function get()

@@ -5,14 +5,23 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\XenditRequest;
 use App\Repository\XenditSecretRepository;
+use App\Service\XenditService;
 
 class XenditController extends Controller
 {
-    public function index()
-    {
-        $secret = XenditSecretRepository::get();
+    protected XenditService $service;
 
-        return view('admin.xendit.index', compact('secret'));
+    public function __construct()
+    {
+        $this->service = new XenditService;
+    }
+
+    public function index()
+    {   
+        return view('admin.xendit.index', [
+            'secret' => XenditSecretRepository::get(),
+            'balance' => $this->service->balance()
+        ]);
     }
 
     public function store(XenditRequest $request)
