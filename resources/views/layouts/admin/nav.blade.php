@@ -64,6 +64,14 @@
                     </ul>
                 </div>
             </li>
+            <li class="nav-item @active('admin.xendit')">
+                <a href="{{ route('admin.xendit.index') }}" class="nav-link">
+                    <span class="sidebar-icon">
+                        <i class="fas fa-fw fa-coins"></i>
+                    </span> 
+                    <span class="sidebar-text">Xendit</span>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>
