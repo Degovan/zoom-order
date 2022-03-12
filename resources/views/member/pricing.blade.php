@@ -122,7 +122,10 @@
                                     <li><i data-feather="check-circle"></i>Guaranted 100%</li>
                                 </ul>
                                 <div class="card-footer">
+                                  {{-- <a href="{{ route('member.booking', 1, 1) }}"> --}}
+                                    <a href="/member-area/booking/1/1">
                                     <button class="btn btn-primary btn-block">Booking disini</button>
+                                  </a>
                                 </div>
                             </div>
                         </div>
