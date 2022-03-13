@@ -12,10 +12,10 @@
                 </a>
             </li>
 
-            <li class="sidebar-item @active('member.pricing.index')">
-                <a href="{{ route('member.pricing.index')}}" class="sidebar-link">
-                    <i data-feather="command" width="20"></i>
-                    <span>Pricing</span>
+            <li class="sidebar-item @active('member.packages')">
+                <a href="{{ route('member.packages')}}" class="sidebar-link">
+                    <i data-feather="package" width="20"></i>
+                    <span>Daftar Paket</span>
                 </a>
             </li>
             <li class="sidebar-item @active('member.invoice.index')">

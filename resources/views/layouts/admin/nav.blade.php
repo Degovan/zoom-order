@@ -38,7 +38,7 @@
                 </a>
             </li>
             <li class="nav-item @active('admin.pricings')">
-                <a href="{{ route('admin.pricings.index') }}" class="nav-link">
+                <a href="{{ route('admin.packages.index') }}" class="nav-link">
                     <span class="sidebar-icon">
                         <i class="fas fa-fw fa-hand-holding-usd"></i>
                     </span> 

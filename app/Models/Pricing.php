@@ -9,15 +9,17 @@ class Pricing extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
-        'title',
-        'summary',
+        'package_id',
+        'max_audience',
         'cost',
-        'discount',
-        'items'
+        'discount'
     ];
 
-    protected $casts = [
-        'items' => 'array'
-    ];
+    public function package()
+    {
+        return $this->belongsTo(Package::class);
+    }
 }
