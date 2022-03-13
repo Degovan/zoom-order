@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InvoiceController;
-use App\Http\Controllers\Admin\PricingController;
+use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\XenditController;
 use App\Http\Controllers\Admin\ZoomAccountController;
@@ -28,9 +28,9 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
     });
 
     Route::resource('/invoice', InvoiceController::class);
-    Route::get('pricings/dt', [PricingController::class, 'datatables'])
-        ->name('pricings.datatables');
-    Route::resource('pricings', PricingController::class);
+    Route::get('packages/dt', [PackageController::class, 'datatables'])
+        ->name('packages.datatables');
+    Route::resource('packages', PackageController::class);
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::patch('/update-profile',[ ProfileController::class, 'update'])->name('profile.update');
