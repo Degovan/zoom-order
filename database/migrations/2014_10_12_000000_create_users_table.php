@@ -19,6 +19,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('province')->nullable();
+            $table->string('district')->nullable(); //kabupaten
+            $table->string('sub_district')->nullable(); //kecamatan
+            $table->string('institution')->nullable(); // lembaga
+            $table->string('phone')->nullable(); // no hp
             $table->rememberToken();
             $table->timestamps();
         });
