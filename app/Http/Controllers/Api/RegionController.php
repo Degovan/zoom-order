@@ -16,16 +16,16 @@ class RegionController extends Controller
 
     public function provinces()
     {
-        return $this->repo->province();
+        return response()->json($this->repo->province());
     }
 
     public function districts(int $id)
     {
-        return $this->repo->district($id);
+        return response()->json($this->repo->district($id));
     }
 
     public function subDistricts(int $id)
     {
-        return $this->repo->sub_district($id);
+        return response()->json($this->repo->sub_district($id));
     }
 }

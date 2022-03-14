@@ -60,7 +60,7 @@
                                 <div class="form-group">
                                     <select class="choices form-select" name="province">
                                         @foreach($provinces as $prov)
-                                        <option value="{{ $prov->name }}" data-id="{{ $prov->id }}">{{ $prov->name }}</option>
+                                        <option value="{{ $prov->id }}">{{ $prov->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
