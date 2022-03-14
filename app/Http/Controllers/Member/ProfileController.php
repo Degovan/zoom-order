@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Requests\ProfileRequest;
+use App\Repository\RegionRepository;
 
 class ProfileController extends Controller
 {
     public function index()
     {
-        return view('member.profile');
+        $provinces = (new RegionRepository)->province();
+
+        return view('member.profile', compact('provinces'));
     }
 
     public function update(ProfileRequest $request)
