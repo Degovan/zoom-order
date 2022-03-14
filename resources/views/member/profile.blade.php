@@ -32,25 +32,26 @@
                     </div>
                     <div class="card-content">
                     <div class="card-body">
-                        <form class="form form-vertical" autocomplete="off">
+                        <form class="form form-vertical" autocomplete="off" action="{{route('member.profile.update')}}" method="POST">
+                            @csrf
+                            @method('PUT')
                         <div class="form-body">
                             <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
                                 <label for="first-name-vertical">Name</label>
-                                <input type="text" id="first-name-vertical" class="form-control" name="fname" placeholder="First Name">
+                                    <input type="text" id="first-name-vertical" class="form-control @error('name') is-invalid @enderror" value="{{Auth::user()->name }}" name="name" placeholder="First Name">
+                                @error('name')
+                                    <div class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
+                                @enderror
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                 <label for="email-id-vertical">Email</label>
-                                <input type="email" id="email-id-vertical" class="form-control" name="email-id" placeholder="Email">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                <label for="contact-info-vertical">Mobile</label>
-                                <input type="number" id="contact-info-vertical" class="form-control" name="contact" placeholder="Mobile">
+                                <input type="email" id="email-id-vertical" class="form-control" name="email" value="{{Auth::user()->email}}" placeholder="Email" readonly>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -104,13 +105,24 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Lembaga/Institusi</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control @error('institution') is-invalid @enderror" value="{{Auth::user()->institution}}">
+                                    @error('institution')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>No Handphone</label>
-                                    <input type="number" class="form-control">
+                                    <input type="number" class="form-control @error('phone') is-invalid @enderror" value="{{Auth::user()->phone}}">
+
+                                    @error('phone')
+                                        <div class="invalid-feedback">
+                                            {{$message}}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-12 d-flex justify-content-end">
@@ -132,4 +144,8 @@
 @push('script')
         <!-- Include Choices JavaScript -->
         <script src="/vendor/choices.js/choices.min.js"></script>
+        <script>
+            let response = fetch(url);
+
+        </script>
 @endpush

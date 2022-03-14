@@ -9,7 +9,11 @@ Route::middleware(['auth', 'role:user'])->group(function() {
     Route::get('/invoice',[InvoiceController::class, 'index'])->name('invoice.index');
     Route::get('/booking/{package:id}/{pricing:id}',[BookingController::class, 'detail'])->name('booking');
     Route::get('packages', [PackageController::class, 'index'])->name('packages');
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::controller(ProfileController::class)->group(function() {
+        Route::get('/profile', 'index')->name('profile.index');
+        Route::put('profile','update')->name('profile.update');
+    });
+
 });
 
 include __DIR__ . '/auth.php';
