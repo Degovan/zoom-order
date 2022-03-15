@@ -24,9 +24,12 @@ class ProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:8',
+            'name' => 'required|min:3',
             'institution' => 'required',
-            'phone' => 'required'
+            'province' => 'required',
+            'district' => 'required',
+            'sub_district' => 'required',
+            // 'phone' => 'required'
         ];
     }
 }

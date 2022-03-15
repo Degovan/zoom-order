@@ -58,11 +58,16 @@
                             <div class="form-group">
                                 <label>Provinsi</label>
                                 <div class="form-group">
-                                    <select class="choices form-select" id="provinsi" name="province">
+                                    <select class="choices form-select @error('province') is-invalid @enderror" id="provinsi" name="province">
                                         @foreach($provinces as $prov)
                                         <option value="{{ $prov->id }}">{{ $prov->name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('province')
+                                        <div class="invalid-feedback">
+                                            {{$message}}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -70,8 +75,13 @@
                             <div class="form-group">
                                 <label>Kabupaten</label>
                                 <div class="form-group">
-                                    <select class="form-select" id="district">
+                                    <select class="form-select @error('district') is-invalid @enderror" id="district" name="district">
                                     </select>
+                                    @error('district')
+                                        <div class="invalid-feedback">
+                                            {{$message}}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -79,15 +89,20 @@
                             <div class="form-group">
                                 <label>Kecamatan</label>
                                 <div class="form-group">
-                                    <select class="form-select" id="sub_district">
+                                    <select class="form-select @error('sub_district') is-invalid @enderror" id="sub_district" name="sub_district">
                                     </select>
+                                    @error('sub_district')
+                                    <div class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Lembaga/Institusi</label>
-                                <input type="text" class="form-control @error('institution') is-invalid @enderror" value="{{Auth::user()->institution}}">
+                                <input type="text" class="form-control @error('institution') is-invalid @enderror" value="{{Auth::user()->institution}}" name="institution">
                                 @error('institution')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -98,7 +113,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label>No Handphone</label>
-                                <input type="number" class="form-control @error('phone') is-invalid @enderror" value="{{Auth::user()->phone}}">
+                                <input type="number" class="form-control @error('phone') is-invalid @enderror" value="{{Auth::user()->phone}}" name="phone">
 
                                 @error('phone')
                                     <div class="invalid-feedback">
@@ -127,14 +142,14 @@
         <!-- Include Choices JavaScript -->
         <script src="/vendor/choices.js/choices.min.js"></script>
         <script>
-        
+
         const provinsi = document.querySelector("#provinsi");
         const districts = document.querySelector("#district")
         const sub_district = document.querySelector("#sub_district");
         const choicesDistrict = new Choices(districts);
         const choicesSubDistrict = new Choices(sub_district);
         // console.log(provinsi)
-        
+
         provinsi.addEventListener('change', function(){
             fetch(`/api/region/districts/${this.value}`)
             .then(res => res.json())
@@ -143,12 +158,12 @@
                 choicesDistrict.clearStore();
                 choicesDistrict.setChoices(data.map(district => {
                     return {
-                       label: district.name, 
+                       label: district.name,
                        value: district.id
                     }
                 }));
-                
-                
+
+
             })
         })
 
@@ -159,15 +174,15 @@
                 choicesSubDistrict.clearStore();
                 choicesSubDistrict.setChoices(data.map(subdistrict => {
                     return {
-                       label: subdistrict.name, 
+                       label: subdistrict.name,
                        value: subdistrict.id
                     }
                 }));
-                
-                
+
+
             })
         })
-        
-        
+
+
         </script>
 @endpush

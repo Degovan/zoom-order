@@ -17,9 +17,10 @@ class ProfileController extends Controller
 
     public function update(ProfileRequest $request)
     {
-        $request->user()->update(
-            $request->all()
-        );
+
+        $data =  $request->all();
+
+        $request->user()->update($data);
 
         return back();
     }
