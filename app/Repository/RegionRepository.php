@@ -46,7 +46,6 @@ class RegionRepository
         }
 
         if(!is_null($id)) return $this->getByID($districts, $id);
-
         return $districts;
     }
 
@@ -76,7 +75,7 @@ class RegionRepository
     {
         $storage = Storage::disk('local');
         $path = "regions/{$name}.json";
-        
+
         if(!$storage->exists($path)) return null;
 
         $content = json_decode($storage->get($path));

@@ -58,7 +58,7 @@
                             <div class="form-group">
                                 <label>Provinsi</label>
                                 <div class="form-group">
-                                    <select class="choices form-select" name="province">
+                                    <select class="choices form-select" name="province" onchange="getVal(this)">
                                         @foreach($provinces as $prov)
                                         <option value="{{ $prov->id }}">{{ $prov->name }}</option>
                                         @endforeach
@@ -68,32 +68,18 @@
                         </div>
                         <div class="col-4">
                             <div class="form-group">
-                                <label for="">Kabupaten</label>
+                                <label>Kabupaten</label>
                                 <div class="form-group">
-                                    <select class="choices form-select">
-                                        <option value="square">Square</option>
-                                        <option value="rectangle">Rectangle</option>
-                                        <option value="rombo">Rombo</option>
-                                        <option value="romboid">Romboid</option>
-                                        <option value="trapeze">Trapeze</option>
-                                        <option value="traible">Triangle</option>
-                                        <option value="polygon">Polygon</option>
+                                    <select class="choices form-select" id="district">
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="form-group">
-                                <label for="">Kecamatan</label>
+                                <label>Kecamatan</label>
                                 <div class="form-group">
-                                    <select class="choices form-select">
-                                        <option value="square">Square</option>
-                                        <option value="rectangle">Rectangle</option>
-                                        <option value="rombo">Rombo</option>
-                                        <option value="romboid">Romboid</option>
-                                        <option value="trapeze">Trapeze</option>
-                                        <option value="traible">Triangle</option>
-                                        <option value="polygon">Polygon</option>
+                                    <select class="choices form-select" id="sub_district">
                                     </select>
                                 </div>
                             </div>
@@ -140,7 +126,12 @@
 @push('script')
 <!-- Include Choices JavaScript -->
 <script src="/vendor/choices.js/choices.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
 <script>
-    let response = fetch(url);
+    function getVal(sel) {
+        province_id = sel.value
+        console.log(province_id)
+    }
 </script>
 @endpush
