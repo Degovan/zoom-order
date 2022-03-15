@@ -58,14 +58,7 @@
                                 <div class="form-group">
                                     <label>Provinsi</label>
                                     <div class="form-group">
-                                        <select class="choices form-select">
-                                            <option value="square">Square</option>
-                                            <option value="rectangle">Rectangle</option>
-                                            <option value="rombo">Rombo</option>
-                                            <option value="romboid">Romboid</option>
-                                            <option value="trapeze">Trapeze</option>
-                                            <option value="traible">Triangle</option>
-                                            <option value="polygon">Polygon</option>
+                                        <select class="choices form-select" id="provinsi">
                                         </select>
                                     </div>
                                 </div>
@@ -74,7 +67,7 @@
                                 <div class="form-group">
                                     <label for="">Kabupaten</label>
                                     <div class="form-group">
-                                        <select class="choices form-select">
+                                        <select class="choices form-select" id="kabupaten">
                                             <option value="square">Square</option>
                                             <option value="rectangle">Rectangle</option>
                                             <option value="rombo">Rombo</option>
@@ -90,7 +83,7 @@
                                 <div class="form-group">
                                     <label for="">Kecamatan</label>
                                     <div class="form-group">
-                                        <select class="choices form-select">
+                                        <select class="choices form-select" id="kecamatan">
                                             <option value="square">Square</option>
                                             <option value="rectangle">Rectangle</option>
                                             <option value="rombo">Rombo</option>
@@ -145,7 +138,21 @@
         <!-- Include Choices JavaScript -->
         <script src="/vendor/choices.js/choices.min.js"></script>
         <script>
-            let response = fetch(url);
+            let endpoint = "http://127.0.0.1:8000/api/region/");
 
+            $("#provinsi").on('change', function(){
+                $.ajax({
+                    type: 'GET',
+                    url: endpoint + 'provinces',
+                    dataType: 'json',
+                    success: function(data){
+                        $.each(data, function(index, item){
+                            $.each(item, function(key, value){
+                                $("#provinsi").append('<option>'+ value. +'</option>')
+                            }
+                        })
+                    }
+                })
+            })
         </script>
 @endpush
