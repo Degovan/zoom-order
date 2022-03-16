@@ -9,4 +9,14 @@
         });
     </script>
     @endif
+
+    @if(session()->has('alert_i'))
+    <script>
+        Swal.fire({
+            icon: 'info',
+            text: '{{ session('alert_i') }}',
+            timer: 1500
+        });
+    </script>
+    @endif
 @endpush
