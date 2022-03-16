@@ -26,6 +26,7 @@
     <script src="/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/vendor/voler/js/app.js"></script>
     <script src="/vendor/voler/js/main.js"></script>
+    <x-sweetalert/>
     @stack('script')
 </body>
 </html>

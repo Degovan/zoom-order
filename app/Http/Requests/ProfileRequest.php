@@ -29,7 +29,7 @@ class ProfileRequest extends FormRequest
             'province' => 'required',
             'district' => 'required',
             'sub_district' => 'required',
-            // 'phone' => 'required'
+            'phone' => 'required'
         ];
     }
 }

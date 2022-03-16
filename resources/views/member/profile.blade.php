@@ -60,13 +60,12 @@
                                 <div class="form-group">
                                     <select class="choices form-select @error('province') is-invalid @enderror" id="provinsi" name="province">
                                         @foreach($provinces as $prov)
-                                        <option value="{{ $prov->id }}">{{ $prov->name }}</option>
+                                        <option value="{{ $prov->id }}" {{ $user->province == $prov->id ? 'selected' : '
+                                        ' }}>{{ $prov->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('province')
-                                        <div class="invalid-feedback">
-                                            {{$message}}
-                                        </div>
+                                    <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
@@ -76,11 +75,12 @@
                                 <label>Kabupaten</label>
                                 <div class="form-group">
                                     <select class="form-select @error('district') is-invalid @enderror" id="district" name="district">
+                                        @foreach($districts as $district)
+                                        <option value="{{ $district->id }}" {{ $district->id == $user->district ? 'selected' : '' }}>{{ $district->name }}</option>
+                                        @endforeach
                                     </select>
                                     @error('district')
-                                        <div class="invalid-feedback">
-                                            {{$message}}
-                                        </div>
+                                    <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
@@ -90,11 +90,12 @@
                                 <label>Kecamatan</label>
                                 <div class="form-group">
                                     <select class="form-select @error('sub_district') is-invalid @enderror" id="sub_district" name="sub_district">
+                                        @foreach($subDistricts as $sub)
+                                        <option value="{{ $sub->id }}" {{ $sub->id == $user->sub_district ? 'selected' : '' }}>{{ $sub->name }}</option>
+                                        @endforeach
                                     </select>
                                     @error('sub_district')
-                                    <div class="invalid-feedback">
-                                        {{$message}}
-                                    </div>
+                                    <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
@@ -162,8 +163,6 @@
                        value: district.id
                     }
                 }));
-
-
             })
         })
 
