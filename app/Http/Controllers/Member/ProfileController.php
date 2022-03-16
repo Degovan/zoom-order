@@ -4,28 +4,20 @@ namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileRequest;
-use App\Repository\RegionRepository;
+use App\Service\AccountService;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    private RegionRepository $region;
-
-    public function __construct()
-    {
-        $this->region = new RegionRepository;    
-    }
-
     public function index()
     {
         $user = Auth::user();
-        $districts = $user->province ? $this->region->district($user->province) : [];
-        $subDistricts = $user->district ? $this->region->sub_district($user->district) : [];
+        $region = AccountService::region($user);
 
         return view('member.profile', [
-            'provinces' => $this->region->province(),
-            'districts' => $districts,
-            'subDistricts' => $subDistricts,
+            'provinces' => $region->provinces,
+            'districts' => $region->districts,
+            'subDistricts' => $region->sub_districts,
             'user' => $user
         ]);
     }
