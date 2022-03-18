@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('invoices', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('no_resi');
+            $table->foreignId('zoom_account_id')->constrained();
+            $table->date('till_date');
+            $table->enum('status', [
+                'pending', 'active', 'finish'
+            ]);
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoices');
+        Schema::dropIfExists('orders');
     }
 };
