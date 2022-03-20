@@ -47,6 +47,6 @@ class InvoiceRepository
 
     private function totalGen(Pricing $pricing): int
     {
-        return ($pricing->total - $pricing->discount);
+        return ($pricing->cost - $pricing->discount);
     }
 }
