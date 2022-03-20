@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Invoice extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'code', 'due', 'user_id', 'items', 'total', 'status'
+    ];
+
+    public function order()
+    {
+        return $this->hasOne(Order::class);
+    }
 }

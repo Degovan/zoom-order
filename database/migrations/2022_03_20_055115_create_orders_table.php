@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('zoom_account_id')->constrained();
+            $table->foreignId('invoice_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('zoom_account_id')->constrained()->cascadeOnDelete();
             $table->date('till_date');
             $table->enum('status', [
                 'pending', 'active', 'finish'

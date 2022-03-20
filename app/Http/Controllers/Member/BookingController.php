@@ -1,9 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Member;
+
+use App\Exceptions\BookingServiceException;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Member\BookingRequest;
 use App\Models\{Package, Pricing};
 use App\Service\AccountService;
+use App\Service\BookingService;
 use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
@@ -26,5 +30,15 @@ class BookingController extends Controller
             'user' => $user,
             'region' => $region
         ]);
+    }
+
+    public function store(Package $package, Pricing $pricing, BookingRequest $request)
+    {
+        try {
+            BookingService::create($package, $pricing, intval($request->days));
+            return back()->with('alert_s', 'Berhasil melakukan pemesanan');
+        } catch(BookingServiceException $exception) {
+            return back()->with('alert_e', $exception->getMessage());
+        }
     }
 }

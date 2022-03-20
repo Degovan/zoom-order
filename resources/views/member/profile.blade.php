@@ -59,6 +59,7 @@
                                 <label>Provinsi</label>
                                 <div class="form-group">
                                     <select class="choices form-select @error('province') is-invalid @enderror" id="provinsi" name="province">
+                                        <option value="">--Pilih--</option>
                                         @foreach($provinces as $prov)
                                         <option value="{{ $prov->id }}" {{ $user->province == $prov->id ? 'selected' : '
                                         ' }}>{{ $prov->name }}</option>
