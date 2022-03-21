@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -12,8 +13,8 @@ class InvoiceController extends Controller
         return view('member.invoice.index');
     }
 
-    public function show()
+    public function show(Invoice $invoice)
     {
-        return view('member.invoice.detail');
+        return view('member.invoice.detail', compact('invoice'));
     }
 }

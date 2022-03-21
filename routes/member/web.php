@@ -6,7 +6,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'role:user'])->group(function() {
     Route::get('/', DashboardController::class)->name('dashboard');
-    Route::get('/invoice',[InvoiceController::class, 'index'])->name('invoice.index');
+    
+    Route::controller(InvoiceController::class)->name('invoice.')->group(function() {
+        Route::get('invoice', 'index')->name('index');
+        Route::get('invoice/{invoice:code}', 'show')->name('show');
+    });
 
     Route::controller(BookingController::class)->name('booking')->group(function() {
         Route::get('/booking/{package:id}/{pricing:id}', 'detail')->name('detail');

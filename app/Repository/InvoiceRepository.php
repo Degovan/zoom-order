@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Models\{Invoice, Package, Pricing};
+use App\Service\XenditService;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,6 +12,7 @@ class InvoiceRepository
     public static function create(Package $package, Pricing $pricing): Invoice
     {
         $repo = new self;
+        $xService = new XenditService;
         $items = json_encode([
             'title' => $package->title,
             'max_audience' => $pricing->max_audience,
@@ -18,7 +20,7 @@ class InvoiceRepository
             'discount' => $pricing->discount
         ]);
 
-        return Invoice::create([
+        $invoice = Invoice::create([
             'code' => $repo->codeGen(),
             'due' => $repo->dueDateGen(),
             'user_id' => Auth::user()->id,
@@ -26,6 +28,10 @@ class InvoiceRepository
             'total' => $repo->totalGen($pricing),
             'status' => 'unpaid'
         ]);
+
+        $xService->createInvoice(Auth::user(), $invoice);
+
+        return $invoice;
     }
 
     private function codeGen(): int

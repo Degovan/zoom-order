@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->string('code', 6);
+            $table->string('xendit_inv', 255)->nullable();
             $table->dateTime('due');
             $table->foreignId('user_id')->constrained();
             $table->json('items');
