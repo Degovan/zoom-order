@@ -54,7 +54,7 @@
                             <input type="email" id="email-id-vertical" class="form-control" name="email" value="{{Auth::user()->email}}" placeholder="Email" readonly>
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Provinsi</label>
                                 <div class="form-group">
@@ -71,7 +71,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Kabupaten</label>
                                 <div class="form-group">
@@ -86,7 +86,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-12">
                             <div class="form-group">
                                 <label>Kecamatan</label>
                                 <div class="form-group">
