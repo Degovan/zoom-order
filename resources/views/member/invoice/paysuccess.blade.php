@@ -1,4 +1,4 @@
-@extends('layouts.member.app')
+@extends('layouts.member.auth')
 
 @push('style')
     <link rel="stylesheet" href="/vendor/simple-datatables/style.css">
@@ -10,7 +10,7 @@
 @section('content')
 <div class="container">
     <div class="row text-center">
-        <div class="col-md-7 mx-auto mt-10">
+        <div class="col-md-6 col-lg-5 mx-auto">
             <div class="card">
                 <div class="card-header text-center">
                      <span class="text-success">
@@ -21,7 +21,7 @@
                      </span>
                     <h2 class="fw-normal text-success mt-3">Transaksi Berhasil</h2>
                 </div>
-                <div class="card-body mt-5">
+                <div class="card-body mt-2">
                     <div class="row gx-5">
                         <div class="col text-start">
                              <p class="fw-bold">Payment type</p>
