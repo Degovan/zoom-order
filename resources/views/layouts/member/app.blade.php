@@ -15,6 +15,7 @@
             @include('layouts.member.sidebar')
         </div>
         <div id="main">
+        
             @include('layouts.member.topbar')
 
             @yield('content')
