@@ -17,4 +17,11 @@ class InvoiceController extends Controller
     {
         return view('member.invoice.detail', compact('invoice'));
     }
+
+    public function datatables()
+    {
+        $invoices = Invoice::orderBy('created_at', 'DESC')->get();
+
+        return view('member.invoice.datatable', compact('invoices'));
+    }
 }
