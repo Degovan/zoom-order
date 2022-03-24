@@ -39,7 +39,7 @@
                         <div class="col-md-7">
                             <div class="text-wrapper">
                                 <h3>Pay to:</h3>
-                                <p class="mt-3">PT. Furqan digital indonesia</p> 
+                                <p class="mt-3">PT. Furqan digital indonesia</p>
                                 <p>NPWP : 00.000.000.0000.000</p>
                                 <p >Jl. Rowosari RT 04 RW 05. Meteseh, Kec Boja, Kabupaten Kendal, Jawa Tengah</p>
                             </div>
@@ -67,7 +67,7 @@
                             </tbody>
                         </table>
                     </div>
-                    
+
                     <div class="row justify-content-end">
                         <div class="col-md-8">
                             <table class="table table-borderless">

@@ -18,8 +18,8 @@
                     <span>Daftar Paket</span>
                 </a>
             </li>
-            <li class="sidebar-item @active('member.invoice.index')">
-                <a href="{{ route('member.invoice.index')}}" class="sidebar-link">
+            <li class="sidebar-item @active('member.invoice.datatables')">
+                <a href="{{ route('member.invoice.datatables')}}" class="sidebar-link">
                     <i data-feather="command" width="20"></i>
                     <span>Invoice</span>
                 </a>
