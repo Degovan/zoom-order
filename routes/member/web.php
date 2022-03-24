@@ -8,8 +8,8 @@ Route::middleware(['auth', 'role:user'])->group(function() {
     Route::get('/', DashboardController::class)->name('dashboard');
 
     Route::controller(InvoiceController::class)->name('invoice.')->group(function() {
-        Route::get('invoice/{invoice:code}', 'index')->name('index');
-        Route::get('/datatables', 'datatables')->name('datatables');
+        Route::get('invoice', 'index')->name('index');
+        Route::get('invoice/datatables', 'datatables')->name('datatables');
         Route::get('invoice/{invoice:code}', 'show')->name('show');
     });
 
