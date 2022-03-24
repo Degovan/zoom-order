@@ -6,7 +6,9 @@
 @endpush
 
 @section('content')
-@php $total = ($invoice->items->cost - $invoice->items->discount); @endphp
+@php
+$total = ($invoice->items->cost - $invoice->items->discount);
+@endphp
 <div class="main-content container-fluid">
     <div class="row">
         <div class="col-md-9">
@@ -64,6 +66,10 @@
                                     <td>{{ $invoice->items->title }}</td>
                                     <td>Rp. {{ $total }}</td>
                                 </tr>
+                                <tr>
+                                    <td>Durasi</td>
+                                    <td>{{ $invoice->items->days }} hari</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -74,7 +80,7 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row" class="text-right">Total</th>
-                                        <th>Rp. {{ $invoice->items->cost - $invoice->items->discount }}</th>
+                                        <th>Rp. {{ $total * $invoice->items->days }}</th>
                                     </tr>
                                 </tbody>
                             </table>
@@ -87,10 +93,10 @@
                 <div class="card">
                     <div class="card-header bg-primary">
                         <p class="text-white">Total due</p>
-                        <h2 class="text-white">Rp. {{ $total }}</h2>
+                        <h2 class="text-white">Rp. {{ $invoice->total }}</h2>
                         <p class="text-white mt-3">Payment method: </p>
                         <button type="button" class="button w-full box-border btn-custom mt-2 fw-bold">
-                            <a href="#">Proceed To Payment</a>
+                            <a href="{{ $invoice->payment_url }}">Proceed To Payment</a>
                         </button>
                     </div>
                 </div>

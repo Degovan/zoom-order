@@ -15,7 +15,7 @@ class BookingService
     public static function create(Package $package, Pricing $pricing, int $days): Order
     {
         $account = static::availableAccount();
-        $invoice = InvoiceRepository::create($package, $pricing);
+        $invoice = InvoiceRepository::create($package, $pricing, $days);
 
         return $invoice->order()->create([
             'zoom_account_id' => $account->id,
@@ -39,6 +39,6 @@ class BookingService
         $nowDate = date('Y-m-d');
         $date = new DateTime($nowDate);
         
-        return $date->modify("+{$days} days")->format('Y-m-d');
+        return $date->modify("+" . ($days - 1) . " days")->format('Y-m-d');
     }
 }

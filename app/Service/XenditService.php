@@ -38,6 +38,7 @@ class XenditService
     {
         $xInvoice = InvoiceRepository::create($invoice, $user);
         $invoice->xendit_inv = $xInvoice->id;
+        $invoice->payment_url = $xInvoice->invoice_url;
         $invoice->save();
 
         return (object) $xInvoice;
