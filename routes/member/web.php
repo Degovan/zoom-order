@@ -1,7 +1,9 @@
 <?php
 
 
-use App\Http\Controllers\Member\{DashboardController, InvoiceController, BookingController, PackageController, ProfileController};
+
+use App\Http\Controllers\Member\{DashboardController, PricingController, InvoiceController, BookingController, PackageController, ProfileController, PaymentSuccessController};
+
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'role:user'])->group(function() {
@@ -19,6 +21,7 @@ Route::middleware(['auth', 'role:user'])->group(function() {
     });
 
     Route::get('packages', [PackageController::class, 'index'])->name('packages');
+    Route::get( '/payment-success', [PaymentSuccessController::class, 'index'])->name('paymentsuccess');
     Route::controller(ProfileController::class)->group(function() {
         Route::get('/profile', 'index')->name('profile.index');
         Route::put('profile','update')->name('profile.update');
