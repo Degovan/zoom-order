@@ -35,8 +35,8 @@ class BookingController extends Controller
     public function store(Package $package, Pricing $pricing, BookingRequest $request)
     {
         try {
-            BookingService::create($package, $pricing, intval($request->days));
-            return back()->with('alert_s', 'Berhasil melakukan pemesanan');
+            $booking = BookingService::create($package, $pricing, intval($request->days));
+            return redirect()->route('member.invoice.show', $booking->invoice);
         } catch(BookingServiceException $exception) {
             return back()->with('alert_e', $exception->getMessage());
         }
