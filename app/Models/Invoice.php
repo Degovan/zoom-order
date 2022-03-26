@@ -15,7 +15,7 @@ class Invoice extends Model
     ];
 
     protected $casts = [
-        'due' => 'datetime'
+        'due' => 'datetime:d-m-Y'
     ];
 
     protected function items(): Attribute

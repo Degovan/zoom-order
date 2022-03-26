@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::directive('money', function($mount) {
-            return "<?php echo 'Rp.'. number_format($mount, 2) ?>";
+            return "<?php echo 'IDR.'. number_format($mount, 2) ?>";
         });
     }
 }

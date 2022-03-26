@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'role:admin'])->group(function() {
     Route::get('/', DashboardController::class)->name('dashboard');
-  
+
     Route::prefix('zoom')->name('zoom.')->group(function() {
         Route::resource('app', ZoomAppController::class)
             ->only(['index', 'store']);
-        
+
         Route::resource('account', ZoomAccountController::class)
             ->only(['index', 'store', 'destroy']);
         Route::get('/account/dt', [ZoomAccountController::class, 'datatables'])
@@ -27,7 +27,10 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
         Route::post('xendit/store', 'store')->name('xendit.store');
     });
 
-    Route::resource('/invoice', InvoiceController::class);
+    Route::controller(InvoiceController::class)->name('invoice.')->group(function(){
+        Route::get('/invoice', 'index')->name('index');
+        Route::get('/datatables','datatables')->name('datatables');
+    });
     Route::get('packages/dt', [PackageController::class, 'datatables'])
         ->name('packages.datatables');
     Route::resource('packages', PackageController::class);

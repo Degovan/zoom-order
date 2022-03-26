@@ -12,83 +12,58 @@
                 <li class="breadcrumb-item active" aria-current="page"></li>
             </ol>
         </nav>
-        <h2 class="h4">All Orders </h2>
+        <h2 class="h4">All Invoices </h2>
         <p class="mb-0">Your web analytics dashboard template.</p>
     </div>
 </div>
 
-<div class="table-responsive">
-    <table class="table table-centered table-nowrap mb-0 rounded">
-        <thead class="thead-light">
-            <tr>
-                <th class="border-0 rounded-start">Country</th>
-                <th class="border-0">All</th>
-                <th class="border-0 rounded-end">All Change</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Item -->
-            <tr>
-                <td class="border-0">
-                    <a href="#" class="d-flex align-items-center">
-                        <img class="me-2 image image-small rounded-circle" alt="Image placeholder" src="../../assets/img/flags/united-states-of-america.svg">
-                        <div><span class="h6">United States</span></div>
-                    </a>
-                </td>
-                <td class="border-0 font-weight-bold">106</td>
-                <td class="border-0 text-danger">
-                    <span class="fas fa-angle-down"></span>
-                    <span class="font-weight-bold">5</span>
-                </td>
-            </tr>
-            <!-- End of Item -->
-            <!-- Item -->
-            <tr>
-                <td class="border-0">
-                    <a href="#" class="d-flex align-items-center">
-                        <img class="me-2 image image-small rounded-circle" alt="Image placeholder" src="../../assets/img/flags/canada.svg">
-                        <div><span class="h6">Canada</span></div>
-                    </a>
-                </td>
-                <td class="border-0 font-weight-bold">76</td>
-                <td class="border-0 text-success">
-                    <span class="fas fa-angle-up"></span>
-                    <span class="font-weight-bold">17</span>
-                </td>
-            </tr>
-            <!-- End of Item -->
-            <!-- Item -->
-            <tr>
-                <td class="border-0">
-                    <a href="#" class="d-flex align-items-center">
-                        <img class="me-2 image image-small rounded-circle" alt="Image placeholder" src="../../assets/img/flags/united-kingdom.svg">
-                        <div><span class="h6">United Kingdom</span></div>
-                    </a>
-                </td>
-                <td class="border-0 font-weight-bold">147</td>
-                <td class="border-0 text-success">
-                    <span class="fas fa-angle-up"></span>
-                    <span class="font-weight-bold">10</span>
-                </td>
-            </tr>
-            <!-- End of Item -->
-            <!-- Item -->
-            <tr>
-                <td class="border-0">
-                    <a href="#" class="d-flex align-items-center">
-                        <img class="me-2 image image-small rounded-circle" alt="Image placeholder" src="../../assets/img/flags/france.svg">
-                        <div><span class="h6">France</span></div>
-                    </a>
-                </td>
-                <td class="border-0 font-weight-bold">112</td>
-                <td class="border-0 text-success">
-                    <span class="fas fa-angle-up"></span>
-                    <span class="font-weight-bold">3</span>
-                </td>
-            </tr>
-            <!-- End of Item -->
-
-        </tbody>
-    </table>
+<div class="row py-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover" id="invoices-table">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Invoice id</th>
+                                <th>Due</th>
+                                <th>User</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<x-datatables/>
 @endsection
+
+@push('script')
+<script>
+    $('#invoices-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: '{{ route('admin.invoice.datatables') }}'
+        },
+        columns: [
+            {data: 'DT_RowIndex', orderable: false, searchable: false},
+            {data: 'code'},
+            {data: 'due'},
+            {data: 'user_id'},
+            {data: 'total'},
+            {render: (data, type, raw, meta) => {
+                const value = raw.status.toLowerCase();
+                const bg = (value == 'unpaid') ? 'bg-danger' : (value == 'active') ? 'bg-success' : (value == 'complete') ? 'bg-info' : '';
+
+                return `<span class='badge ${bg}'>${value}</span>`;
+            }}
+
+        ]
+    });
+</script>
+@endpush
