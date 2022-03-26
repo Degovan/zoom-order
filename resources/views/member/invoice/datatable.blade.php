@@ -1,10 +1,5 @@
 @extends('layouts.member.app')
 
-@push('style')
-    {{-- datatables --}}
-    <link rel="stylesheet" href="/vendor/simple-datatables/style.css">
-@endpush
-
 @section('content')
 <div class="main-content container-fluid">
     <div class="page-title">
@@ -31,36 +26,17 @@
                 {{-- Simple Datatable --}}
             </div>
             <div class="card-body">
-                <table class='table table-striped hover' id="table1">
+                <table class="table table-striped hover invoice-table" id="invoice-table">
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Code</th>
-                            <th>Xendit_inv</th>
+                            <th>Id Invoice</th>
                             <th>Due</th>
-                            <th>User</th>
                             <th>Total</th>
                             <th>Status</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($invoices as $invoice)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{$invoice->code}}</td>
-                                <td>{{$invoice->xendit_inv}}</td>
-                                <td>{{$invoice->due}}</td>
-                                <td>{{$invoice->user->name}}</td>
-                                <td>@money($invoice->total)</td>
-                                <td>
-                                    <button class="btn btn-danger">{{$invoice->status}}</button>
-                                </td>
-                                <td>
-                                    <a href="#">Bayar Bang</a>
-                                </td>
-                            </tr>
-                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -68,9 +44,35 @@
 
     </section>
 </div>
+<x-datatables/>
 @endsection
 
 @push('script')
-<script src="/vendor/simple-datatables/simple-datatables.js"></script>
-<script src="/vendor/js/vendors.js"></script>
+<script type="text/javascript">
+
+$('#invoice-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: '{{ route('member.invoice.datatables') }}'
+        },
+        columns: [
+            {data: 'DT_RowIndex', orderable: false, searchable: false},
+            {data: 'code'},
+            {data: 'due' },
+            {data: 'total'},
+            {render: (data, type, raw, meta) => {
+
+                const value = raw.status.toLowerCase();
+                const bg = (value == 'unpaid') ? 'bg-danger' : (value == 'active') ? 'bg-success' : (value == 'complete') ? 'bg-info' : '';
+
+                if (value == 'unpaid') {
+                    return `<a href='/member-area/invoice/${raw.code}' class='badge ${bg}'>${value}</a>`;
+                }
+
+                return `<span class='badge ${bg}'>${value}</span>`;
+            }}
+        ],
+    });
+</script>
 @endpush

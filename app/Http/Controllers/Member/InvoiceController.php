@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
-use App\Service\XenditService;
+use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
 
 class InvoiceController extends Controller
 {
@@ -31,8 +32,13 @@ class InvoiceController extends Controller
 
     public function datatables()
     {
-        $invoices = Invoice::orderBy('created_at', 'DESC')->get();
+       if ($request->ajax()) {
+        $data = Invoice::query();
+        return FacadesDataTables::of($data)
+                    ->addIndexColumn()
+                    ->make(true);
+       }
 
-        return view('member.invoice.datatable', compact('invoices'));
+       return view('member.invoice.datatable');
     }
 }
