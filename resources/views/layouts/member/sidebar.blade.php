@@ -19,8 +19,8 @@
                 </a>
             </li>
             <li class="sidebar-item @active('member.invoice.datatables')">
-                <a href="{{ route('member.invoice.datatables')}}" class="sidebar-link">
-                    <i data-feather="command" width="20"></i>
+                <a href="{{ route('member.invoice.index')}}" class="sidebar-link">
+                    <i data-feather="file-plus" width="20"></i>
                     <span>Invoice</span>
                 </a>
             </li>

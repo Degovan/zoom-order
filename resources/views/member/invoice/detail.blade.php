@@ -64,7 +64,7 @@ $total = ($invoice->items->cost - $invoice->items->discount);
                             <tbody>
                                 <tr>
                                     <td>{{ $invoice->items->title }}</td>
-                                    <td>Rp. {{ $total }}</td>
+                                    <td>@money($total)</td>
                                 </tr>
                                 <tr>
                                     <td>Durasi</td>
@@ -80,7 +80,7 @@ $total = ($invoice->items->cost - $invoice->items->discount);
                                 <tbody>
                                     <tr>
                                         <th scope="row" class="text-right">Total</th>
-                                        <th>Rp. {{ $total * $invoice->items->days }}</th>
+                                        <th>@money($total * $invoice->items->days)</th>
                                     </tr>
                                 </tbody>
                             </table>
@@ -93,7 +93,7 @@ $total = ($invoice->items->cost - $invoice->items->discount);
                 <div class="card">
                     <div class="card-header bg-primary">
                         <p class="text-white">Total due</p>
-                        <h2 class="text-white">Rp. {{ $invoice->total }}</h2>
+                        <h2 class="text-white">@money($invoice->total)</h2>
                         <p class="text-white mt-3">Payment method: </p>
                         <button type="button" class="button w-full box-border btn-custom mt-2 fw-bold">
                             <a href="{{ $invoice->payment_url }}">Proceed To Payment</a>
