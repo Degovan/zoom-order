@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PackageRequest;
 use App\Models\Package;
-use App\Models\Pricing;
 use App\Repository\PricingRepository;
 
 class PackageController extends Controller
@@ -52,7 +51,7 @@ class PackageController extends Controller
      */
     public function show($id)
     {
-        
+
     }
 
     /**
