@@ -43,4 +43,9 @@ class XenditService
 
         return (object) $xInvoice;
     }
+
+    public function getInvoice(InvoiceModel $invoice)
+    {
+        return InvoiceRepository::get($invoice->xendit_inv);
+    }
 }
