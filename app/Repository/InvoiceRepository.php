@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class InvoiceRepository
 {
-    public static function create(Package $package, Pricing $pricing): Invoice
+    public static function create(Package $package, Pricing $pricing, int $days): Invoice
     {
         $repo = new self;
         $xService = new XenditService;
@@ -17,7 +17,8 @@ class InvoiceRepository
             'title' => $package->title,
             'max_audience' => $pricing->max_audience,
             'cost' => $pricing->cost,
-            'discount' => $pricing->discount
+            'discount' => $pricing->discount,
+            'days' => $days
         ]);
 
         $invoice = Invoice::create([
@@ -25,7 +26,7 @@ class InvoiceRepository
             'due' => $repo->dueDateGen(),
             'user_id' => Auth::user()->id,
             'items' => $items,
-            'total' => $repo->totalGen($pricing),
+            'total' => $repo->totalGen($pricing, $days),
             'status' => 'unpaid'
         ]);
 
@@ -51,8 +52,8 @@ class InvoiceRepository
         return $date->modify('+30 minutes')->format($format);
     }
 
-    private function totalGen(Pricing $pricing): int
+    private function totalGen(Pricing $pricing, int $days): int
     {
-        return ($pricing->cost - $pricing->discount);
+        return ($pricing->cost - $pricing->discount) * $days;
     }
 }

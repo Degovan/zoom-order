@@ -19,7 +19,18 @@ class InvoiceController extends Controller
         return view('member.invoice.detail', compact('invoice'));
     }
 
-    public function datatables(Request $request)
+    public function success(Invoice $invoice)
+    {
+        return view('member.invoice.success', compact('invoice'));
+    }
+
+    public function failure(Invoice $invoice)
+    {
+        $invoice->delete();
+        return redirect()->route('member.packages')->with('alert_e', 'Silahkan lakukan pemesanan ulang');
+    }
+
+    public function datatables()
     {
        if ($request->ajax()) {
         $data = Invoice::query();
