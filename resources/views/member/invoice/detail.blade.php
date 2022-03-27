@@ -16,7 +16,7 @@ $total = ($invoice->items->cost - $invoice->items->discount);
                 <div class="card-body">
                     <div class="row justify-content-between">
                         <div class="col-md-7">
-                            <h1>Invoice #{{ $invoice->code }} <span class="badge" id="invoice-status">UNPAID</span></h1>
+                            <h1>Invoice #{{ $invoice->code }} <span class="badge" id="invoice-status">{{ $invoice->status }}</span></h1>
                         </div>
                         <div class="col-md-5">
                             <div class="row">
@@ -89,26 +89,27 @@ $total = ($invoice->items->cost - $invoice->items->discount);
                 </div>
             </div>
         </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <div class="card-header bg-primary">
-                        <p class="text-white">Total due</p>
-                        <h2 class="text-white">@money($invoice->total)</h2>
-                        <p class="text-white mt-3">Payment method: </p>
-                        <button type="button" class="button w-full box-border btn-custom mt-2 fw-bold">
-                            <a href="{{ $invoice->payment_url }}">Proceed To Payment</a>
-                        </button>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <h4>Actions</h4>
-                    <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-                        </svg>  Download</a>
+        @if($invoice->status == 'unpaid')
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header bg-primary">
+                    <p class="text-white">Total due</p>
+                    <h2 class="text-white">@money($invoice->total)</h2>
+                    <p class="text-white mt-3">Payment method: </p>
+                    <button type="button" class="button w-full box-border btn-custom mt-2 fw-bold">
+                        <a href="{{ $invoice->payment_url }}">Proceed To Payment</a>
+                    </button>
                 </div>
             </div>
+            <div class="mt-4">
+                <h4>Actions</h4>
+                <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                    </svg>  Download</a>
+            </div>
         </div>
+        @endif
     </div>
 </div>
 </section>
@@ -127,7 +128,7 @@ switch(status.innerText.toLowerCase()) {
             status.classList.add('bg-success');
         break;
     case 'complete':
-            status.classList.add('bg-danger');
+            status.classList.add('bg-info');
         break;
 }
 </script>

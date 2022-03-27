@@ -66,11 +66,7 @@ $('#invoice-table').DataTable({
                 const value = raw.status.toLowerCase();
                 const bg = (value == 'unpaid') ? 'bg-danger' : (value == 'active') ? 'bg-success' : (value == 'complete') ? 'bg-info' : '';
 
-                if (value == 'unpaid') {
-                    return `<a href='/member-area/invoice/${raw.code}' class='badge ${bg}'>${value}</a>`;
-                }
-
-                return `<span class='badge ${bg}'>${value}</span>`;
+                return `<a href='/member-area/invoice/${raw.code}' class='badge ${bg}'>${value}</a>`;
             }}
         ],
     });

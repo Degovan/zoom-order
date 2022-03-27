@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Exceptions\BookingServiceException;
+use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\Package;
 use App\Models\Pricing;
@@ -22,6 +23,12 @@ class BookingService
             'till_date' => static::tillDate($days),
             'status' => 'pending'
         ]);
+    }
+
+    public static function activate(Invoice $invoice): void
+    {
+        $invoice->update(['status' => 'active']);
+        $invoice->order->update(['status' => 'active']);
     }
 
     private static function availableAccount(): ZoomAccount

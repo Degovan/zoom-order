@@ -44,8 +44,32 @@ class XenditService
         return (object) $xInvoice;
     }
 
-    public function getInvoice(InvoiceModel $invoice)
+    public static function getInvoice(InvoiceModel $invoice = null)
     {
+        new self;
+        
+        if(is_null($invoice)) return InvoiceRepository::getAll();
         return InvoiceRepository::get($invoice->xendit_inv);
+    }
+
+    public static function syncInvoice(InvoiceModel $invoice)
+    {
+        if($invoice->status == 'complete') return true;
+
+        $service = new self;
+        $xInvoice = $service->getInvoice($invoice);
+
+        switch(strtolower($xInvoice->status)) {
+            case 'pending':
+                    $invoice->update(['status' => 'unpaid']);
+                    $invoice->order->update(['status' => 'pending']);
+                break;
+            case 'paid':
+                    BookingService::activate($invoice);
+                break;
+            case 'expired':
+                    $invoice->delete();
+                break;
+        }
     }
 }

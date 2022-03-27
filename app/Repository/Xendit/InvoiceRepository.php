@@ -13,6 +13,14 @@ class InvoiceRepository
         return (object) Invoice::retrieve($id);
     }
 
+    public static function getAll(array $options = []): array
+    {
+        $invoices = Invoice::retrieveAll($options);
+        if(empty($invoices)) return [];
+
+        return array_map(fn($data) => (object) $data, $invoices);
+    }
+
     public static function create(InvoiceModel $invoice, User $user): object
     {
         $xInvoice = Invoice::create([
