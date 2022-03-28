@@ -9,7 +9,7 @@ class PackageController extends Controller
 {
     public function index()
     {
-        $packages = Package::all()->chunk(3);
+        $packages = Package::all();
 
         return view('member.package', compact('packages'));
     }

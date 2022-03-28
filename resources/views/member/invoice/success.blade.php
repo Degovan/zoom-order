@@ -1,4 +1,4 @@
-@extends('layouts.member.app')
+@extends('layouts.member.auth')
 
 @push('style')
     <link rel="stylesheet" href="/vendor/simple-datatables/style.css">
@@ -10,7 +10,7 @@
 @section('content')
 <div class="container">
     <div class="row text-center">
-        <div class="col-md-7 mx-auto mt-10">
+        <div class="col-md-6 col-lg-5 mx-auto">
             <div class="card">
                 <div class="card-header text-center">
                      <span class="text-success">
@@ -21,11 +21,11 @@
                      </span>
                     <h2 class="fw-normal text-success mt-3">Transaksi Berhasil</h2>
                 </div>
-                <div class="card-body mt-5">
+                <div class="card-body mt-2">
                     <div class="row gx-5">
                         <div class="col text-start">
                              <p class="fw-bold">Payment type</p>
-                             <p class="fw-bold">Bank</p>
+                             <p class="fw-bold">Channel</p>
                              <p class="fw-bold">Mobile</p>
                              <p class="fw-bold">Email</p>
                              <p class="fw-bold mt-5 text-muted">Amount paid</p>
@@ -35,15 +35,15 @@
                             <p>Non Banking</p>
                             <p>GOPAY</p>
                             <p>80343680</p>
-                            <p>user@gmail.com</p>
-                            <p class="fw-bold mt-5">Rp. 279.900</p>
-                            <p class="fw-bold mt-2">12345678</p>
+                            <p>{{ $invoice->user->email }}</p>
+                            <p class="fw-bold mt-5">@money($invoice->total)</p>
+                            <p class="fw-bold mt-2">#{{ $invoice->code }}</p>
                        </div>
                     </div>
                 </div>
                 <div class="card-footer">
                     <button class="btn btn-primary w-full">Cetak</button>
-                    <button class="btn btn-primary w-full">Tutup</button>
+                    <a href="{{ route('member.invoice.show', $invoice) }}" class="btn btn-primary w-full">Tutup</a>
                 </div>
             </div>
         </div>

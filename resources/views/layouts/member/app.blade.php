@@ -23,6 +23,7 @@
             @include('layouts.member.footer')
         </div>
     </div>
+    <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/voler/js/feather-icons/feather.min.js"></script>
     <script src="/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/vendor/voler/js/app.js"></script>

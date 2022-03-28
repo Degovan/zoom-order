@@ -26,13 +26,12 @@
         <div class="row">
             <div class="col-12 col-md-8 offset-md-2">
                 <div class="pricing">
-                    @foreach($packages as $package)
                     <div class="row align-items-center mt-4">
-                        @foreach($package as $pkg)
+                        @foreach($packages as $pkg)
                         @php
                             $fPrice = $pkg->pricings[0];
                         @endphp
-                        <div class="col-md-4 px-0">
+                        <div class="col-md-6 col-lg-4 px-0">
                             <div class="card shadow-md">
                                 <div class="card-header text-center card-highlighted">
                                     <p class='text-center font-bold text-1xl text-white'>Full 1 Hari</p>
@@ -81,7 +80,6 @@
                         </div>
                         @endforeach
                     </div>
-                    @endforeach
                 </div>
             </div>
         </div>
