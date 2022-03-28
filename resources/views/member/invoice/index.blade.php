@@ -39,6 +39,7 @@
                     <tbody>
                     </tbody>
                 </table>
+
             </div>
         </div>
 
@@ -46,10 +47,9 @@
 </div>
 <x-datatables/>
 @endsection
-
 @push('script')
-<script type="text/javascript">
 
+<script type="text/javascript">
 $('#invoice-table').DataTable({
         processing: true,
         serverSide: true,
