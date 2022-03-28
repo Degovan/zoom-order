@@ -10,17 +10,11 @@
     @stack('style')
 </head>
 <body>
-    <div id="app">
-        <div id="sidebar" class='active'>
-            @include('layouts.member.sidebar')
-        </div>
-        <div id="main">
-        
-            @include('layouts.member.topbar')
+    <div id="">
+        <div id="">
 
             @yield('content')
 
-            @include('layouts.member.footer')
         </div>
     </div>
     <script src="/vendor/jquery/jquery.min.js"></script>

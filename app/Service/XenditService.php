@@ -2,6 +2,8 @@
 
 namespace App\Service;
 
+use App\Models\{Invoice as InvoiceModel, User};
+use App\Repository\Xendit\InvoiceRepository;
 use App\Repository\XenditSecretRepository;
 use Xendit\Balance;
 use Xendit\Exceptions\ApiException;
@@ -30,5 +32,44 @@ class XenditService
         }
 
         return $balance;
+    }
+
+    public function createInvoice(User $user, InvoiceModel $invoice): object
+    {
+        $xInvoice = InvoiceRepository::create($invoice, $user);
+        $invoice->xendit_inv = $xInvoice->id;
+        $invoice->payment_url = $xInvoice->invoice_url;
+        $invoice->save();
+
+        return (object) $xInvoice;
+    }
+
+    public static function getInvoice(InvoiceModel $invoice = null)
+    {
+        new self;
+        
+        if(is_null($invoice)) return InvoiceRepository::getAll();
+        return InvoiceRepository::get($invoice->xendit_inv);
+    }
+
+    public static function syncInvoice(InvoiceModel $invoice)
+    {
+        if($invoice->status == 'complete') return true;
+
+        $service = new self;
+        $xInvoice = $service->getInvoice($invoice);
+
+        switch(strtolower($xInvoice->status)) {
+            case 'pending':
+                    $invoice->update(['status' => 'unpaid']);
+                    $invoice->order->update(['status' => 'pending']);
+                break;
+            case 'paid':
+                    BookingService::activate($invoice);
+                break;
+            case 'expired':
+                    $invoice->delete();
+                break;
+        }
     }
 }
