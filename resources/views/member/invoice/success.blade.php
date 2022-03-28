@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary w-full">Cetak</button>
+                    <a href="{{ route('member.invoice.print', $invoice)}}" class="btn btn-primary w-full">Cetak</a>
                     <a href="{{ route('member.invoice.show', $invoice) }}" class="btn btn-primary w-full">Tutup</a>
                 </div>
             </div>

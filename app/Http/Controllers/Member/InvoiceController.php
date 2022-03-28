@@ -44,6 +44,11 @@ class InvoiceController extends Controller
         return redirect()->route('member.packages')->with('alert_e', 'Silahkan lakukan pemesanan ulang');
     }
 
+    public function print(Invoice $invoice)
+    {
+        return view('member.invoice.printprev', compact('invoice'));
+    }
+
     public function datatables()
     {
         return datatables(Invoice::query())

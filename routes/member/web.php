@@ -10,6 +10,7 @@ Route::middleware(['auth', 'role:user'])->group(function() {
     Route::controller(InvoiceController::class)->name('invoice.')->group(function() {
         Route::get('invoice', 'index')->name('index');
         Route::get('invoice/datatables', 'datatables')->name('datatables');
+        Route::get('invoice/{invoice:code}/print', 'print')->name('print');
         Route::get('invoice/{invoice:code}', 'show')->name('show');
     });
 
