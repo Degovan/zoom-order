@@ -25,7 +25,7 @@
                     <div class="row gx-5">
                         <div class="col text-start">
                              <p class="fw-bold">Payment type</p>
-                             <p class="fw-bold">Bank</p>
+                             <p class="fw-bold">Channel</p>
                              <p class="fw-bold">Mobile</p>
                              <p class="fw-bold">Email</p>
                              <p class="fw-bold mt-5 text-muted">Amount paid</p>
@@ -35,15 +35,15 @@
                             <p>Non Banking</p>
                             <p>GOPAY</p>
                             <p>80343680</p>
-                            <p>user@gmail.com</p>
-                            <p class="fw-bold mt-5">Rp. 279.900</p>
-                            <p class="fw-bold mt-2">12345678</p>
+                            <p>{{ $invoice->user->email }}</p>
+                            <p class="fw-bold mt-5">@money($invoice->total)</p>
+                            <p class="fw-bold mt-2">#{{ $invoice->code }}</p>
                        </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary w-full">Cetak</button>
-                    <button class="btn btn-primary w-full">Tutup</button>
+                    <a href="{{ route('member.invoice.print', $invoice)}}" class="btn btn-primary w-full">Cetak</a>
+                    <a href="{{ route('member.invoice.show', $invoice) }}" class="btn btn-primary w-full">Tutup</a>
                 </div>
             </div>
         </div>

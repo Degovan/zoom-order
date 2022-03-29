@@ -2,6 +2,7 @@
 
 use App\Exceptions\ZoomServiceException;
 use App\Http\Controllers\FrontRedirectController;
+use App\Http\Controllers\Member\InvoiceController;
 use App\Http\Controllers\ZoomController;
 use App\Service\ZoomService;
 use Illuminate\Http\Request;
@@ -24,6 +25,11 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function() {
     Route::get('/zoom/add', [ZoomController::class, 'linkAccount'])->name('zoom.add');
+});
+
+Route::controller(InvoiceController::class)->name('member.invoice.')->group(function() {
+    Route::get('invoice/{invoice:code}/success', 'success')->name('success');
+    Route::get('invoice/{invoice:code}/failure', 'failure')->name('failure');
 });
 
 Route::get('/login', FrontRedirectController::class)->name('login');

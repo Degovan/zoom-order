@@ -39,7 +39,6 @@
                     <tbody>
                     </tbody>
                 </table>
-
             </div>
         </div>
 
@@ -47,9 +46,10 @@
 </div>
 <x-datatables/>
 @endsection
-@push('script')
 
+@push('script')
 <script type="text/javascript">
+
 $('#invoice-table').DataTable({
         processing: true,
         serverSide: true,
@@ -66,7 +66,11 @@ $('#invoice-table').DataTable({
                 const value = raw.status.toLowerCase();
                 const bg = (value == 'unpaid') ? 'bg-danger' : (value == 'active') ? 'bg-success' : (value == 'complete') ? 'bg-info' : '';
 
-                return `<a href='/member-area/invoice/${raw.code}' class='badge ${bg}'>${value}</a>`;
+                if (value == 'unpaid') {
+                    return `<a href='/member-area/invoice/${raw.code}' class='badge ${bg}'>${value}</a>`;
+                }
+
+                return `<span class='badge ${bg}'>${value}</span>`;
             }}
         ],
     });

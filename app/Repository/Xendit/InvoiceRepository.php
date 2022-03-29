@@ -8,6 +8,19 @@ use Xendit\Invoice;
 
 class InvoiceRepository
 {
+    public static function get(string $id): object
+    {
+        return (object) Invoice::retrieve($id);
+    }
+
+    public static function getAll(array $options = []): array
+    {
+        $invoices = Invoice::retrieveAll($options);
+        if(empty($invoices)) return [];
+
+        return array_map(fn($data) => (object) $data, $invoices);
+    }
+
     public static function create(InvoiceModel $invoice, User $user): object
     {
         $xInvoice = Invoice::create([
@@ -24,7 +37,9 @@ class InvoiceRepository
                 'invoice_created' => ['email'],
                 'invoice_reminder' => ['email'],
                 'invoice_paid' => ['email']
-            ]
+            ],
+            'success_redirect_url' => route('member.invoice.success', $invoice),
+            'failure_redirect_url' => route('member.invoice.failure', $invoice)
         ]);
 
         return (object)$xInvoice;

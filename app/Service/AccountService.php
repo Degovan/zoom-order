@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Models\User;
+use App\Repository\RegionRepository;
 
 class AccountService
 {
@@ -17,6 +18,17 @@ class AccountService
             $user->institution,
             $user->phone,
         );
+    }
+
+    public static function region(User $user): object
+    {
+        $repo = new RegionRepository;
+
+        return (object)[
+            'provinces' => $repo->province(),
+            'districts' => $user->province ? $repo->district($user->province) : [],
+            'sub_districts' => $user->district ? $repo->sub_district($user->district) : []
+        ];
     }
 
     private static function check(...$params): bool
