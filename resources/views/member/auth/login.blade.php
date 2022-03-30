@@ -28,7 +28,7 @@
                         <div class="form-group position-relative has-icon-left">
                             <div class="clearfix">
                                 <label for="password">Kata sandi</label>
-                                <a href="auth-forgot-password.html" class='float-end'>
+                                <a href="{{ route('member.forgot')}}" class='float-end'>
                                     <small>Lupa sandi?</small>
                                 </a>
                             </div>

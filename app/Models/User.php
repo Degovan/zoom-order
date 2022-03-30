@@ -56,4 +56,10 @@ class User extends Authenticatable
             get: fn($value, $attr) => (string)(new Address($attr))
         );
     }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $email = $this->getAttribute('email');
+        $this->notify(new \App\Notifications\ResetPasswordNotification($token, $email));
+    }
 }

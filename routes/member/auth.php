@@ -23,7 +23,7 @@ Route::middleware('guest')->group(function() {
 
     Route::controller(PasswordResetLinkController::class)->group(function() {
         Route::get('forgot-password', 'create')->name('forgot');
-        Route::post('forgot-password', 'store');
+        Route::post('forgot-password', 'store')->name('password.reset');
     });
 
     Route::controller(NewPasswordController::class)->group(function() {
@@ -35,7 +35,7 @@ Route::middleware('guest')->group(function() {
 Route::middleware('auth')->group(function() {
     Route::get('verify-email', EmailVerificationPromptController::class)
             ->name('verification.notice');
-    
+
     Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])
             ->name('logout');
 
