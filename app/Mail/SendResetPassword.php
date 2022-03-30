@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Mail\Member;
+namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -16,7 +16,7 @@ class SendResetPassword extends Mailable
      *
      * @return void
      */
-    public function __construct($token, $user)
+    public function __construct(string $token, User $user)
     {
         $this->token = $token;
         $this->user = $user;
@@ -29,6 +29,9 @@ class SendResetPassword extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('mail.resetpass', [
+            'token' => $this->token,
+            'user' => $this->user
+        ]);
     }
 }

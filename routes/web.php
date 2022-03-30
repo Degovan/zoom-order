@@ -24,7 +24,7 @@ Route::get('/', function () {
 });
 
 Route::get('/reset-password-test', function(){
-
+    return view('mail.resetpass');
 })->name('password.reset');
 
 Route::middleware(['auth', 'role:admin'])->group(function() {

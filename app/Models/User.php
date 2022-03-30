@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\ResetPasswordNotification;
 use App\Support\Attribute\Address;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -60,6 +61,6 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $email = $this->getAttribute('email');
-        $this->notify(new \App\Notifications\ResetPasswordNotification($token, $email));
+        $this->notify(new ResetPasswordNotification($token, $email));
     }
 }
