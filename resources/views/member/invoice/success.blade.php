@@ -32,9 +32,9 @@
                              <p class="fw-bold mt-2">Transaction id</p>
                         </div>
                         <div class="col text-end">
-                            <p>Non Banking</p>
-                            <p>GOPAY</p>
-                            <p>80343680</p>
+                            <p>{{ $xInvoice->payment_method }}</p>
+                            <p>{{ $xInvoice->payment_channel }}</p>
+                            <p>{{ $invoice->user->phone }}</p>
                             <p>{{ $invoice->user->email }}</p>
                             <p class="fw-bold mt-5">@money($invoice->total)</p>
                             <p class="fw-bold mt-2">#{{ $invoice->code }}</p>

@@ -30,7 +30,7 @@ class InvoiceController extends Controller
         }
 
         BookingService::activate($invoice);
-        return view('member.invoice.success', compact('invoice'));
+        return view('member.invoice.success', compact('invoice', 'xInvoice'));
     }
 
     public function failure(Invoice $invoice)
