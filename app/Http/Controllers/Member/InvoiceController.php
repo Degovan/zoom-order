@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Service\BookingService;
 use App\Service\XenditService;
+use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
 {
@@ -49,9 +50,11 @@ class InvoiceController extends Controller
         return view('member.invoice.printprev', compact('invoice'));
     }
 
-    public function datatables()
+    public function datatables(Request $request)
     {
-        return datatables(Invoice::query())
+        $invoices = Invoice::query()->where('user_id', $request->user()->id);
+
+        return datatables($invoices)
                 ->addIndexColumn()
                 ->editColumn('due', fn($data) => $data->due->diffForHumans())
                 ->editColumn('total', fn($data) => idr_format($data->total))
