@@ -6,7 +6,7 @@
         <ul class="menu">
             <li class='sidebar-title'>Front</li>
             <li class="sidebar-item @active('member.dashboard')">
-                <a href="" class="sidebar-link">
+                <a href="{{ route('member.dashboard') }}" class="sidebar-link">
                     <i data-feather="command" width="20"></i>
                     <span>Dashboard</span>
                 </a>
