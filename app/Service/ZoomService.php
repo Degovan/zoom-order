@@ -4,11 +4,13 @@ namespace App\Service;
 
 use App\Exceptions\ZoomServiceException;
 use App\Factory\ZoomAuthFactory;
+use App\Models\Order;
 use App\Models\ZoomAccount;
 use App\Repository\Zoom\MeetingRepository;
 use App\Repository\ZoomAccessTokenRepository;
 use App\Service\Contract\ZoomServiceContract;
 use App\Service\Zoom\Account;
+use Carbon\Carbon;
 
 class ZoomService implements ZoomServiceContract
 {
@@ -42,8 +44,27 @@ class ZoomService implements ZoomServiceContract
         }
     }
 
-    public function createWebinar(array $data)
+    public function createWebinar(Order $order, object $data)
     {
-        (new MeetingRepository($this->account))->create((object) $data);
+        $date = new Carbon("{$data->date} {$data->time}");
+
+        if($date->greaterThan($order->till_date->addDay())) {
+            return (object) [
+                'status' => false,
+                'message' => "Anda tidak dapat membuat meeting pada waktu tersebut"
+            ];
+        }
+
+        $data = [
+            'topic' => $data->topic,
+            'agenda' => $data->agenda,
+            'start_time' => $date->toISOString(),
+            'waiting_room' => boolval($data->waiting_room),
+            'meeting_authentication' => boolval($data->user_authentication),
+            'password' => $data->passcode ?? '',
+            'duration' => (intval($data->hours) * 60) + intval($data->minutes)
+        ];
+
+        return (new MeetingRepository($this->account))->create((object) $data);
     }
 }

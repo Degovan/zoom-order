@@ -41,6 +41,6 @@ class MeetingRepository
             "topic" => $data->topic
         ];
 
-        $res = $this->http->post("$this->url/users/me/meetings", $data);
+        dd($this->http->post("$this->url/users/me/meetings", $data)->json());
     }
 }

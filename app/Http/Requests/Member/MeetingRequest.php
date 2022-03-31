@@ -27,11 +27,9 @@ class MeetingRequest extends FormRequest
             'topic' => 'required|string',
             'agenda' => 'required|string',
             'date' => 'required|date',
-            'time' => 'required',
             'hours' => 'required|numeric',
             'minutes' => 'required|numeric',
-            'user_authentication' => 'required|boolean',
-            'passcode' => 'sometimes'
+            'user_authentication' => 'required|in:false,true'
         ];
     }
 }

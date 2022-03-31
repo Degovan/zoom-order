@@ -3,11 +3,7 @@
 namespace App\Service;
 
 use App\Exceptions\BookingServiceException;
-use App\Models\Invoice;
-use App\Models\Order;
-use App\Models\Package;
-use App\Models\Pricing;
-use App\Models\ZoomAccount;
+use App\Models\{Invoice, Order, Package, Pricing, User, ZoomAccount};
 use App\Repository\InvoiceRepository;
 use DateTime;
 
@@ -23,6 +19,22 @@ class BookingService
             'till_date' => static::tillDate($days),
             'status' => 'pending'
         ]);
+    }
+
+    public static function getActiveInvoice(User $user)
+    {
+        $invoice = Invoice::whereBelongsTo($user)->where('status', 'active')->limit(1)->first();
+
+        if(!$invoice) return null;
+
+        if($invoice->order->till_date->lessThan(date('Y-m-d'))) {
+            $invoice->update(['status' => 'complete']);
+            $invoice->order->update(['status' => 'finish']);
+            
+            return null;
+        }
+
+        return $invoice;
     }
 
     public static function activate(Invoice $invoice): void

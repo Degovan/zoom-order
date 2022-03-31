@@ -3,11 +3,20 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\Member\MeetingMiddleware;
 use App\Http\Requests\Member\MeetingRequest;
+use App\Models\Invoice;
+use App\Service\ZoomService;
 use Illuminate\Http\Request;
 
 class MeetingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(MeetingMiddleware::class)
+            ->except(['index', 'destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -34,9 +43,12 @@ class MeetingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MeetingRequest $request)
+    public function store(MeetingRequest $request, Invoice $invoice)
     {
-        
+        $service = new ZoomService($invoice->order->zoom_account);
+        $meeting = $service->createWebinar($invoice->order, $request);
+
+        dd($meeting);
     }
 
     /**
