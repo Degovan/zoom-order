@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Member\MeetingRequest;
 use Illuminate\Http\Request;
 
-class WebinarController extends Controller
+class MeetingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class WebinarController extends Controller
      */
     public function index()
     {
-        return view('member.webinar.index');
+        return view('member.meeting.index');
     }
 
     /**
@@ -24,7 +25,7 @@ class WebinarController extends Controller
      */
     public function create()
     {
-        //
+        return view('member.meeting.create');
     }
 
     /**
@@ -33,9 +34,9 @@ class WebinarController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MeetingRequest $request)
     {
-        //
+        
     }
 
     /**

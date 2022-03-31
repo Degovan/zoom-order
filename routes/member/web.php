@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Member\{DashboardController, InvoiceController, BookingController, PackageController, ProfileController, PaymentSuccessController, WebinarController};
+use App\Http\Controllers\Member\{DashboardController, InvoiceController, BookingController, MeetingController, PackageController, ProfileController, PaymentSuccessController};
 
 use Illuminate\Support\Facades\Route;
 
@@ -27,7 +27,7 @@ Route::middleware(['auth', 'role:user'])->group(function() {
         Route::put('profile','update')->name('profile.update');
     });
 
-    Route::resource('webinars', WebinarController::class);
+    Route::resource('meetings', MeetingController::class);
 });
 
 include __DIR__ . '/auth.php';

@@ -12,10 +12,10 @@
                 </a>
             </li>
 
-            <li class="sidebar-item @active('member.webinars')">
-                <a href="{{ route('member.webinars.index')}}" class="sidebar-link">
+            <li class="sidebar-item @active('member.meetings')">
+                <a href="{{ route('member.meetings.index')}}" class="sidebar-link">
                     <i data-feather="video" width="20"></i>
-                    <span>Webinar</span>
+                    <span>Meeting</span>
                 </a>
             </li>
 
