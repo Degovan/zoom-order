@@ -6,6 +6,7 @@ use App\Exceptions\ZoomServiceException;
 use App\Factory\ZoomAuthFactory;
 use App\Models\Order;
 use App\Models\ZoomAccount;
+use App\Models\ZoomMeeting;
 use App\Repository\Zoom\MeetingRepository;
 use App\Repository\ZoomAccessTokenRepository;
 use App\Service\Contract\ZoomServiceContract;
@@ -14,7 +15,7 @@ use Carbon\Carbon;
 
 class ZoomService implements ZoomServiceContract
 {
-    public ZoomAccount $account;
+    public ZoomAccount|null $account;
 
     private ZoomAuthFactory $factory;
     private ZoomAccessTokenRepository $tokenRepo;
@@ -44,7 +45,7 @@ class ZoomService implements ZoomServiceContract
         }
     }
 
-    public function createWebinar(Order $order, object $data)
+    public function createMeeting(Order $order, object $data)
     {
         $date = new Carbon("{$data->date} {$data->time}");
 
@@ -65,6 +66,8 @@ class ZoomService implements ZoomServiceContract
             'duration' => (intval($data->hours) * 60) + intval($data->minutes)
         ];
 
-        return (new MeetingRepository($this->account))->create((object) $data);
+        $meeting = (new MeetingRepository($this->account))->create((object) $data);
+
+        return MeetingRepository::save($order, $data, $meeting);
     }
 }

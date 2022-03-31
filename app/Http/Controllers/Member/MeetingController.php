@@ -46,9 +46,10 @@ class MeetingController extends Controller
     public function store(MeetingRequest $request, Invoice $invoice)
     {
         $service = new ZoomService($invoice->order->zoom_account);
-        $meeting = $service->createWebinar($invoice->order, $request);
+        $meeting = $service->createMeeting($invoice->order, $request);
 
-        dd($meeting);
+        return redirect()->route('member.meetings.show', $meeting)
+                ->with('alert_s', 'Berhasil membuat zoom meeting');
     }
 
     /**
@@ -59,7 +60,7 @@ class MeetingController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
