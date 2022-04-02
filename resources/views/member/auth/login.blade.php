@@ -12,6 +12,13 @@
                     </div>
                     <form action="{{ route('member.login') }}" method="post">
                         @csrf
+
+                        @if(session()->has('status'))
+                        <div class="alert alert-success">
+                            <p>{{ session()->get('status') }}</p>
+                        </div>
+                        @endif
+                        
                         <div class="form-group position-relative has-icon-left">
                             <label for="username">Email</label>
                             <div class="position-relative">
