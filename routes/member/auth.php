@@ -23,19 +23,19 @@ Route::middleware('guest')->group(function() {
 
     Route::controller(PasswordResetLinkController::class)->group(function() {
         Route::get('forgot-password', 'create')->name('forgot');
-        Route::post('forgot-password', 'store');
+        Route::post('forgot-password', 'store')->name('password.reset');
     });
 
     Route::controller(NewPasswordController::class)->group(function() {
         Route::get('reset-password', 'create')->name('reset');
-        Route::post('reset-password');
+        Route::post('reset-password', 'store');
     });
 });
 
 Route::middleware('auth')->group(function() {
     Route::get('verify-email', EmailVerificationPromptController::class)
             ->name('verification.notice');
-    
+
     Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])
             ->name('logout');
 
