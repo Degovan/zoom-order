@@ -22,7 +22,7 @@ class ZoomService implements ZoomServiceContract
         if(!is_null($account)) Account::verify($account);
     }
 
-    public function linkAccount(string $code): void
+    public function linkAccount(string $code)
     {
         $token = $this->factory->requestAccessToken($code);
         if(isset($token['error'])) throw new ZoomServiceException('Invalid auth code');
@@ -31,7 +31,7 @@ class ZoomService implements ZoomServiceContract
         $location = $this->tokenRepo->store($user['email'], $token);
 
         if(!Account::exist($user['email'])) {
-            ZoomAccount::create([
+            return ZoomAccount::create([
                 'email' => $user['email'],
                 'auth_filename' => $location
             ]);

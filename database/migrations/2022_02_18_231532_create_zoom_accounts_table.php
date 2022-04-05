@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('zoom_accounts', function (Blueprint $table) {
             $table->id();
             $table->string('email', 100);
+            $table->integer('capacity')->default(0);
             $table->string('auth_filename');
             $table->timestamps();
         });

@@ -58,8 +58,8 @@
                         <li class="nav-item @active('admin.zoom.app.index')">
                             <a href="{{ route('admin.zoom.app.index') }}" class="nav-link">Aplikasi</a>
                         </li>
-                        <li class="nav-item @active('admin.zoom.account.index')">
-                            <a href="{{ route('admin.zoom.account.index') }}" class="nav-link">Akun</a>
+                        <li class="nav-item @active('admin.zoom.accounts')">
+                            <a href="{{ route('admin.zoom.accounts.index') }}" class="nav-link">Akun</a>
                         </li>
                     </ul>
                 </div>

@@ -16,8 +16,7 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
         Route::resource('app', ZoomAppController::class)
             ->only(['index', 'store']);
 
-        Route::resource('account', ZoomAccountController::class)
-            ->only(['index', 'store', 'destroy']);
+        Route::resource('accounts', ZoomAccountController::class);
         Route::get('/account/dt', [ZoomAccountController::class, 'datatables'])
             ->name('account.datatables');
     });

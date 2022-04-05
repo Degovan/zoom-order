@@ -9,7 +9,7 @@
 </div>
 
 <div class="row py-4">
-    <div class="col-md-8">
+    <div class="col-md-10">
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-end mb-4">
@@ -23,6 +23,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Email</th>
+                                <th>Kapasitas</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -47,15 +48,21 @@
         columns: [
             {data: 'DT_RowIndex', orderable: false, searchable: false},
             {data: 'email'},
+            {data: 'capacity'},
             {render: (data, type, row, meta) => {
                 return `
-                    <form action="${row.delUrl}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                    </form>
+                    <div class="d-flex">
+                        <a href="${row.editUrl}" class="btn btn-sm btn-success me-1">
+                            <i class="fas fa-pencil-alt text-white"></i>
+                        </a>
+                        <form action="${row.delUrl}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
+                    </div>
                 `;
             }}
         ]

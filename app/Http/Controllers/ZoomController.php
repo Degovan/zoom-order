@@ -11,15 +11,15 @@ class ZoomController extends Controller
     public function linkAccount(Request $request)
     {
         try {
-            (new ZoomService)->linkAccount($request->code);
+            $account = (new ZoomService)->linkAccount($request->code);
 
             return redirect()
-                    ->route('admin.zoom.account.index')
-                    ->with('flash_s', 'Sukses menghubungkan akun');
+                    ->route('admin.zoom.accounts.edit', $account)
+                    ->with('alert_s', 'Sukses menghubungkan akun');
         } catch(ZoomServiceException $e) {
             return redirect()
                     ->route('admin.zoom.account.index')
-                    ->with('flash_e', "Error: {$e->getMessage()}");
+                    ->with('alert_e', "Error: {$e->getMessage()}");
         }
     }
 }
