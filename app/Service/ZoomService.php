@@ -30,11 +30,13 @@ class ZoomService implements ZoomServiceContract
         $user = $this->factory->getAccount((object)$token);
         $location = $this->tokenRepo->store($user['email'], $token);
 
-        if(!Account::exist($user['email'])) {
-            return ZoomAccount::create([
-                'email' => $user['email'],
-                'auth_filename' => $location
-            ]);
+        if(Account::exist($user['email'])) {
+            throw new ZoomServiceException('Account has already exist');
         }
+
+        return ZoomAccount::create([
+            'email' => $user['email'],
+            'auth_filename' => $location
+        ]);
     }
 }

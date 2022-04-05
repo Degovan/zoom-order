@@ -18,7 +18,7 @@ class ZoomController extends Controller
                     ->with('alert_s', 'Sukses menghubungkan akun');
         } catch(ZoomServiceException $e) {
             return redirect()
-                    ->route('admin.zoom.account.index')
+                    ->route('admin.zoom.accounts.index')
                     ->with('alert_e', "Error: {$e->getMessage()}");
         }
     }
