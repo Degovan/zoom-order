@@ -10,7 +10,7 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
-        'invoice_id', 'zoom_account_id', 'till_date', 'status'
+        'invoice_id', 'user_id', 'remaining'
     ];
 
     public function invoice()

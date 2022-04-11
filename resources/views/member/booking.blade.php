@@ -17,8 +17,8 @@
                             <input type="text" class="form-control mt-3 " placeholder="kapasitas" readonly value="{{ $pricing->max_audience }} peserta">
                         </div>
                         <div class="mb-4">
-                            <label for="days">Berapa Hari</label>
-                            <select class="form-select mt-3" aria-label="Default select example" name="days">
+                            <label for="packets">Berapa Paket</label>
+                            <select class="form-select mt-3" aria-label="Default select example" name="packets">
                                 @for($i = 1; $i <= 30; $i++)
                                 <option value="{{ $i }}">{{ $i }}</option>
                                 @endfor

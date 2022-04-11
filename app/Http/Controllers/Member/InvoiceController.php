@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
-use App\Service\BookingService;
 use App\Service\XenditService;
 use Illuminate\Http\Request;
 
@@ -25,12 +24,12 @@ class InvoiceController extends Controller
     {
         $xInvoice = XenditService::getInvoice($invoice);
 
-        if($xInvoice->status != 'PAID') {
+        if($xInvoice->status == 'UNPAID') {
             return redirect()->route('member.invoice.show', $invoice)
                     ->with('alert_e', 'Mohon selesaikan pembayaran terlebih dahulu');
         }
 
-        BookingService::activate($invoice);
+        $invoice->activate();
         return view('member.invoice.success', compact('invoice', 'xInvoice'));
     }
 

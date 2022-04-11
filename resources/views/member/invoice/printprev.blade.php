@@ -67,8 +67,8 @@ $total = ($invoice->items->cost - $invoice->items->discount);
                                     <td>@money($total)</td>
                                 </tr>
                                 <tr>
-                                    <td>Durasi</td>
-                                    <td>{{ $invoice->items->days }} hari</td>
+                                    <td>Paket</td>
+                                    <td>{{ $invoice->items->packets }} paket</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -80,7 +80,7 @@ $total = ($invoice->items->cost - $invoice->items->discount);
                                 <tbody>
                                     <tr>
                                         <th scope="row" class="text-right">Total</th>
-                                        <th>@money($total * $invoice->items->days)</th>
+                                        <th>@money($total * $invoice->items->packets)</th>
                                     </tr>
                                 </tbody>
                             </table>
