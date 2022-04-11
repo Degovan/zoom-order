@@ -10,7 +10,7 @@ class BookingService
 {
     public static function create(Package $package, Pricing $pricing, int $packets): Order
     {
-        static::availableAccount($packets);
+        static::availableAccount($pricing->max_audience);
         $invoice = InvoiceRepository::create($package, $pricing, $packets);
 
         return $invoice->order()->create([
@@ -20,11 +20,11 @@ class BookingService
         ]);
     }
 
-    private static function AvailableAccount(int $packets)
+    private static function AvailableAccount(int $audiences)
     {
         $max = ZoomAccount::max('capacity');
 
-        if($packets > intval($max)) {
+        if($audiences > intval($max)) {
             throw new BookingServiceException('No zoom acccount are available');
         }
     }
