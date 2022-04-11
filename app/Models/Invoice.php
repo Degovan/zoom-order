@@ -11,7 +11,14 @@ class Invoice extends Model
     use HasFactory;
 
     protected $fillable = [
-        'code', 'due', 'user_id', 'items', 'total', 'status'
+        'code',
+        'xendit_inv',
+        'payment_url',
+        'due',
+        'user_id',
+        'items',
+        'total',
+        'status'
     ];
 
     protected $casts = [
@@ -33,5 +40,13 @@ class Invoice extends Model
     public function order()
     {
         return $this->hasOne(Order::class);
+    }
+
+    public function activate(): Invoice
+    {
+        $this->setAttribute('status', 'complete');
+        $this->save();
+
+        return $this;
     }
 }

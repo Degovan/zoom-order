@@ -24,7 +24,7 @@ class BookingRequest extends FormRequest
     public function rules()
     {
         return [
-            'days' => 'required|numeric'
+            'packets' => 'required|numeric'
         ];
     }
 }

@@ -59,17 +59,10 @@ class XenditService
         $service = new self;
         $xInvoice = $service->getInvoice($invoice);
 
-        switch(strtolower($xInvoice->status)) {
-            case 'pending':
-                    $invoice->update(['status' => 'unpaid']);
-                    $invoice->order->update(['status' => 'pending']);
-                break;
-            case 'paid':
-                    BookingService::activate($invoice);
-                break;
-            case 'expired':
-                    $invoice->delete();
-                break;
+        if(strtolower($xInvoice->status) == 'pending') {
+            $invoice->update(['status' => 'unpaid']);
+        } else {
+            $invoice->update(['status' => 'complete']);
         }
     }
 }

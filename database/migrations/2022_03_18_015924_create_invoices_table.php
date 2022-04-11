@@ -23,7 +23,7 @@ return new class extends Migration
             $table->json('items');
             $table->integer('total');
             $table->enum('status', [
-                'unpaid', 'active', 'complete'
+                'unpaid', 'complete'
             ]);
             $table->timestamps();
         });

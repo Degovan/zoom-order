@@ -4,29 +4,28 @@ namespace App\Repository;
 
 use App\Models\{Invoice, Package, Pricing};
 use App\Service\XenditService;
-use DateTime;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class InvoiceRepository
 {
-    public static function create(Package $package, Pricing $pricing, int $days): Invoice
+    public static function create(Package $package, Pricing $pricing, int $packets): Invoice
     {
-        $repo = new self;
         $xService = new XenditService;
         $items = json_encode([
             'title' => $package->title,
             'max_audience' => $pricing->max_audience,
             'cost' => $pricing->cost,
             'discount' => $pricing->discount,
-            'days' => $days
+            'packets' => $packets
         ]);
 
         $invoice = Invoice::create([
-            'code' => $repo->codeGen(),
-            'due' => $repo->dueDateGen(),
+            'code' => static::codeGen(),
+            'due' => Carbon::now()->addMinutes(30),
             'user_id' => Auth::user()->id,
             'items' => $items,
-            'total' => $repo->totalGen($pricing, $days),
+            'total' => ($pricing->cost - $pricing->discount) * $packets,
             'status' => 'unpaid'
         ]);
 
@@ -35,25 +34,12 @@ class InvoiceRepository
         return $invoice;
     }
 
-    private function codeGen(): int
+    private static function codeGen(): int
     {
         do {
             $code = rand(100000, 999999);
         } while(Invoice::where('code', $code)->first());
 
         return $code;
-    }
-
-    private function dueDateGen(): string
-    {
-        $format = 'Y-m-d H:i:s';
-        $date = new DateTime(date($format));
-
-        return $date->modify('+30 minutes')->format($format);
-    }
-
-    private function totalGen(Pricing $pricing, int $days): int
-    {
-        return ($pricing->cost - $pricing->discount) * $days;
     }
 }
