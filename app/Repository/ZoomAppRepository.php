@@ -14,7 +14,7 @@ class ZoomAppRepository extends ZoomRepositoryAbstract
      * Get zoom client app configuration
      * @return object $information
      */
-    public function get(): object
+    public function get()
     {
         $content = $this->storage->get(self::CONFIGFILE);
         return json_decode($content);

@@ -23,7 +23,7 @@
                         <div class="input-group-text">
                             <i class="fas fa-file-alt"></i>
                         </div>
-                        <input type="text" name="client_id" id="appid" class="form-control @error('client_id') is-invalid @enderror" value="{{ $zoom->client_id }}" autofocus>
+                        <input type="text" name="client_id" id="appid" class="form-control @error('client_id') is-invalid @enderror" value="{{ $zoom->client_id ?? '' }}" autofocus>
                     </div>
                     @error('client_id')
                         <small class="text-danger">{{ $message }}</small>
@@ -36,7 +36,7 @@
                         <div class="input-group-text">
                             <i class="fas fa-key"></i>
                         </div>
-                        <input type="password" name="client_secret" id="appsecret" class="form-control @error('client_secret') is-invalid @enderror" value="{{ $zoom->client_secret }}">
+                        <input type="password" name="client_secret" id="appsecret" class="form-control @error('client_secret') is-invalid @enderror" value="{{ $zoom->client_secret ?? '' }}">
                     </div>
                     @error('client_secret')
                         <small class="text-danger">{{ $message }}</small>
@@ -49,7 +49,7 @@
                         <div class="input-group-text">
                             <i class="fas fa-link"></i>
                         </div>
-                        <input type="text" name="redirect" id="redirect" class="form-control" value="{{ $zoom->redirect_url }}" readonly>
+                        <input type="text" name="redirect" id="redirect" class="form-control" value="{{ $zoom->redirect_url ?? '' }}" readonly>
                     </div>
                 </div>
                 
