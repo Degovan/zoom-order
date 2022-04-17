@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Factory\ZoomAuthFactory;
 use App\Models\ZoomAccount;
 
 class ZoomAccessTokenRepository extends ZoomRepositoryAbstract
@@ -17,6 +18,8 @@ class ZoomAccessTokenRepository extends ZoomRepositoryAbstract
     public function get(ZoomAccount $account): object
     {
         $location = self::TOKENLOCATION . "/{$account->auth_filename}";
+        $this->refreshIfExpired($location);
+
         return json_decode($this->storage->get($location));
     }
 
@@ -42,5 +45,17 @@ class ZoomAccessTokenRepository extends ZoomRepositoryAbstract
     {
         if(!$this->storage->exists(self::TOKENLOCATION))
             $this->storage->makeDirectory(self::TOKENLOCATION);
+    }
+
+    private function refreshIfExpired(string $path)
+    {
+        $token = json_decode($this->storage->get($path));
+
+        if($token->expires_in <= time()) {
+            $newToken = (new ZoomAuthFactory)->refreshAccessToken($token);
+            $newToken['expires_in'] = time() + $newToken['expires_in'];
+
+            $this->storage->put($path, json_encode($newToken));
+        }
     }
 }
