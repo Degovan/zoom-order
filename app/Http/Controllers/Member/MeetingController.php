@@ -105,7 +105,25 @@ class MeetingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $meeting = ZoomMeeting::findOrFail($id);
+
+        if($meeting->status != 'waiting') {
+            return redirect()->back()
+                    ->with('alert_e', 'Tidak dapat membatalkan meeting yang telah dimulai');
+        }
+
+        try {
+            MeetingService::cancel($meeting);
+        } catch(MeetingException $exception)
+        {
+            return back()->with('alert_e', $exception->getMessage());
+        }
+
+        $meeting->order->increment('remaining', 1);
+        $meeting->delete();
+
+        return redirect()->to('member.meetings.index')
+                ->with('alert_s', 'Berhasil membatalkan meeting');
     }
 
     public function datatables()

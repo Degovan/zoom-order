@@ -13,6 +13,7 @@ class ZoomMeeting extends Model
         'zoom_meeting_id',
         'user_id',
         'zoom_account_id',
+        'order_id',
         'topic',
         'status',
         'start',
@@ -26,4 +27,14 @@ class ZoomMeeting extends Model
         'start' => 'datetime',
         'end' => 'datetime'
     ];
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+    public function zoom_account()
+    {
+        return $this->belongsTo(ZoomAccount::class);
+    }
 }

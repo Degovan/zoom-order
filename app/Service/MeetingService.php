@@ -3,7 +3,7 @@
 namespace App\Service;
 
 use App\Exceptions\MeetingException;
-use App\Models\{Invoice, ZoomAccount, ZoomMeeting};
+use App\Models\{Invoice, Order, ZoomAccount, ZoomMeeting};
 use App\Repository\Zoom\MeetingRepository;
 use Carbon\Carbon;
 
@@ -33,7 +33,12 @@ class MeetingService
             'passcode' => $data['passcode']
         ]);
 
-        return MeetingRepository::save($invoice->user, $account, (object) $meeting);
+        return MeetingRepository::save(app(Order::class), $account, (object) $meeting);
+    }
+
+    public static function cancel(ZoomMeeting $meeting)
+    {
+        (new MeetingRepository($meeting->zoom_account))->delete($meeting);
     }
 
     private static function findAccount(int $max, $date): ZoomAccount
