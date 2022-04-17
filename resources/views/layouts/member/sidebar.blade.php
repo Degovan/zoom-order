@@ -24,6 +24,13 @@
                     <span>Invoice</span>
                 </a>
             </li>
+
+            <li class="sidebar-item @active('member.meetings')">
+                <a href="{{ route('member.meetings.index') }}" class="sidebar-link">
+                    <i data-feather="video" width="20"></i>
+                    <span>Meeting</span>
+                </a>
+            </li>
         </ul>
     </div>
     <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>

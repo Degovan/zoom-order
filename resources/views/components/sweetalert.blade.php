@@ -5,7 +5,7 @@
         Swal.fire({
             icon: 'success',
             text: '{{ session('alert_s') }}',
-            timer: 1500
+            timer: 2000
         });
     </script>
     @endif
@@ -15,7 +15,7 @@
         Swal.fire({
             icon: 'info',
             text: '{{ session('alert_i') }}',
-            timer: 1500
+            timer: 2000
         });
     </script>
     @endif
@@ -25,7 +25,7 @@
         Swal.fire({
             icon: 'error',
             text: '{{ session('alert_e') }}',
-            timer: 1500
+            timer: 2000
         });
     </script>
     @endif
