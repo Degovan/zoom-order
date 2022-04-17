@@ -16,7 +16,7 @@ class MeetingController extends Controller
     public function __construct()
     {
         $this->middleware(MeetingMiddleware::class)
-            ->except(['index', 'destroy']);
+            ->only(['create', 'store']);
     }
 
     /**
@@ -52,7 +52,10 @@ class MeetingController extends Controller
         }
 
         try {
-            dd(MeetingService::create($order->invoice, $request));
+            $meeting = MeetingService::create($order->invoice, $request);
+            $order->decrement('remaining');
+
+            return redirect()->route('member.meetings.show', $meeting);
         } catch(MeetingException $exception) {
             return back()->withInput()->with('alert_e', $exception->getMessage());
         }
