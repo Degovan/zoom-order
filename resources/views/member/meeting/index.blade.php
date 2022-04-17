@@ -23,7 +23,7 @@
                                 <th>#</th>
                                 <th>Topik</th>
                                 <th>Waktu</th>
-                                <th>Durasi</th>
+                                <th>Selesai</th>
                                 <th>Password</th>
                                 <th>Aksi</th>
                             </tr>
@@ -34,4 +34,40 @@
         </div>
     </div>
 </div>
+<x-datatables/>
 @endsection
+
+@push('script')
+<script>
+const tbl = $('#meetings-table').DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: {
+        url: '{{ route('member.meetings.dt') }}'
+    },
+    columns: [
+        {data: 'DT_RowIndex', orderable: false, searchable: false},
+        {data: 'topic'},
+        {data: 'start'},
+        {data: 'end'},
+        {data: 'passcode'},
+        {render: (data, type, row, meta) => {
+            const href = document.location;
+
+            return `
+                <a href="${href}/${row.id}" title="detail" class="btn btn-sm btn-primary">
+                    <i data-feather="eye"></i>
+                </a>
+                <a href="${href}/${row.id}/start" title="start" class="btn btn-sm btn-success">
+                    <i data-feather="play"></i>
+                </a>
+            `;
+        }}
+    ]
+});
+
+tbl.on('draw', () => {
+    feather.replace();
+});
+</script>
+@endpush

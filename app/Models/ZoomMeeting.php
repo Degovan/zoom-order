@@ -23,7 +23,7 @@ class ZoomMeeting extends Model
     ];
 
     protected $casts = [
-        'start' => 'timestamp',
-        'end' => 'timestamp'
+        'start' => 'datetime',
+        'end' => 'datetime'
     ];
 }

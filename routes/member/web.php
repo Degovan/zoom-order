@@ -27,6 +27,8 @@ Route::middleware(['auth', 'role:user'])->group(function() {
         Route::put('profile','update')->name('profile.update');
     });
 
+    Route::get('meetings/dt', [MeetingController::class, 'datatables'])
+            ->name('meetings.dt');
     Route::resource('meetings', MeetingController::class);
 });
 

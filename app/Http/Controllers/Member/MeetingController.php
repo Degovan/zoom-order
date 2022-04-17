@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Middleware\Member\MeetingMiddleware;
 use App\Http\Requests\Member\MeetingRequest;
 use App\Models\Order;
+use App\Models\ZoomMeeting;
 use App\Service\MeetingService;
 use Illuminate\Http\Request;
 
@@ -100,5 +101,14 @@ class MeetingController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function datatables()
+    {
+        return datatables(ZoomMeeting::query())
+                ->addIndexColumn()
+                ->editColumn('start', fn($d) => $d->start->format('d/m/Y H:i T'))
+                ->editColumn('end', fn($d) => $d->end->format('d/m/Y H:i T'))
+                ->toJson();
     }
 }
