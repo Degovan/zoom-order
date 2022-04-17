@@ -6,9 +6,9 @@ use App\Exceptions\MeetingException;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\Member\MeetingMiddleware;
 use App\Http\Requests\Member\MeetingRequest;
-use App\Models\Order;
-use App\Models\ZoomMeeting;
+use App\Models\{Order, ZoomMeeting};
 use App\Service\MeetingService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class MeetingController extends Controller
@@ -67,9 +67,11 @@ class MeetingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ZoomMeeting $meeting, Request $request)
     {
-        //
+        if($meeting->user_id != $request->user()->id) return back();
+
+        return view('member.meeting.show', compact('meeting'));
     }
 
     /**
@@ -113,5 +115,17 @@ class MeetingController extends Controller
                 ->editColumn('start', fn($d) => $d->start->format('d/m/Y H:i T'))
                 ->editColumn('end', fn($d) => $d->end->format('d/m/Y H:i T'))
                 ->toJson();
+    }
+
+    public function start($id)
+    {
+        $meeting = ZoomMeeting::findOrFail($id);
+
+        if(!Carbon::now()->lt($meeting->start)) {
+            $meeting->update(['status' => 'active']);
+            return redirect()->to($meeting->start_url);
+        }
+
+        return back()->with('alert_e', 'Anda bisa memulai meeting sesuai waktu yang telah dijadwalkan');
     }
 }

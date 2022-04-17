@@ -29,6 +29,8 @@ Route::middleware(['auth', 'role:user'])->group(function() {
 
     Route::get('meetings/dt', [MeetingController::class, 'datatables'])
             ->name('meetings.dt');
+    Route::get('meetings/{id}/start', [MeetingController::class, 'start'])
+            ->name('meetings.start');
     Route::resource('meetings', MeetingController::class);
 });
 
