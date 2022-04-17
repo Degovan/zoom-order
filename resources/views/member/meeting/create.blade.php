@@ -10,6 +10,21 @@
         </div>
     </div>
     <div class="col-md-6">
+        <div class="card shadow-sm text-primary mt-2">
+            <div class="card-body">
+                <table border="0">
+                    <tr>
+                        <td class="pe-2">
+                            <i data-feather="info" style="width:30px; height: 30px;"></i>
+                        </td>
+                        <td class="pt-3">
+                            <p>Anda memiliki <strong>{{ $order->remaining }} paket</strong> tersisa untuk membuat zoom meeting</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
         <div class="card">
             <div class="card-body">
                 <form action="{{ route('member.meetings.store') }}" method="post" class="form form-horizontal">
@@ -49,21 +64,6 @@
                             </div>
                             <div class="col-md-8 form-group">
                                 <input type="text" name="timezone" id="timezone" class="form-control" value="(GMT+7:00)Jakarta" readonly>
-                            </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-md-4">
-                                <label for="">User Terdaftar</label>
-                            </div>
-                            <div class="col-md-7 form-group d-flex justify-content-between">
-                                <div class="div">
-                                    <input type="radio" name="user_authentication" id="no_auth" value="false" checked>
-                                    <label for="no_auth">Tidak Diperlukan</label>
-                                </div>
-                                <div>
-                                    <input type="radio" name="user_authentication" id="with_auth" value="true">
-                                    <label for="with_auth">Diperlukan</label>
-                                </div>
                             </div>
                         </div>
                         <div class="row mt-2">

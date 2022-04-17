@@ -16,15 +16,15 @@ return new class extends Migration
         Schema::create('zoom_meetings', function (Blueprint $table) {
             $table->id();
             $table->string('zoom_meeting_id', 100);
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('zoom_account_id')->constrained();
+            $table->string('topic', 50);
             $table->enum('status', ['waiting', 'active', 'finish']);
-            $table->timestamp('start');
-            $table->timestamp('end');
+            $table->dateTime('start');
+            $table->dateTime('end');
             $table->longText('start_url');
             $table->mediumText('join_url');
-            $table->string('passcode', 20);
-            $table->json('settings');
+            $table->string('passcode', 20)->nullable();
             $table->timestamps();
         });
     }

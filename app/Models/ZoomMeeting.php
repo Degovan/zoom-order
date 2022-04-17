@@ -13,6 +13,7 @@ class ZoomMeeting extends Model
         'zoom_meeting_id',
         'user_id',
         'zoom_account_id',
+        'topic',
         'status',
         'start',
         'end',

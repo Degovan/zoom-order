@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Member;
 
+use App\Exceptions\MeetingException;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\Member\MeetingMiddleware;
 use App\Http\Requests\Member\MeetingRequest;
 use App\Models\Order;
+use App\Service\MeetingService;
 use Illuminate\Http\Request;
 
 class MeetingController extends Controller
@@ -31,9 +33,9 @@ class MeetingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Order $order)
     {
-        return view('member.meeting.create');
+        return view('member.meeting.create', compact('order'));
     }
 
     /**
@@ -48,7 +50,11 @@ class MeetingController extends Controller
             $request->validate(['passcode' => 'required|alpha_dash|max:10']);
         }
 
-        
+        try {
+            dd(MeetingService::create($order->invoice, $request));
+        } catch(MeetingException $exception) {
+            return back()->withInput()->with('alert_e', $exception->getMessage());
+        }
     }
 
     /**

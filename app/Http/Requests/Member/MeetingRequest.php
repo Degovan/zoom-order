@@ -25,9 +25,8 @@ class MeetingRequest extends FormRequest
     {
         return [
             'topic' => 'required|string',
-            'date' => 'required|after_or_equal:date',
+            'date' => 'required|date_format:Y-m-d|after_or_equal:date',
             'time' => 'required|date_format:H:i',
-            'user_authentication' => 'required|in:true,false'
         ];
     }
 }
