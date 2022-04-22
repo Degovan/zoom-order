@@ -69,9 +69,10 @@ class MeetingController extends Controller
      */
     public function show(ZoomMeeting $meeting, Request $request)
     {
-        if($meeting->user_id != $request->user()->id) return back();
+        $user = request()->user();
+        if($meeting->user_id != $user->id) return back();
 
-        return view('member.meeting.show', compact('meeting'));
+        return view('member.meeting.show', compact('meeting', 'user'));
     }
 
     /**

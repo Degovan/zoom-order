@@ -49,11 +49,9 @@
                     </a>
                     @endif
 
-                    @if($meeting->status == 'active')
-                    <button class="btn btn-info" id="join-url" data-clipboard-text="{{ $meeting->join_url}}">
+                    <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#meeting-inv">
                         Salin Link <i data-feather="copy"></i>
                     </button>
-                    @endif
 
                     @if($meeting->status == 'waiting')
                     <form action="{{ route('member.meetings.destroy', $meeting) }}" method="post">
@@ -69,13 +67,44 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade text-left modal-borderless" id="meeting-inv" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Invitation Link</h5>
+                <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <textarea id="inv-text" class="form-control" rows="12" readonly>{{ $user->name }} mengundang anda pada zoom meeting.
+
+Topik: {{ $meeting->topic }}
+Waktu: {{ $meeting->start->format('d M Y, H:i T') }}
+
+Join zoom meeting:
+{{ $meeting->join_url }}
+
+Meeting ID: {{ $meeting->zoom_meeting_id }}
+Passcode: {{ $meeting->passcode }}</textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm btn-danger close" data-bs-dismiss="modal">
+                    <i data-feather="x"></i> Tutup
+                </button>
+                <button class="btn btn-sm btn-primary" id="btn-copy" data-clipboard-target="#inv-text">
+                    <i data-feather="copy"></i> Salin
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @push('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
 <script>
-const clipboard = new ClipboardJS('#join-url');
-
-console.log(clipboard);
+const clipboard = new ClipboardJS('#btn-copy');
 </script>
 @endpush
