@@ -9,7 +9,7 @@
 </div>
 
 <div class="row py-4">
-    <div class="col-md-10">
+    <div class="col-md-12">
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-end mb-4">
@@ -23,6 +23,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Email</th>
+                                <th>Host Key</th>
                                 <th>Kapasitas</th>
                                 <th>Action</th>
                             </tr>
@@ -48,6 +49,7 @@
         columns: [
             {data: 'DT_RowIndex', orderable: false, searchable: false},
             {data: 'email'},
+            {data: 'host_key'},
             {data: 'capacity'},
             {render: (data, type, row, meta) => {
                 return `

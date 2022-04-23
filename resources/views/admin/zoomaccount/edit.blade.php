@@ -18,6 +18,15 @@
                         </div>
                     </div>
                     <div class="mb-3">
+                        <label for="host-key">host-key</label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <i class="fas fa-fw fa-key"></i>
+                            </div>
+                            <input type="text" id="host-key" class="form-control" value="{{ $account->host_key }}" readonly>
+                        </div>
+                    </div>
+                    <div class="mb-3">
                         <label for="capacity">Kapasitas</label>
                         <div class="input-group">
                             <div class="input-group-text">

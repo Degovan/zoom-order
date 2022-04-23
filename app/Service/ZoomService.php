@@ -36,6 +36,7 @@ class ZoomService implements ZoomServiceContract
 
         return ZoomAccount::create([
             'email' => $user['email'],
+            'host_key' => $user['host_key'],
             'auth_filename' => $location
         ]);
     }
