@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('zoom_meeting_id', 100);
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('zoom_account_id')->constrained();
+            $table->foreignId('zoom_account_id')->nullable()->constrained()->onDelete('SET NULL')->onUpdate('CASCADE');
             $table->foreignId('order_id')->constrained();
             $table->string('topic', 50);
             $table->enum('status', ['waiting', 'active', 'finish']);
