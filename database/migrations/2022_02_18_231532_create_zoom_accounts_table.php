@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('host_key', 6);
             $table->integer('capacity')->default(0);
             $table->string('auth_filename');
+            $table->timestamp('last_synced')->nullable();
             $table->timestamps();
         });
     }

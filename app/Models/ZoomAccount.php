@@ -13,6 +13,11 @@ class ZoomAccount extends Model
         'email',
         'host_key',
         'capacity',
+        'last_synced',
         'auth_filename'
+    ];
+
+    protected $casts = [
+        'last_synced' => 'timestamp'
     ];
 }
