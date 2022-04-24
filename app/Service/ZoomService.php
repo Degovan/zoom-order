@@ -11,6 +11,8 @@ use App\Service\Zoom\Account;
 
 class ZoomService implements ZoomServiceContract
 {
+    public ZoomAccount $account;
+
     private ZoomAuthFactory $factory;
     private ZoomAccessTokenRepository $tokenRepo;
 
@@ -20,6 +22,7 @@ class ZoomService implements ZoomServiceContract
         $this->tokenRepo = new ZoomAccessTokenRepository;
 
         if(!is_null($account)) Account::verify($account);
+        $this->account = $account;
     }
 
     public function linkAccount(string $code)
@@ -36,7 +39,15 @@ class ZoomService implements ZoomServiceContract
 
         return ZoomAccount::create([
             'email' => $user['email'],
+            'host_key' => $user['host_key'],
             'auth_filename' => $location
         ]);
+    }
+
+    public function syncHostkey(ZoomAccount $accounts = null)
+    {
+        if(!$accounts) {
+            return Account::syncHostkey($this->account);
+        }
     }
 }
