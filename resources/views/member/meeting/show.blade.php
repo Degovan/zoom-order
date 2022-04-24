@@ -11,8 +11,16 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-10 col-lg-6">
             <div class="card mt-2">
+                <div class="card-header">
+                    <div class="text-primary border border-primary rounded p-1 p-md-2 p-lg-3 d-flex align-items-center">
+                        <span class="icon me-2 mx-auto">
+                            <i data-feather="alert-triangle" style="width:40px; height: 40px;"></i>
+                        </span>
+                        <p class="m-0">Host harus diclaim agar <strong>room</strong> bisa berjalan <strong>lebih dari 40 menit</strong> & fitur PRO lainnya dapat digunakan. Claim host dapat dilakukan dengan menginputkan <strong>host key</strong> dibawah</p>
+                    </div>
+                </div>
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-md-4">
@@ -39,6 +47,17 @@
                         </div>
                         <div class="col-md-8">
                             <input type="text" class="form-control" value="{{ $meeting->passcode }}" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row position-relative has-icon-right">
+                        <div class="col-md-4">
+                            <label for="host-key">Host Key</label>
+                        </div>
+                        <div class="col-md-8 has-icon-right">
+                            <input type="text" id="host-key" class="form-control" value="{{ $meeting->host_key() }}" readonly>
+                            <div class="form-control-icon me-2" id="btn-copy-hostkey" title="copy" data-clipboard-target="#host-key">
+                                <i data-feather="copy"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -105,6 +124,7 @@ Passcode: {{ $meeting->passcode }}</textarea>
 @push('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
 <script>
-const clipboard = new ClipboardJS('#btn-copy');
+new ClipboardJS('#btn-copy');
+new ClipboardJS('#btn-copy-hostkey');
 </script>
 @endpush

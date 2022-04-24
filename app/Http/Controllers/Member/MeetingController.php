@@ -10,6 +10,7 @@ use App\Models\{Order, ZoomMeeting};
 use App\Service\MeetingService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MeetingController extends Controller
 {
@@ -129,7 +130,7 @@ class MeetingController extends Controller
 
     public function datatables()
     {
-        return datatables(ZoomMeeting::query())
+        return datatables(ZoomMeeting::whereBelongsTo(Auth::user()))
                 ->addIndexColumn()
                 ->editColumn('start', fn($d) => $d->start->format('d/m/Y H:i T'))
                 ->editColumn('end', fn($d) => $d->end->format('d/m/Y H:i T'))

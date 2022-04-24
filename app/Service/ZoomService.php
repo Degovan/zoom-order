@@ -11,7 +11,7 @@ use App\Service\Zoom\Account;
 
 class ZoomService implements ZoomServiceContract
 {
-    public ZoomAccount $account;
+    public ?ZoomAccount $account;
 
     private ZoomAuthFactory $factory;
     private ZoomAccessTokenRepository $tokenRepo;
@@ -46,7 +46,7 @@ class ZoomService implements ZoomServiceContract
 
     public function syncHostkey(ZoomAccount $accounts = null)
     {
-        if(!$accounts) {
+        if(!$accounts && $this->account instanceof ZoomAccount) {
             return Account::syncHostkey($this->account);
         }
     }
