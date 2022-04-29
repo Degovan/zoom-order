@@ -124,7 +124,7 @@ class MeetingController extends Controller
         $meeting->order->increment('remaining', 1);
         $meeting->delete();
 
-        return redirect()->to('member.meetings.index')
+        return redirect()->route('member.meetings.index')
                 ->with('alert_s', 'Berhasil membatalkan meeting');
     }
 
