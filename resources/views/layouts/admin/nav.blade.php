@@ -41,7 +41,7 @@
                 <a href="{{ route('admin.packages.index') }}" class="nav-link">
                     <span class="sidebar-icon">
                         <i class="fas fa-fw fa-hand-holding-usd"></i>
-                    </span> 
+                    </span>
                     <span class="sidebar-text">Paket</span>
                 </a>
             </li>
@@ -64,11 +64,19 @@
                     </ul>
                 </div>
             </li>
+            <li class="nav-item @active('admin.meeting.index')">
+                <a href="{{ route('admin.meeting.index') }}" class="nav-link">
+                    <span class="sidebar-icon">
+                        <i class="fas fa-fw fa-coins"></i>
+                    </span>
+                    <span class="sidebar-text">Zoom Meeting</span>
+                </a>
+            </li>
             <li class="nav-item @active('admin.xendit')">
                 <a href="{{ route('admin.xendit.index') }}" class="nav-link">
                     <span class="sidebar-icon">
                         <i class="fas fa-fw fa-coins"></i>
-                    </span> 
+                    </span>
                     <span class="sidebar-text">Xendit</span>
                 </a>
             </li>
