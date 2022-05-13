@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ZoomMeeting;
-use Illuminate\Http\Request;
-use DataTables;
+use App\Service\MeetingService;
 
 class MeetingController extends Controller
 {
@@ -14,39 +13,45 @@ class MeetingController extends Controller
         return view('admin.meeting.index');
     }
 
-    public function getOngoing(Request $request)
+    public function stop($id)
     {
-        if ($request->ajax()) {
-            $data = ZoomMeeting::where('status', 'waiting')
-                                    ->get();
+        $meeting = ZoomMeeting::findOrFail($id);
+        $stopped = MeetingService::stop($meeting);
 
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->make(true);
-        }
+        if($stopped) return back()->with('alert_s', 'Berhasil memberhentikan meeting');
+        return back()->with('alert_e', 'Gagal memberhentikan meeting');
     }
 
-    public function getRunning(Request $request)
+    public function getOngoing()
     {
-        if ($request->ajax()) {
-            $data = ZoomMeeting::where('status', 'active')
-                                    ->get();
+        $data = ZoomMeeting::query()->where('status', 'waiting');
 
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->make(true);
-        }
+        return datatables($data)
+                ->addIndexColumn()
+                ->editColumn('start', fn($data) => $data->start->format('d/m/Y H:i'))
+                ->editColumn('end', fn($data) => $data->end->format('d/m/Y H:i'))
+                ->toJson();
     }
 
-    public function getFinish(Request $request)
+    public function getRunning()
     {
-        if ($request->ajax()) {
-            $data = ZoomMeeting::where('status', 'finish')
-                                    ->get();
+        $data = ZoomMeeting::query()->where('status', 'active');
 
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->make(true);
-        }
+        return datatables($data)
+                ->addIndexColumn()
+                ->editColumn('start', fn($data) => $data->start->format('d/m/Y H:i'))
+                ->editColumn('end', fn($data) => $data->end->format('d/m/Y H:i'))
+                ->toJson();
+    }
+
+    public function getFinish()
+    {
+        $data = ZoomMeeting::query()->where('status', 'finish');
+
+        return datatables($data)
+                ->addIndexColumn()
+                ->editColumn('start', fn($data) => $data->start->format('d/m/Y H:i'))
+                ->editColumn('end', fn($data) => $data->end->format('d/m/Y H:i'))
+                ->toJson();
     }
 }

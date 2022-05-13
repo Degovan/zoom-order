@@ -37,12 +37,11 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
 
     //meeting
     Route::controller(MeetingController::class)->name('meeting.')->group(function(){
-
-        Route::get('/meeting', 'index')->name('index');
-        Route::get('/meeting/ongoing','getOngoing')->name('ongoing');
-        Route::get('/meeting/running','getRunning')->name('running');
-        Route::get('/meeting/finish','getFinish')->name('finish');
-
+        Route::get('meeting', 'index')->name('index');
+        Route::delete('meeting/stop/{id}', 'stop')->name('stop');
+        Route::get('meeting/ongoing','getOngoing')->name('ongoing');
+        Route::get('meeting/running','getRunning')->name('running');
+        Route::get('meeting/finish','getFinish')->name('finish');
     });
 
 

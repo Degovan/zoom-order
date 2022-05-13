@@ -39,7 +39,10 @@ class MeetingService
     public static function stop(ZoomMeeting $meeting = null)
     {
         if($meeting instanceof ZoomMeeting) {
-            return (new MeetingRepository($meeting->zoom_account))->stop($meeting);
+            $status = (new MeetingRepository($meeting->zoom_account))->stop($meeting);
+            if($status) $meeting->update(['status' => 'finish']);
+
+            return $status;
         }
     }
 

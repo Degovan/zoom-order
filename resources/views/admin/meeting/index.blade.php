@@ -22,7 +22,7 @@
                   </nav>
                   <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active mt-5" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <table class="table table-bordered yajra-datatable">
+                        <table class="table table-bordered" id="ongoing-meetings">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -40,7 +40,7 @@
                         </table>
                     </div>
                     <div class="tab-pane fade mt-5" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        <table class="table table-bordered yajra-datatable1">
+                        <table class="table table-bordered" id="active-meetings">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -51,6 +51,7 @@
                                     <th>Start</th>
                                     <th>End</th>
                                     <th>Passcode</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -58,7 +59,7 @@
                         </table>
                     </div>
                     <div class="tab-pane fade mt-5" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                        <table class="table table-bordered yajra-datatable2">
+                        <table class="table table-bordered" id="finished-meetings">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -85,60 +86,64 @@
 @endsection
 @push('script')
     <script>
-        $(function(){
-            var table = $('.yajra-datatable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('admin.meeting.ongoing')}}",
-                columns: [
-                    {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                    {data: 'status', name: 'status'},
-                    {data: 'zoom_meeting_id', name: 'zoom_meeting_id'},
-                    {data: 'user_id', name: 'user_id'},
-                    {data: 'topic', name: 'topic'},
-                    {data: 'start', name: 'start'},
-                    {data: 'end', name: 'end'},
-                    {data: 'passcode', name: 'passcode'},
-                ]
-            })
+        $('#ongoing-meetings').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('admin.meeting.ongoing')}}",
+            columns: [
+                {data: 'DT_RowIndex', orderable: false, searchable: false},
+                {data: 'status', name: 'status'},
+                {data: 'zoom_meeting_id', name: 'zoom_meeting_id'},
+                {data: 'user_id', name: 'user_id'},
+                {data: 'topic', name: 'topic'},
+                {data: 'start', name: 'start'},
+                {data: 'end', name: 'end'},
+                {data: 'passcode', name: 'passcode'},
+            ]
+        });
+
+        $('#active-meetings').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('admin.meeting.running')}}",
+            columns: [
+                {data: 'DT_RowIndex', searchable: false, orderable: false},
+                {data: 'status', name: 'status'},
+                {data: 'zoom_meeting_id', name: 'zoom_meeting_id'},
+                {data: 'user_id', name: 'user_id'},
+                {data: 'topic', name: 'topic'},
+                {data: 'start', name: 'start'},
+                {data: 'end', name: 'end'},
+                {data: 'passcode', name: 'passcode'},
+                {render: (data, type, row, meta) => {
+                    return `
+                    <form action="/admin-area/meeting/stop/${row.id}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger" title="stop meeting">
+                            <i class="fas fa-stop"></i>
+                        </button>
+                    </form>
+                    `;
+                }}
+            ]
         })
-    </script>
-    <script>
-        $(function(){
-            var table = $('.yajra-datatable1').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('admin.meeting.running')}}",
-                columns: [
-                    {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                    {data: 'status', name: 'status'},
-                    {data: 'zoom_meeting_id', name: 'zoom_meeting_id'},
-                    {data: 'user_id', name: 'user_id'},
-                    {data: 'topic', name: 'topic'},
-                    {data: 'start', name: 'start'},
-                    {data: 'end', name: 'end'},
-                    {data: 'passcode', name: 'passcode'},
-                ]
-            })
-        })
-    </script>
-      <script>
-        $(function(){
-            var table = $('.yajra-datatable2').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('admin.meeting.finish')}}",
-                columns: [
-                    {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                    {data: 'status', name: 'status'},
-                    {data: 'zoom_meeting_id', name: 'zoom_meeting_id'},
-                    {data: 'user_id', name: 'user_id'},
-                    {data: 'topic', name: 'topic'},
-                    {data: 'start', name: 'start'},
-                    {data: 'end', name: 'end'},
-                    {data: 'passcode', name: 'passcode'},
-                ]
-            })
+
+        
+        $('#finished-meetings').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('admin.meeting.finish')}}",
+            columns: [
+                {data: 'DT_RowIndex', searchable: false, orderable: false},
+                {data: 'status', name: 'status'},
+                {data: 'zoom_meeting_id', name: 'zoom_meeting_id'},
+                {data: 'user_id', name: 'user_id'},
+                {data: 'topic', name: 'topic'},
+                {data: 'start', name: 'start'},
+                {data: 'end', name: 'end'},
+                {data: 'passcode', name: 'passcode'},
+            ]
         })
     </script>
 @endpush
