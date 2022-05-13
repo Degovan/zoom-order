@@ -36,6 +36,26 @@ class MeetingService
         return MeetingRepository::save(app(Order::class), $account, (object) $meeting);
     }
 
+    public static function stop(ZoomMeeting $meeting = null)
+    {
+        if($meeting instanceof ZoomMeeting) {
+            $status = (new MeetingRepository($meeting->zoom_account))->stop($meeting);
+            if($status) $meeting->update(['status' => 'finish']);
+
+            return $status;
+        }
+
+        $meetings = ZoomMeeting::where('end', '>', date('d-m-Y H:i:s'))->get();
+        $statuses = [];
+        
+        foreach($meetings as $meeting) {
+            $status = (new MeetingRepository($meeting->zoom_account))->stop($meeting);
+            $statuses[] = $status;
+        }
+
+        return $statuses;
+    }
+
     public static function cancel(ZoomMeeting $meeting)
     {
         (new MeetingRepository($meeting->zoom_account))->delete($meeting);

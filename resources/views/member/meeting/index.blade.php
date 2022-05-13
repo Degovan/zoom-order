@@ -58,7 +58,7 @@ const tbl = $('#meetings-table').DataTable({
                 <a href="${href}/${row.id}" title="detail" class="btn btn-sm btn-primary">
                     <i data-feather="eye"></i>
                 </a>
-                <a href="${href}/${row.id}/start" title="start" class="btn btn-sm btn-success">
+                <a href="${href}/${row.id}/start" title="start" class="btn btn-sm btn-success ${(row.status == 'finish') ? 'd-none' : ''}">
                     <i data-feather="play"></i>
                 </a>
             `;

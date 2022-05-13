@@ -141,6 +141,10 @@ class MeetingController extends Controller
     {
         $meeting = ZoomMeeting::findOrFail($id);
 
+        if($meeting->status == 'finish') {
+            return back()->with('alert_e', 'Tidak dapat memulai meeting yang telah selesai');
+        }
+
         if(!Carbon::now()->lt($meeting->start)) {
             $meeting->update(['status' => 'active']);
             return redirect()->to($meeting->start_url);

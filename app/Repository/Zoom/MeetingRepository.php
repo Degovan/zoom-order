@@ -41,6 +41,12 @@ class MeetingRepository
         return $this->http->post("{$this->url}/users/me/meetings", $data)->json();
     }
 
+    public function stop(ZoomMeeting $meeting)
+    {
+        $url = "{$this->url}/meetings/{$meeting->zoom_meeting_id}/status";
+        return $this->http->put($url, ['action' => 'end'])->status() == 204;
+    }
+
     public function delete(ZoomMeeting $meeting)
     {
         $mid = $meeting->zoom_meeting_id;
