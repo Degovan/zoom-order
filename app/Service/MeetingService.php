@@ -44,6 +44,16 @@ class MeetingService
 
             return $status;
         }
+
+        $meetings = ZoomMeeting::where('end', '>', date('d-m-Y H:i:s'))->get();
+        $statuses = [];
+        
+        foreach($meetings as $meeting) {
+            $status = (new MeetingRepository($meeting->zoom_account))->stop($meeting);
+            $statuses[] = $status;
+        }
+
+        return $statuses;
     }
 
     public static function cancel(ZoomMeeting $meeting)
