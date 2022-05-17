@@ -9,6 +9,7 @@ use App\Http\Requests\Member\MeetingRequest;
 use App\Models\{Order, ZoomMeeting};
 use App\Service\MeetingService;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,7 @@ class MeetingController extends Controller
     public function __construct()
     {
         $this->middleware(MeetingMiddleware::class)
-            ->only(['create', 'store']);
+            ->only(['create', 'store', 'choose']);
     }
 
     /**
@@ -126,6 +127,14 @@ class MeetingController extends Controller
 
         return redirect()->route('member.meetings.index')
                 ->with('alert_s', 'Berhasil membatalkan meeting');
+    }
+
+    public function choose(Collection $orders)
+    {
+        if(count($orders) == 1)
+            return redirect()->route('member.meetings.create', $orders[0]->id);
+
+        return view('member.meeting.choose', compact('orders'));
     }
 
     public function datatables()

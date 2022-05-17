@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Exceptions\BookingServiceException;
 use App\Models\{Order,Package,Pricing, User, ZoomAccount};
 use App\Repository\InvoiceRepository;
+use Illuminate\Database\Eloquent\Collection;
 
 class BookingService
 {
@@ -20,12 +21,11 @@ class BookingService
         ]);
     }
 
-    public static function getActiveOrder(User $user): Order|null
+    public static function getActiveOrder(User $user): Collection|null
     {
         return Order::whereBelongsTo($user)
                         ->where('remaining', '>', '0')
-                        ->limit(1)
-                        ->first();
+                        ->get();
     }
 
     private static function AvailableAccount(int $audiences)

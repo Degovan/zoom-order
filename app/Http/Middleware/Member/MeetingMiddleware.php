@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware\Member;
 
-use App\Models\Order;
 use App\Service\BookingService;
 use Closure;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,15 +19,15 @@ class MeetingMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $order = BookingService::getActiveOrder(Auth::user());
+        $orders = BookingService::getActiveOrder(Auth::user());
 
-        if(!$order) {
+        if(count($orders) < 1) {
             return redirect()
                     ->route('member.packages')
                     ->with('alert_e', 'Anda harus memesan paket terlebih dahulu');
         }
 
-        app()->instance(Order::class, $order);
+        app()->instance(Collection::class, $orders);
 
         return $next($request);
     }
