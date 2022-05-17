@@ -31,6 +31,8 @@ Route::middleware(['auth', 'role:user'])->group(function() {
         Route::get('meetings/dt', 'datatables')->name('dt');
         Route::get('meetings/{id}/start', 'start')->name('start');
         Route::get('meetings/choose', 'choose')->name('choose');
+        Route::get('meetings/create/{order}', 'create')->name('create');
+        Route::post('meetings/create/{order}', 'store')->name('store');
     });
     Route::resource('meetings', MeetingController::class)->except(['create', 'store']);
 });

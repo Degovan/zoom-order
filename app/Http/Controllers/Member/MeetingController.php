@@ -131,6 +131,9 @@ class MeetingController extends Controller
 
     public function choose(Collection $orders)
     {
+        if(count($orders) == 1)
+            return redirect()->route('member.meeting.create', $orders[0]->id);
+
         return view('member.meeting.choose', compact('orders'));
     }
 

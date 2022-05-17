@@ -27,7 +27,7 @@
 
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('member.meetings.store') }}" method="post" class="form form-horizontal">
+                <form action="{{ route('member.meetings.store', $order) }}" method="post" class="form form-horizontal">
                     @csrf
                     <div class="form-body">
                         <div class="row">

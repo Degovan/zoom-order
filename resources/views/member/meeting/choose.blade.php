@@ -14,7 +14,7 @@
         @foreach ($orders as $order)
         @php $invoice = $order->invoice @endphp
         <div class="col-md-4">
-            <a class="card" href="/dsaom">
+            <a class="card" href="{{ route('member.meetings.create', $order) }}">
                 <div class="card-header">
                     <h4>{{ $invoice->items->title }}</h4>
                 </div>
