@@ -45,11 +45,15 @@ class MeetingService
             return $status;
         }
 
-        $meetings = ZoomMeeting::where('end', '>', date('d-m-Y H:i:s'))->get();
         $statuses = [];
+        $meetings = ZoomMeeting::where('end', '<', date('Y-m-d H:i:s'))
+                                ->whereNot('status', 'finish')
+                                ->get();
         
         foreach($meetings as $meeting) {
             $status = (new MeetingRepository($meeting->zoom_account))->stop($meeting);
+            
+            if($status) $meeting->update(['status' => 'finish']);
             $statuses[] = $status;
         }
 
