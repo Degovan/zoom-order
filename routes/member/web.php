@@ -27,11 +27,12 @@ Route::middleware(['auth', 'role:user'])->group(function() {
         Route::put('profile','update')->name('profile.update');
     });
 
-    Route::get('meetings/dt', [MeetingController::class, 'datatables'])
-            ->name('meetings.dt');
-    Route::get('meetings/{id}/start', [MeetingController::class, 'start'])
-            ->name('meetings.start');
-    Route::resource('meetings', MeetingController::class);
+    Route::controller(MeetingController::class)->name('meetings.')->group(function() {
+        Route::get('meetings/dt', 'datatables')->name('dt');
+        Route::get('meetings/{id}/start', 'start')->name('start');
+        Route::get('meetings/choose', 'choose')->name('choose');
+    });
+    Route::resource('meetings', MeetingController::class)->except(['create', 'store']);
 });
 
 include __DIR__ . '/auth.php';

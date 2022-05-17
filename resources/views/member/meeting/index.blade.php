@@ -14,7 +14,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-end mb-4">
-                    <a href="{{ route('member.meetings.create') }}" class="btn btn-primary"><i data-feather="plus-square" width="20"></i> Buat Meeting</a>
+                    <a href="{{ route('member.meetings.choose') }}" class="btn btn-primary"><i data-feather="plus-square" width="20"></i> Buat Meeting</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover" id="meetings-table">
