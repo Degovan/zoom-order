@@ -17,6 +17,13 @@ class PricingRepository
         Pricing::where('package_id', $id)->delete();
 
         array_map(function($pricing) use($id) {
+            
+            $pricing = [
+                'max_audience' => $pricing['max_audience'] ?? 0,
+                'cost' => $pricing['cost'] ?? 0,
+                'discount' => $pricing['discount'] ?? 0,
+            ];
+
             Pricing::create(array_merge(['package_id' => $id], $pricing));
         }, $pricings);
     }
