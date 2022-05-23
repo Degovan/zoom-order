@@ -54,6 +54,12 @@ class TutorialController extends Controller
         return back()->with('alert_s', 'Berhasil mengedit tutorial');
     }
 
+    public function destroy(Tutorial $tutorial)
+    {
+        $tutorial->delete();
+        return back()->with('alert_s', 'Berhasil menghapus tutorial');
+    }
+
     public function datatables()
     {
         return datatables(Tutorial::query())
