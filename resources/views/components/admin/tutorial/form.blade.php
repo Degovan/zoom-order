@@ -1,7 +1,7 @@
-<form action="{{ route("admin.tutorials.{$method}") }}" method="post">
+<form action="{{ $route }}" method="post">
     @csrf
     @if ($method != 'store')
-        @method(strtoupper($method))
+        @method($method)
     @endif
     <div class="mb-4 pb-4 text-end">
         <button type="submit" class="btn btn-primary">
@@ -11,14 +11,14 @@
     <div class="mb-4 row">
         <div class="col-md-6">
             <label for="title">Judul</label>
-            <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" autofocus>
+            <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') ?? $tutorial->title ?? '' }}" autofocus>
             @error('title')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
         <div class="col-md-6">
             @php
-                $icon = old('icon') ?? 'package';
+                $icon = old('icon') ?? $tutorial->icon ?? 'package';
             @endphp
             <label for="icon">Ikon (<small class="text-info"><a href="https://feathericons.com/" target="_blank">daftar ikon</a></small>)</label>
             <div class="input-group">
@@ -35,7 +35,7 @@
     </div>
     <div class="mb-4">
         <label for="content-editor">Konten</label>
-        <textarea name="content" id="content-editor" class="form-control">{{ old('content') }}</textarea>
+        <textarea name="content" id="content-editor" class="form-control">{!! old('content') ?? $tutorial->content ?? '' !!}</textarea>
         @error('content')
         <small class="text-danger">{{ $message }}</small>
         @enderror

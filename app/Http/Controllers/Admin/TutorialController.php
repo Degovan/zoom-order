@@ -33,6 +33,27 @@ class TutorialController extends Controller
         return back()->with('alert_s', 'Berhasil membuat tutorial');
     }
 
+    public function edit(Tutorial $tutorial)
+    {
+        return view('admin.tutorial.edit', compact('tutorial'));
+    }
+
+    public function update(Request $request, Tutorial $tutorial)
+    {
+        $request->validate([
+            'title' => 'required|string|max:50',
+            'icon' => 'required',
+            'content' => 'required|string'
+        ]);
+
+        if($request->title != $tutorial->title) {
+            $request->validate(['title' => 'unique:tutorials,title']);
+        }
+
+        $this->repo->update($tutorial, $request->only(['title', 'icon', 'content']));
+        return back()->with('alert_s', 'Berhasil mengedit tutorial');
+    }
+
     public function datatables()
     {
         return datatables(Tutorial::query())
