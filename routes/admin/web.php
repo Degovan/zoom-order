@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\MeetingController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\TutorialController;
 use App\Http\Controllers\Admin\XenditController;
 use App\Http\Controllers\Admin\ZoomAccountController;
 use App\Http\Controllers\Admin\ZoomAppController;
@@ -44,6 +45,7 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
         Route::get('meeting/finish','getFinish')->name('finish');
     });
 
+    Route::resource('tutorials', TutorialController::class);
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::patch('/update-profile',[ ProfileController::class, 'update'])->name('profile.update');

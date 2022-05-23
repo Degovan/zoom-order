@@ -21,7 +21,7 @@
         </div>
     </div>
 <div class="row mb-4">
-    <div class="col-md-8">
+    <div class="col-md-7">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h4 class="card-title">Pemesanan Terakhir</h4>
@@ -47,6 +47,23 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Tutorial</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <i data-feather="package"></i> Pemesanan paket
+                    </li>
+                    <li class="list-group-item">
+                        <i data-feather="video"></i> Pembuatan zoom meeting
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

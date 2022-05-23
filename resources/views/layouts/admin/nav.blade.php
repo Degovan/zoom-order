@@ -45,6 +45,14 @@
                     <span class="sidebar-text">Paket</span>
                 </a>
             </li>
+            <li class="nav-item @active('admin.tutorials')">
+                <a href="{{ route('admin.tutorials.index') }}" class="nav-link">
+                    <span class="sidebar-icon">
+                        <i class="fas fa-fw fa-align-left"></i>
+                    </span>
+                    <span class="sidebar-text">Tutorial</span>
+                </a>
+            </li>
             <li class="nav-item">
                 <span class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" data-bs-target="#zoom-submenu">
                     <span>
