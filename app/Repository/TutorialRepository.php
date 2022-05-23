@@ -23,4 +23,9 @@ class TutorialRepository
             'content' => $data['content']
         ]);
     }
+
+    public function get()
+    {
+        return Tutorial::latest()->get();
+    }
 }

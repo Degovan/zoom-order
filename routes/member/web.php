@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\Member\{DashboardController, InvoiceController, BookingController, MeetingController, PackageController, ProfileController, PaymentSuccessController};
+use App\Http\Controllers\Member\{DashboardController, InvoiceController, BookingController, MeetingController, PackageController, ProfileController, PaymentSuccessController, TutorialController};
 
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'role:user'])->group(function() {
     Route::get('/', DashboardController::class)->name('dashboard');
+    Route::get('tutorial/{tutorial:slug}', [TutorialController::class, 'show'])
+        ->name('tutorials.show');
 
     Route::controller(InvoiceController::class)->name('invoice.')->group(function() {
         Route::get('invoice', 'index')->name('index');

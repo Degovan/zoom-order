@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
+use App\Repository\TutorialRepository;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -15,7 +16,8 @@ class DashboardController extends Controller
                             ->where('user_id', Auth::user()->id)
                             ->limit(10)
                             ->get();
+        $tutors = (new TutorialRepository)->get();
 
-        return view('member.dashboard', compact('lastOrders'));
+        return view('member.dashboard', compact('lastOrders', 'tutors'));
     }
 }

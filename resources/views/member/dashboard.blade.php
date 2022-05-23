@@ -37,13 +37,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($lastOrders as $lastOrder)
+                            @forelse($lastOrders as $lastOrder)
                             <tr>
                                 <td>{{ $lastOrder->items->title }}</td>
                                 <td>@money($lastOrder->total)</td>
                                 <td>{{ $lastOrder->created_at->format('d/m/Y') }}</td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="3" class="text-center">Data masih kosong</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -57,12 +61,13 @@
             </div>
             <div class="card-body">
                 <ul class="list-group">
+                    @foreach($tutors as $tutor)
                     <li class="list-group-item">
-                        <i data-feather="package"></i> Pemesanan paket
+                        <a href="{{ route('member.tutorials.show', $tutor->slug) }}">
+                            <i data-feather="{{ $tutor->icon }}"></i> {{ $tutor->title }}
+                        </a>
                     </li>
-                    <li class="list-group-item">
-                        <i data-feather="video"></i> Pembuatan zoom meeting
-                    </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
