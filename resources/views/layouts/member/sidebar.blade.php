@@ -1,6 +1,6 @@
 <div class="sidebar-wrapper active">
     <div class="sidebar-header">
-        <img src="/img/logo.svg" alt="" srcset="">
+        <img src="/img/logo.png" alt="" srcset="">
     </div>
     <div class="sidebar-menu">
         <ul class="menu">

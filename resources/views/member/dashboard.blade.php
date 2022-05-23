@@ -21,7 +21,7 @@
         </div>
     </div>
 <div class="row mb-4">
-    <div class="col-md-8">
+    <div class="col-md-7">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h4 class="card-title">Pemesanan Terakhir</h4>
@@ -37,16 +37,38 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($lastOrders as $lastOrder)
+                            @forelse($lastOrders as $lastOrder)
                             <tr>
                                 <td>{{ $lastOrder->items->title }}</td>
                                 <td>@money($lastOrder->total)</td>
                                 <td>{{ $lastOrder->created_at->format('d/m/Y') }}</td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="3" class="text-center">Data masih kosong</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Tutorial</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    @foreach($tutors as $tutor)
+                    <li class="list-group-item">
+                        <a href="{{ route('member.tutorials.show', $tutor->slug) }}">
+                            <i data-feather="{{ $tutor->icon }}"></i> {{ $tutor->title }}
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
             </div>
         </div>
     </div>
