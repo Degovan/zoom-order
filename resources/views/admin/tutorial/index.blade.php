@@ -36,3 +36,41 @@
 
 <x-datatables/>
 @endsection
+
+@push('script')
+<script src="/vendor/voler/js/feather-icons/feather.min.js"></script>
+<script>
+    const table = $('#pricing-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: '{{ route('admin.tutorials.dt') }}'
+        },
+        columns: [
+            {data: 'DT_RowIndex', searchable: false, sortable: false},
+            {render: (data, type, row, meta) => {
+                return `<i data-feather="${row.icon}" width="20"></i>`;
+            }},
+            {data: 'title'},
+            {render: (data, type, row, meta) => {
+                return `
+                <div class="d-flex">
+                    <a href="${row.editLink}" class="btn btn-sm btn-success text-white" title="edit">
+                        <i class="fas fa-pencil-alt"></i>
+                    </a>
+                    <form action="${row.delLink}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger ms-1" title="hapus">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </form>
+                </div>
+                `;
+            }}
+        ]
+    });
+
+    table.on('draw', () => feather.replace());
+</script>
+@endpush

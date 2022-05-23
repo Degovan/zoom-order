@@ -45,6 +45,8 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
         Route::get('meeting/finish','getFinish')->name('finish');
     });
 
+    Route::get('tutorials/datatables', [TutorialController::class, 'datatables'])
+        ->name('tutorials.dt');
     Route::resource('tutorials', TutorialController::class);
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
