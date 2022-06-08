@@ -2,54 +2,28 @@
 
 namespace App\Repository;
 
-class ZoomAppRepository extends ZoomRepositoryAbstract
+use App\Models\ZoomApp;
+
+class ZoomAppRepository
 {
+    public string $redirect_url;
+
     public function __construct()
     {
-        parent::__construct();
-        $this->createIfEmpty();
+        $this->redirect_url = route('zoom.add');
     }
 
-    /**
-     * Get zoom client app configuration
-     * @return object $information
-     */
-    public function get()
+    public function store(array $data): ZoomApp
     {
-        $content = $this->storage->get(self::CONFIGFILE);
-        return json_decode($content);
+        $data = array_merge($data, ['redirect_url' => $this->redirect_url]);
+        return ZoomApp::create($data);
     }
 
-    /**
-     * Store zoom client configuration into json file
-     * @param array $data
-     * @return void
-     */
-    public function store(array $data): void
+    public function update(ZoomApp $app, array $data): ZoomApp
     {
-        $oldConfig = $this->get();
-        $newConfig = [
-            'client_id' => $data['client_id'] ?? $oldConfig->client_id,
-            'client_secret' => $data['client_secret'] ?? $oldConfig->client_secret,
-            'redirect_url' => route('zoom.add')
-        ];
+        $data = array_merge($data, ['redirect_url' => $this->redirect_url]);
+        $app->update($data);
 
-        $this->storage->put(self::CONFIGFILE, json_encode($newConfig));
-    }
-
-    /**
-     * Create zoom configuration file if empty
-     */
-    private function createIfEmpty()
-    {
-        $blueprint = [
-            'client_id' => '',
-            'client_secret' => '',
-            'redirect_url' => route('zoom.add')
-        ];
-
-        if(!$this->storage->exists(self::CONFIGFILE)) {
-            $this->storage->put(self::CONFIGFILE, json_encode($blueprint));
-        }
+        return $app;
     }
 }

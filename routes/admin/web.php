@@ -15,8 +15,9 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
     Route::get('/', DashboardController::class)->name('dashboard');
 
     Route::prefix('zoom')->name('zoom.')->group(function() {
-        Route::resource('app', ZoomAppController::class)
-            ->only(['index', 'store']);
+        Route::get('app/dt', [ZoomAppController::class, 'datatables'])
+            ->name('app.datatables');
+        Route::resource('app', ZoomAppController::class);
 
         Route::resource('accounts', ZoomAccountController::class);
         Route::get('/account/dt', [ZoomAccountController::class, 'datatables'])
