@@ -1,16 +1,21 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repository\Zoom;
 
 use App\Models\ZoomApp;
 
-class ZoomAppRepository
+class AppRepository
 {
     public string $redirect_url;
 
     public function __construct()
     {
         $this->redirect_url = route('zoom.add');
+    }
+
+    public static function getAvailable()
+    {
+        return ZoomApp::doesntHave('zoomAccount')->get();
     }
 
     public function store(array $data): ZoomApp

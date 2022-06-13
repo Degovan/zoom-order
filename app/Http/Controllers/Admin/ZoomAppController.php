@@ -5,15 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ZoomAppRequest;
 use App\Models\ZoomApp;
-use App\Repository\ZoomAppRepository;
+use App\Repository\Zoom\AppRepository;
 
 class ZoomAppController extends Controller
 {
-    protected ZoomAppRepository $repo;
+    protected AppRepository $repo;
 
     public function __construct()
     {
-        $this->repo = new ZoomAppRepository;
+        $this->repo = new AppRepository;
     }
 
     public function index()

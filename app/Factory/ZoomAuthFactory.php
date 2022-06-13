@@ -2,10 +2,11 @@
 
 namespace App\Factory;
 
+use App\Models\ZoomApp;
 use App\Repository\ZoomAppRepository;
 use Illuminate\Support\Facades\Http;
 
-class ZoomAuthFactory implements ZoomAuthFactoryContract
+class ZoomAuthFactory
 {
     public const AUTHURL = 'https://zoom.us/oauth';
     public const APIURL = 'https://api.zoom.us/v2';
@@ -21,12 +22,12 @@ class ZoomAuthFactory implements ZoomAuthFactoryContract
         ];
     }
 
-    public function generateAuthUrl(): string
+    public static function generateAuthUrl(ZoomApp $app): string
     {
         $queries = [
             'response_type' => 'code',
-            'client_id' => $this->zoomapp->client_id,
-            'redirect_uri' => $this->zoomapp->redirect_url
+            'client_id' => $app->client_id,
+            'redirect_uri' => $app->redirect_url
         ];
 
         return self::AUTHURL . '/authorize?' . http_build_query($queries);

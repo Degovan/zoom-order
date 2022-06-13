@@ -2,32 +2,39 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Factory\ZoomAuthFactory;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ZoomAccountRequest;
 use App\Models\ZoomAccount;
+use App\Repository\Zoom\AccountRepository;
+use App\Repository\Zoom\AppRepository;
 
 class ZoomAccountController extends Controller
 {
+    protected AccountRepository $appRepo;
+
+    public function __construct()
+    {
+        $this->accRepo = new AccountRepository;
+    }
+
     public function index()
     {
-        return view('admin.zoomaccount.index', [
-            'auth_url' => (new ZoomAuthFactory)->generateAuthUrl()
-        ]);
+        return view('admin.zoomaccount.index');
     }
 
-    public function edit(ZoomAccount $account)
+    public function create()
     {
-        return view('admin.zoomaccount.edit', compact('account'));
+        $apps = AppRepository::getAvailable();
+        return view('admin.zoomaccount.create', compact('apps'));
     }
 
-    public function update(ZoomAccount $account, ZoomAccountRequest $request)
+    public function store(ZoomAccountRequest $request)
     {
-        $account->update($request->only('capacity'));
+        $this->accRepo->store($request->only([
+            'zoom_app_id', 'capacity', 'email'
+        ]));
 
-        return redirect()
-                ->route('admin.zoom.accounts.index')
-                ->with('alert_s', 'Detail akun telah diperbarui');
+        return back()->with('alert_s', 'Berhasil menambahkan akun');
     }
 
     public function destroy($id)

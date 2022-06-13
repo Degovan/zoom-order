@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Repository\Zoom;
+
+use App\Models\ZoomAccount;
+
+class AccountRepository
+{
+    public string $redirect_url;
+
+    public function __construct()
+    {
+        $this->redirect_url = route('zoom.add');
+    }
+
+    public function store(array $data): ZoomAccount
+    {
+        $data = array_merge($data, ['redirect_url' => $this->redirect_url]);
+        return ZoomAccount::create($data);
+    }
+}

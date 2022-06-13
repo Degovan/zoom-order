@@ -12,4 +12,9 @@ class ZoomApp extends Model
     protected $fillable = [
         'name', 'client_id', 'client_secret', 'redirect_url'
     ];
+
+    public function zoomAccount()
+    {
+        return $this->hasOne(ZoomAccount::class);
+    }
 }
