@@ -77,9 +77,9 @@ class ZoomAccountController extends Controller
         return back()->with('alert_e', 'Akun zoom tidak ditemukan');
     }
 
-    public function destroy($id)
+    public function destroy(ZoomAccount $account)
     {
-        ZoomAccount::destroy($id);
+        $this->accRepo->destroy($account);
         return redirect()->back()->with('alert_s', 'Berhasil menghapus akun');
     }
 

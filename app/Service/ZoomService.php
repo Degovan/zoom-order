@@ -42,10 +42,12 @@ class ZoomService implements ZoomServiceContract
         ]);
     }
 
-    public function syncHostkey(ZoomAccount $accounts = null)
+    public function syncHostkey(): ZoomAccount
     {
-        if(!$accounts && $this->account instanceof ZoomAccount) {
+        if($this->account->status == 'connected') {
             return Account::syncHostkey($this->account);
         }
+
+        return $this->account;
     }
 }

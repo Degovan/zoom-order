@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Exceptions\BookingServiceException;
 use App\Models\{Order,Package,Pricing, User, ZoomAccount};
 use App\Repository\InvoiceRepository;
+use App\Repository\Zoom\AccountRepository;
 use Illuminate\Database\Eloquent\Collection;
 
 class BookingService
@@ -30,10 +31,13 @@ class BookingService
 
     private static function AvailableAccount(int $audiences)
     {
-        $max = ZoomAccount::max('capacity');
+        $available = AccountRepository::availableAccounts();
 
-        if($audiences > intval($max)) {
-            throw new BookingServiceException('No zoom acccount are available');
+        if(count($available) > 0) {
+            $max = ZoomAccount::max('capacity');
+            if($audiences <= intval($max)) return true;
         }
+
+        throw new BookingServiceException('No zoom acccount are available');
     }
 }

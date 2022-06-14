@@ -3,6 +3,7 @@
 namespace App\Repository\Zoom;
 
 use App\Models\ZoomAccount;
+use App\Repository\ZoomAccessTokenRepository;
 
 class AccountRepository
 {
@@ -23,5 +24,19 @@ class AccountRepository
     {
         $account->update($data);
         return $account;
+    }
+
+    public function destroy(ZoomAccount $account)
+    {
+        if($account->status == 'connected') {
+            (new ZoomAccessTokenRepository)->delete($account);
+        }
+
+        $account->delete();
+    }
+
+    public static function availableAccounts()
+    {
+        return ZoomAccount::where('status', 'connected')->get();
     }
 }

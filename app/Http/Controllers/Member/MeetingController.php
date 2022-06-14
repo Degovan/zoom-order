@@ -52,9 +52,9 @@ class MeetingController extends Controller
         if($request->passcode) {
             $request->validate(['passcode' => 'required|alpha_dash|max:10']);
         }
-
+ 
         try {
-            $meeting = MeetingService::create($order->invoice, $request);
+            $meeting = MeetingService::create($order, $request);
             $order->decrement('remaining');
 
             return redirect()->route('member.meetings.show', $meeting);

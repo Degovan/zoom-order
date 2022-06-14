@@ -18,7 +18,7 @@ class ZoomAccessTokenRepository extends ZoomRepositoryAbstract
     public function get(ZoomAccount $account): object
     {
         $location = self::TOKENLOCATION . "/{$account->auth_filename}";
-        $this->refreshIfExpired($location);
+        $this->refreshIfExpired($account, $location);
 
         return json_decode($this->storage->get($location));
     }
@@ -38,6 +38,14 @@ class ZoomAccessTokenRepository extends ZoomRepositoryAbstract
         return "{$email}.json";
     }
 
+    public function delete(ZoomAccount $account)
+    {
+        $filename = self::TOKENLOCATION . "/{$account->email}.json";
+        $this->storage->delete($filename);
+
+        return "{$account->email}.json";
+    }
+
     /**
      * Create zoom token location if empty
      */
@@ -47,12 +55,13 @@ class ZoomAccessTokenRepository extends ZoomRepositoryAbstract
             $this->storage->makeDirectory(self::TOKENLOCATION);
     }
 
-    private function refreshIfExpired(string $path)
+    private function refreshIfExpired(ZoomAccount $account, string $path)
     {
         $token = json_decode($this->storage->get($path));
 
         if($token->expires_in <= time()) {
-            $newToken = (new ZoomAuthFactory)->refreshAccessToken($token);
+            $newToken = (new ZoomAuthFactory($account->zoomApp))
+                            ->refreshAccessToken($token);
             $newToken['expires_in'] = time() + $newToken['expires_in'];
 
             $this->storage->put($path, json_encode($newToken));
