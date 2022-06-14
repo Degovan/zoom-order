@@ -76,6 +76,7 @@ class MeetingService
         $account = ZoomAccount::whereNotIn('id', $ids)
                         ->where('status', 'connected')
                         ->where('capacity', '>=', $max)
+                        ->orderBy('capacity', 'ASC')
                         ->limit(1)
                         ->first();
 
