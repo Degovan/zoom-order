@@ -53,9 +53,11 @@
             {data: 'host_key'},
             {data: 'capacity'},
             {render: (data, type, row, meta) => {
-                if(row.status == 'waiting') {
-                    return `<a class="badge bg-warning text-primary" href="${row.connectUrl}">waiting</a>`
+                if(row.status == 'connected') {
+                    return `<span class="badge bg-success">connected</span>`
                 }
+
+                return `<a class="badge bg-warning text-primary btn-connect" data-url="${row.connectUrl}" data-email="${row.email}">waiting</a>`
             }},
             {render: (data, type, row, meta) => {
                 return `
@@ -74,6 +76,23 @@
                 `;
             }}
         ]
+    });
+
+    $('#zoom-account-table').on('click', '.btn-connect', function(e) {
+        e.preventDefault();
+        window.authCode = 'hello';
+        const authWindow = window.open($(this).data('url'));
+        const email = $(this).data('email');
+
+        const authInterval = setInterval(() => {
+            if(authWindow.closed) {
+                let url = window.location.href.replace(/\/$/, "");
+                url = `${url}/authenticate?email=${email}&code=${window.authCode}`;
+
+                document.location.href = url;
+                window.clearInterval(authInterval);
+            }
+        }, 1000);
     });
 </script>
 @endpush

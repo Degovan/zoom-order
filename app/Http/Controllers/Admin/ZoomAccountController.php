@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exceptions\ZoomServiceException;
 use App\Factory\ZoomAuthFactory;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ZoomAccountRequest;
@@ -9,6 +10,8 @@ use App\Models\ZoomAccount;
 use App\Models\ZoomApp;
 use App\Repository\Zoom\AccountRepository;
 use App\Repository\Zoom\AppRepository;
+use App\Service\ZoomService;
+use Illuminate\Http\Request;
 
 class ZoomAccountController extends Controller
 {
@@ -54,6 +57,24 @@ class ZoomAccountController extends Controller
     {
         $url = (new ZoomAuthFactory($account->zoomApp))->generateAuthUrl();
         return redirect($url);
+    }
+
+    public function authenticate(Request $request)
+    {
+        if($request->email) {
+            $account = ZoomAccount::where('email', $request->email)->first();
+
+            if($account) {
+                try {
+                    (new ZoomService($account))->linkAccount($request->code);
+                    return back()->with('alert_s', 'Sukses menghubungkan akun');
+                } catch(ZoomServiceException $e) {
+                    return back()->with('alert_e', $e->getMessage());
+                }
+            }
+        }
+
+        return back()->with('alert_e', 'Akun zoom tidak ditemukan');
     }
 
     public function destroy($id)

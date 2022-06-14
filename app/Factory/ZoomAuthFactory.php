@@ -35,7 +35,7 @@ class ZoomAuthFactory
     }
 
     public function requestAccessToken(string $code = null): array
-    {
+    { 
         $url = self::AUTHURL . '/token';
         $body = [
             'code' => $code,

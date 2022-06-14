@@ -21,6 +21,8 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
 
         Route::get('accounts/{account}/connect', [ZoomAccountController::class, 'connect'])
             ->name('accounts.connect');
+        Route::get('accounts/authenticate', [ZoomAccountController::class, 'authenticate'])
+            ->name('accounts.authenticate');
         Route::get('accounts/dt', [ZoomAccountController::class, 'datatables'])
             ->name('accounts.datatables');
         Route::resource('accounts', ZoomAccountController::class);
