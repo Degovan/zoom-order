@@ -24,7 +24,7 @@ class Account
         $token = (new ZoomAccessTokenRepository)->get($account);
 
         if(($account->last_synced + 7200) < time()) {
-            $user = (new ZoomAuthFactory)->getAccount($token);
+            $user = (new ZoomAuthFactory($account->zoomApp))->getAccount($token);
             $account->update([
                 'host_key' => $user['host_key'],
                 'last_synced' => date('Y-m-d H:i:s')
@@ -34,10 +34,10 @@ class Account
         return $account;
     }
 
-    private static function refreshTokenIfExpired($account, object $token)
+    private static function refreshTokenIfExpired(ZoomAccount $account, object $token)
     {
         if(($token->expires_in - time()) < 900) {
-            $token = (new ZoomAuthFactory)->refreshAccessToken($token);
+            $token = (new ZoomAuthFactory($account->zoomApp))->refreshAccessToken($token);
             (new ZoomAccessTokenRepository)->store($account->email, $token);
         }
     }
