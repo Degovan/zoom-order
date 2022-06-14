@@ -69,6 +69,7 @@ class MeetingService
     private static function findAccount(int $max, $date): ZoomAccount
     {
         $ids = ZoomMeeting::whereDate('start', $date)
+                    ->where('status', '!=', 'finish')
                     ->get()
                     ->pluck('zoom_account_id')
                     ->toArray();
