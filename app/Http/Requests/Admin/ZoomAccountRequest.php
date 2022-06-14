@@ -23,6 +23,14 @@ class ZoomAccountRequest extends FormRequest
      */
     public function rules()
     {
+        $method = request()->getMethod();
+
+        if(in_array($method, ['PUT', 'PATCH'])) {
+            return [
+                'capacity' => 'required|numeric'
+            ];
+        }
+
         return [
             'zoom_app_id' => 'required|exists:zoom_apps,id|unique:zoom_accounts,zoom_app_id',
             'capacity' => 'required|numeric',

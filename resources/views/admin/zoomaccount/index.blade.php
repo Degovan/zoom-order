@@ -13,7 +13,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-end mb-4">
-                    <a href="{{ $auth_url }}" class="btn btn-sm btn-primary">
+                    <a href="{{ route('admin.zoom.accounts.create') }}" class="btn btn-sm btn-primary">
                         <i class="fas fa-paperclip"></i> Hubungkan akun baru
                     </a>
                 </div>
@@ -25,7 +25,8 @@
                                 <th>Email</th>
                                 <th>Host Key</th>
                                 <th>Kapasitas</th>
-                                <th>Action</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                     </table>
@@ -44,13 +45,18 @@
         processing: true,
         serverSide: true,
         ajax: {
-            url: '{{ route('admin.zoom.account.datatables') }}'
+            url: '{{ route('admin.zoom.accounts.datatables') }}'
         },
         columns: [
             {data: 'DT_RowIndex', orderable: false, searchable: false},
             {data: 'email'},
             {data: 'host_key'},
             {data: 'capacity'},
+            {render: (data, type, row, meta) => {
+                if(row.status == 'waiting') {
+                    return `<a class="badge bg-warning text-primary" href="${row.connectUrl}">waiting</a>`
+                }
+            }},
             {render: (data, type, row, meta) => {
                 return `
                     <div class="d-flex">

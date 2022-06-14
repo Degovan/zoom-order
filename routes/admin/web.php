@@ -19,9 +19,11 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
             ->name('app.datatables');
         Route::resource('app', ZoomAppController::class);
 
+        Route::get('accounts/{account}/connect', [ZoomAccountController::class, 'connect'])
+            ->name('accounts.connect');
+        Route::get('accounts/dt', [ZoomAccountController::class, 'datatables'])
+            ->name('accounts.datatables');
         Route::resource('accounts', ZoomAccountController::class);
-        Route::get('/account/dt', [ZoomAccountController::class, 'datatables'])
-            ->name('account.datatables');
     });
 
     Route::controller(XenditController::class)->group(function() {

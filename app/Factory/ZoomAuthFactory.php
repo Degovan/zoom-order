@@ -3,7 +3,6 @@
 namespace App\Factory;
 
 use App\Models\ZoomApp;
-use App\Repository\ZoomAppRepository;
 use Illuminate\Support\Facades\Http;
 
 class ZoomAuthFactory
@@ -11,23 +10,25 @@ class ZoomAuthFactory
     public const AUTHURL = 'https://zoom.us/oauth';
     public const APIURL = 'https://api.zoom.us/v2';
 
+    protected ZoomApp $zoomApp;
+
     private array $tokenHeaders;
 
-    public function __construct()
+    public function __construct(ZoomApp $app)
     {
-        $this->zoomapp = (new ZoomAppRepository)->get();
+        $this->zoomApp = $app;
         $this->tokenHeaders = [
             'Content-Type'=> 'application/x-www-form-urlencoded',
             'Authorization' => "Basic {$this->accessTokenAuth()}"
         ];
     }
 
-    public static function generateAuthUrl(ZoomApp $app): string
+    public function generateAuthUrl(): string
     {
         $queries = [
             'response_type' => 'code',
-            'client_id' => $app->client_id,
-            'redirect_uri' => $app->redirect_url
+            'client_id' => $this->zoomApp->client_id,
+            'redirect_uri' => $this->zoomApp->redirect_url
         ];
 
         return self::AUTHURL . '/authorize?' . http_build_query($queries);
@@ -39,7 +40,7 @@ class ZoomAuthFactory
         $body = [
             'code' => $code,
             'grant_type' => 'authorization_code',
-            'redirect_uri' => $this->zoomapp->redirect_url,
+            'redirect_uri' => $this->zoomApp->redirect_url,
         ];
 
         $response = Http::withHeaders($this->tokenHeaders)->asForm()->post($url, $body);
@@ -76,6 +77,6 @@ class ZoomAuthFactory
      */
     private function accessTokenAuth(): string
     {
-        return base64_encode("{$this->zoomapp->client_id}:{$this->zoomapp->client_secret}");
+        return base64_encode("{$this->zoomApp->client_id}:{$this->zoomApp->client_secret}");
     }
 }

@@ -22,4 +22,9 @@ class ZoomAccount extends Model
     protected $casts = [
         'last_synced' => 'timestamp'
     ];
+
+    public function zoomApp()
+    {
+        return $this->belongsTo(ZoomApp::class);
+    }
 }

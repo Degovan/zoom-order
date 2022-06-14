@@ -18,4 +18,10 @@ class AccountRepository
         $data = array_merge($data, ['redirect_url' => $this->redirect_url]);
         return ZoomAccount::create($data);
     }
+
+    public function update(ZoomAccount $account, array $data)
+    {
+        $account->update($data);
+        return $account;
+    }
 }
