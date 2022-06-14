@@ -8,6 +8,7 @@ use App\Models\ZoomAccount;
 use App\Repository\ZoomAccessTokenRepository;
 use App\Service\Contract\ZoomServiceContract;
 use App\Service\Zoom\Account;
+use Carbon\Carbon;
 
 class ZoomService implements ZoomServiceContract
 {
@@ -16,16 +17,16 @@ class ZoomService implements ZoomServiceContract
     private ZoomAuthFactory $factory;
     private ZoomAccessTokenRepository $tokenRepo;
 
-    public function __construct(ZoomAccount $account = null)
+    public function __construct(ZoomAccount $account)
     {
-        $this->factory = new ZoomAuthFactory;
+        $this->factory = new ZoomAuthFactory($account->zoomApp);
         $this->tokenRepo = new ZoomAccessTokenRepository;
 
-        if(!is_null($account)) Account::verify($account);
+        if($account->status == 'connected') Account::verify($account);
         $this->account = $account;
     }
 
-    public function linkAccount(string $code)
+    public function linkAccount(string $code): void
     {
         $token = $this->factory->requestAccessToken($code);
         if(isset($token['error'])) throw new ZoomServiceException('Invalid auth code');
@@ -33,21 +34,20 @@ class ZoomService implements ZoomServiceContract
         $user = $this->factory->getAccount((object)$token);
         $location = $this->tokenRepo->store($user['email'], $token);
 
-        if(Account::exist($user['email'])) {
-            throw new ZoomServiceException('Account has already exist');
-        }
-
-        return ZoomAccount::create([
-            'email' => $user['email'],
+        $this->account->update([
             'host_key' => $user['host_key'],
-            'auth_filename' => $location
+            'auth_filename' => $location,
+            'status' => 'connected',
+            'last_synced' => Carbon::now()
         ]);
     }
 
-    public function syncHostkey(ZoomAccount $accounts = null)
+    public function syncHostkey(): ZoomAccount
     {
-        if(!$accounts && $this->account instanceof ZoomAccount) {
+        if($this->account->status == 'connected') {
             return Account::syncHostkey($this->account);
         }
+
+        return $this->account;
     }
 }

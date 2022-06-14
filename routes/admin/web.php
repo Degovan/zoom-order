@@ -15,12 +15,17 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
     Route::get('/', DashboardController::class)->name('dashboard');
 
     Route::prefix('zoom')->name('zoom.')->group(function() {
-        Route::resource('app', ZoomAppController::class)
-            ->only(['index', 'store']);
+        Route::get('app/dt', [ZoomAppController::class, 'datatables'])
+            ->name('app.datatables');
+        Route::resource('app', ZoomAppController::class);
 
+        Route::get('accounts/{account}/connect', [ZoomAccountController::class, 'connect'])
+            ->name('accounts.connect');
+        Route::get('accounts/authenticate', [ZoomAccountController::class, 'authenticate'])
+            ->name('accounts.authenticate');
+        Route::get('accounts/dt', [ZoomAccountController::class, 'datatables'])
+            ->name('accounts.datatables');
         Route::resource('accounts', ZoomAccountController::class);
-        Route::get('/account/dt', [ZoomAccountController::class, 'datatables'])
-            ->name('account.datatables');
     });
 
     Route::controller(XenditController::class)->group(function() {

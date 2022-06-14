@@ -11,6 +11,8 @@ class ZoomAccount extends Model
 
     protected $fillable = [
         'email',
+        'zoom_app_id',
+        'status',
         'host_key',
         'capacity',
         'last_synced',
@@ -20,4 +22,9 @@ class ZoomAccount extends Model
     protected $casts = [
         'last_synced' => 'timestamp'
     ];
+
+    public function zoomApp()
+    {
+        return $this->belongsTo(ZoomApp::class);
+    }
 }

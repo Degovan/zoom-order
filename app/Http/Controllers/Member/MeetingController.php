@@ -54,7 +54,7 @@ class MeetingController extends Controller
         }
 
         try {
-            $meeting = MeetingService::create($order->invoice, $request);
+            $meeting = MeetingService::create($order, $request);
             $order->decrement('remaining');
 
             return redirect()->route('member.meetings.show', $meeting);

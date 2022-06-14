@@ -9,9 +9,10 @@ use Carbon\Carbon;
 
 class MeetingService
 {
-    public static function create(Invoice $invoice, $data): ZoomMeeting
+    public static function create(Order $order, $data): ZoomMeeting
     {
-        $account = static::findAccount($invoice->items->max_audience, $data->date);
+        $maxAudience = $order->invoice->items->max_audience;
+        $account = static::findAccount($maxAudience, $data->date);
         $time = Carbon::parse("$data->date $data->time");
 
         if($time->lt(Carbon::now())) {
@@ -26,14 +27,14 @@ class MeetingService
             'end' => Carbon::parse($time)->endOfDay()
         ];
 
-        $meeting = (new MeetingRepository($account))->create((object) $data);
+        $meeting = (new MeetingRepository($account))->create((object)$data);
         $meeting = array_merge($meeting, [
             'start' => $time,
             'end' => $data['end'],
             'passcode' => $data['passcode']
         ]);
 
-        return MeetingRepository::save(app(Order::class), $account, (object) $meeting);
+        return MeetingRepository::save($order, $account, (object)$meeting);
     }
 
     public static function stop(ZoomMeeting $meeting = null)
@@ -67,8 +68,17 @@ class MeetingService
 
     private static function findAccount(int $max, $date): ZoomAccount
     {
-        $ids = ZoomMeeting::whereDate('start', $date)->get()->pluck('zoom_account_id')->toArray();
-        $account = ZoomAccount::whereNotIn('id', $ids)->where('capacity', '>=', $max)->limit(1)->first();
+        $ids = ZoomMeeting::whereDate('start', $date)
+                    ->get()
+                    ->pluck('zoom_account_id')
+                    ->toArray();
+
+        $account = ZoomAccount::whereNotIn('id', $ids)
+                        ->where('status', 'connected')
+                        ->where('capacity', '>=', $max)
+                        ->orderBy('capacity', 'ASC')
+                        ->limit(1)
+                        ->first();
 
         if(!$account) {
             throw new MeetingException("Tidak dapat membuat meeting pada tanggal ini");

@@ -13,7 +13,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-end mb-4">
-                    <a href="{{ $auth_url }}" class="btn btn-sm btn-primary">
+                    <a href="{{ route('admin.zoom.accounts.create') }}" class="btn btn-sm btn-primary">
                         <i class="fas fa-paperclip"></i> Hubungkan akun baru
                     </a>
                 </div>
@@ -25,7 +25,8 @@
                                 <th>Email</th>
                                 <th>Host Key</th>
                                 <th>Kapasitas</th>
-                                <th>Action</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                     </table>
@@ -44,13 +45,20 @@
         processing: true,
         serverSide: true,
         ajax: {
-            url: '{{ route('admin.zoom.account.datatables') }}'
+            url: '{{ route('admin.zoom.accounts.datatables') }}'
         },
         columns: [
             {data: 'DT_RowIndex', orderable: false, searchable: false},
             {data: 'email'},
             {data: 'host_key'},
             {data: 'capacity'},
+            {render: (data, type, row, meta) => {
+                if(row.status == 'connected') {
+                    return `<span class="badge bg-success">connected</span>`
+                }
+
+                return `<a class="badge bg-warning text-primary btn-connect" data-url="${row.connectUrl}" data-email="${row.email}">waiting</a>`
+            }},
             {render: (data, type, row, meta) => {
                 return `
                     <div class="d-flex">
@@ -68,6 +76,23 @@
                 `;
             }}
         ]
+    });
+
+    $('#zoom-account-table').on('click', '.btn-connect', function(e) {
+        e.preventDefault();
+        window.authCode = 'hello';
+        const authWindow = window.open($(this).data('url'));
+        const email = $(this).data('email');
+
+        const authInterval = setInterval(() => {
+            if(authWindow.closed) {
+                let url = window.location.href.replace(/\/$/, "");
+                url = `${url}/authenticate?email=${email}&code=${window.authCode}`;
+
+                document.location.href = url;
+                window.clearInterval(authInterval);
+            }
+        }, 1000);
     });
 </script>
 @endpush

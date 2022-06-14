@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('zoom_accounts', function (Blueprint $table) {
+        Schema::create('zoom_apps', function (Blueprint $table) {
             $table->id();
-            $table->string('email', 100);
-            $table->string('host_key', 6)->nullable();
-            $table->integer('capacity')->default(0);
-            $table->string('auth_filename')->nullable();
-            $table->timestamp('last_synced')->nullable();
+            $table->string('name', 25);
+            $table->string('client_id', 255);
+            $table->string('client_secret', 255);
+            $table->string('redirect_url');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('zoom_accounts');
+        Schema::dropIfExists('zoom_apps');
     }
 };
