@@ -29,16 +29,17 @@ class MeetingRepository
 
     public function create(object $data): array
     {
-        $data = [
+        $meeting = [
             'agenda' => $data->topic,
             'topic' => $data->topic,
             'duration' => $data->end->diffInMinutes($data->start),
-            'password' => $data->passcode,
             'start_time' => $data->start->format('Y-m-d\TH:i:s'),
             'timezone' => 'Asia/Jakarta'
         ];
 
-        return $this->http->post("{$this->url}/users/me/meetings", $data)->json();
+        if(strlen((string) $data->passcode) > 0) $meeting['password'] = $data->passcode;
+
+        return $this->http->post("{$this->url}/users/me/meetings", $meeting)->json();
     }
 
     public function stop(ZoomMeeting $meeting)
