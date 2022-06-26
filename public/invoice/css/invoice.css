@@ -1,242 +1,292 @@
 @import "https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap";
 * {
-  margin: 0 auto;
-  padding: 0 auto;
-  user-select: none;
+    margin: 0 auto;
+    padding: 0 auto;
+    user-select: none;
 }
 
 body {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  background-color: #f2f2f2;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background-color: #f2f2f2;
 }
 
 .wrapper-invoice {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 .wrapper-invoice .invoice {
-  margin-top: 2rem;
-  height: auto;
-  background: #fff;
-  padding: 14px;
-  max-width: 800px;
-  width: 100%;
-  box-sizing: border-box;
+    margin-top: 2rem;
+    height: auto;
+    background: #fff;
+    padding: 14px;
+    max-width: 800px;
+    width: 100%;
+    box-sizing: border-box;
 }
 .wrapper-invoice .invoice .invoice-information {
-  float: right;
-  text-align: right;
+    float: right;
+    text-align: right;
 }
 .wrapper-invoice .invoice .invoice-information b {
-  color: "#0F172A";
+    color: "#0F172A";
 }
 .wrapper-invoice .invoice .invoice-information p {
-  font-size: 14px;
-  color: gray;
+    font-size: 14px;
+    color: gray;
 }
 .wrapper-invoice .invoice .invoice-information .table-date {
-  border-collapse: collapse;
-  width: 100%;
+    border-collapse: collapse;
+    width: 100%;
 }
 .wrapper-invoice .invoice .invoice-information .table-date tr {
-  padding: 1vh;
-  background-color: #fff;
+    padding: 1vh;
+    background-color: #fff;
 }
 .wrapper-invoice .invoice .invoice-information .table-date tr td {
-  font-size: 14px;
-  padding: 1vh;
-  text-align: left;
-}
-.wrapper-invoice .invoice .invoice-information .table-date tr td:nth-child(2) {
-  text-align: right;
-}
-.wrapper-invoice .invoice .invoice-information .table-date tr:nth-child(3) {
-  background-color: #f2f2f2;
-}
-.wrapper-invoice .invoice .invoice-logo-brand h2 {
-  text-transform: uppercase;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 2.9vh;
-  color: "#0F172A";
-}
-.wrapper-invoice .invoice .invoice-logo-brand img {
-  max-width: 230px;
-  width: 100%;
-  object-fit: cover;
-}
-.wrapper-invoice .invoice .invoice-head {
-  display: block;
-  margin-top: 14px;
-}
-.wrapper-invoice .invoice .invoice-head .head {
-  width: 100%;
-  box-sizing: border-box;
-}
-.wrapper-invoice .invoice .invoice-head .client-info {
-  text-align: left;
-}
-.wrapper-invoice .invoice .invoice-head .client-info h2 {
-  font-weight: 500;
-  letter-spacing: 0.3px;
-  font-size: 14px;
-  color: "#0F172A";
-}
-.wrapper-invoice .invoice .invoice-head .client-info p {
-  font-size: 14px;
-  color: gray;
-}
-.wrapper-invoice .invoice .invoice-head .client-data {
-  text-align: left;
-}
-.wrapper-invoice .invoice .invoice-head .client-data h2 {
-  font-weight: 500;
-  letter-spacing: 0.3px;
-  font-size: 14px;
-  color: "#0F172A";
-}
-.wrapper-invoice .invoice .invoice-head .client-data p {
-  margin-left: 0;
-  font-size: 14px;
-  color: gray;
-  max-width: 400px;
-}
-.wrapper-invoice .invoice .invoice-body {
-  margin-top: 5vh;
-}
-.wrapper-invoice .invoice .invoice-body .table {
-  border-collapse: collapse;
-  width: 100%;
-}
-.wrapper-invoice .invoice .invoice-body .table thead tr th {
-  font-size: 14px;
-  color: #f2f2f2;
-  text-align: left;
-  padding: 1vh;
-  background-color: #3a3a3a;
-}
-.wrapper-invoice .invoice .invoice-body .table tbody tr td {
-  font-size: 14px;
-  text-align: left;
-  padding: 1vh;
-  background-color: #fff;
-}
-.wrapper-invoice .invoice .invoice-body .flex-table {
-  display: flex;
-}
-.wrapper-invoice .invoice .invoice-body .flex-table .flex-column {
-  text-align: center;
-  width: 100%;
-  box-sizing: border-box;
-}
-.wrapper-invoice .invoice .invoice-body .flex-table .flex-column .signature {
-  margin-top: 1rem;
-  max-width: 200px;
-  width: 100%;
-}
-.wrapper-invoice .invoice .invoice-body .flex-table .flex-column .table-subtotal {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  width: 100%;
-  margin-top: 5vh;
-}
-.wrapper-invoice .invoice .invoice-body .flex-table .flex-column .table-subtotal tbody tr td {
-  font-size: 14px;
-  text-align: right;
-  padding: 1vh;
-  background-color: #fff;
-}
-.wrapper-invoice .invoice .invoice-body .flex-table .flex-column .table-subtotal tbody tr td:nth-child(2) {
-  text-align: right;
-}
-.wrapper-invoice .invoice .invoice-body .invoice-total-amount {
-  margin-top: 1rem;
-}
-.wrapper-invoice .invoice .invoice-body .invoice-total-amount p {
-  font-weight: bold;
-  color: "#0F172A";
-  text-align: right;
-  font-size: 14px;
-}
-.wrapper-invoice .invoice .invoice-footer {
-  margin-top: 4vh;
-}
-.wrapper-invoice .invoice .invoice-footer p {
-  font-size: 1.7vh;
-  color: gray;
-}
-
-.copyright {
-  margin-top: 2rem;
-  text-align: center;
-}
-.copyright p {
-  color: gray;
-  font-size: 1.8vh;
-}
-
-@media print {
-  .wrapper-invoice .invoice {
-    margin-top: 0px;
-  }
-  .wrapper-invoice .invoice .invoice-information p {
-    font-size: 12px;
-  }
-  .wrapper-invoice .invoice .invoice-information .table-date tr td {
     font-size: 14px;
     padding: 1vh;
     text-align: left;
-  }
-  .wrapper-invoice .invoice .invoice-information .table-date tr td:nth-child(2) {
+}
+.wrapper-invoice .invoice .invoice-information .table-date tr td:nth-child(2) {
     text-align: right;
-  }
-  .wrapper-invoice .invoice .invoice-information .table-date tr:nth-child(even) {
-    background-color: #f2f2f2 !important;
-  }
+}
+.wrapper-invoice .invoice .invoice-information .table-date tr:nth-child(3) {
+    background-color: #f2f2f2;
+}
+.wrapper-invoice .invoice .invoice-logo-brand h2 {
+    text-transform: uppercase;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 2.9vh;
+    color: "#0F172A";
+}
+.wrapper-invoice .invoice .invoice-logo-brand img {
+    max-width: 230px;
+    width: 100%;
+    object-fit: cover;
+}
+.wrapper-invoice .invoice .invoice-head {
+    display: block;
+    margin-top: 14px;
+}
+.wrapper-invoice .invoice .invoice-head .head {
+    width: 100%;
+    box-sizing: border-box;
+}
+.wrapper-invoice .invoice .invoice-head .client-info {
+    text-align: left;
+}
+.wrapper-invoice .invoice .invoice-head .client-info h2 {
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    font-size: 14px;
+    color: "#0F172A";
+}
+.wrapper-invoice .invoice .invoice-head .client-info p {
+    font-size: 14px;
+    color: gray;
+}
+.wrapper-invoice .invoice .invoice-head .client-data {
+    text-align: left;
+}
+.wrapper-invoice .invoice .invoice-head .client-data h2 {
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    font-size: 14px;
+    color: "#0F172A";
+}
+.wrapper-invoice .invoice .invoice-head .client-data p {
+    margin-left: 0;
+    font-size: 14px;
+    color: gray;
+    max-width: 400px;
+}
+.wrapper-invoice .invoice .invoice-body {
+    margin-top: 5vh;
+}
+.wrapper-invoice .invoice .invoice-body .table {
+    border-collapse: collapse;
+    width: 100%;
+}
+.wrapper-invoice .invoice .invoice-body .table thead tr th {
+    font-size: 14px;
+    color: #f2f2f2;
+    text-align: left;
+    padding: 1vh;
+    background-color: #3a3a3a;
+}
+.wrapper-invoice .invoice .invoice-body .table tbody tr td {
+    font-size: 14px;
+    text-align: left;
+    padding: 1vh;
+    background-color: #fff;
+}
+.wrapper-invoice .invoice .invoice-body .flex-table {
+    display: flex;
+}
+.wrapper-invoice .invoice .invoice-body .flex-table .flex-column {
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+.wrapper-invoice .invoice .invoice-body .flex-table .flex-column .signature {
+    margin-top: 5rem;
+    max-width: 200px;
+    width: 100%;
+}
+.wrapper-invoice
+    .invoice
+    .invoice-body
+    .flex-table
+    .flex-column
+    .table-subtotal {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 5vh;
+}
+.wrapper-invoice
+    .invoice
+    .invoice-body
+    .flex-table
+    .flex-column
+    .table-subtotal
+    tbody
+    tr
+    td {
+    font-size: 14px;
+    text-align: right;
+    padding: 1vh;
+    background-color: #fff;
+}
+.wrapper-invoice
+    .invoice
+    .invoice-body
+    .flex-table
+    .flex-column
+    .table-subtotal
+    tbody
+    tr
+    td:nth-child(2) {
+    text-align: right;
+}
+.wrapper-invoice .invoice .invoice-body .invoice-total-amount {
+    margin-top: 1rem;
+}
+.wrapper-invoice .invoice .invoice-body .invoice-total-amount p {
+    font-weight: bold;
+    color: "#0F172A";
+    text-align: right;
+    font-size: 14px;
+}
+.wrapper-invoice .invoice .invoice-footer {
+    margin-top: 4vh;
+}
+.wrapper-invoice .invoice .invoice-footer p {
+    font-size: 1.7vh;
+    color: gray;
+}
 
-  .table thead tr th {
-    -webkit-print-color-adjust: exact;
-    background-color: #3a3a3a !important;
-  }
-  .table tbody tr td {
-    font-size: 12px;
-  }
+.copyright {
+    margin-top: 2rem;
+    text-align: center;
+}
+.copyright p {
+    color: gray;
+    font-size: 1.8vh;
+}
 
-  .copyright {
-    display: none;
-  }
+@media print {
+    .wrapper-invoice .invoice {
+        margin-top: 0px;
+    }
+    .wrapper-invoice .invoice .invoice-information p {
+        font-size: 12px;
+    }
+    .wrapper-invoice .invoice .invoice-information .table-date tr td {
+        font-size: 14px;
+        padding: 1vh;
+        text-align: left;
+    }
+    .wrapper-invoice
+        .invoice
+        .invoice-body
+        .flex-table
+        .flex-column
+        .signature {
+        margin-top: 25rem;
+        max-width: 200px;
+        width: 100%;
+    }
+    .wrapper-invoice
+        .invoice
+        .invoice-information
+        .table-date
+        tr
+        td:nth-child(2) {
+        text-align: right;
+    }
+    .wrapper-invoice
+        .invoice
+        .invoice-information
+        .table-date
+        tr:nth-child(even) {
+        background-color: #f2f2f2 !important;
+    }
+
+    .table thead tr th {
+        -webkit-print-color-adjust: exact;
+        background-color: #3a3a3a !important;
+    }
+    .table tbody tr td {
+        font-size: 12px;
+    }
+
+    .copyright {
+        display: none;
+    }
 }
 .rtl {
-  direction: rtl;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    direction: rtl;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 .rtl .invoice-information {
-  float: left !important;
-  text-align: left !important;
+    float: left !important;
+    text-align: left !important;
 }
 .rtl .invoice-head .client-info {
-  text-align: right !important;
+    text-align: right !important;
 }
 .rtl .invoice-head .client-data {
-  text-align: left !important;
+    text-align: left !important;
 }
 .rtl .invoice-body .table thead tr th {
-  text-align: right !important;
+    text-align: right !important;
 }
 .rtl .invoice-body .table tbody tr td {
-  text-align: right !important;
+    text-align: right !important;
 }
 .rtl .invoice-body .table tbody tr td:nth-child(2) {
-  text-align: left !important;
+    text-align: left !important;
 }
 .rtl .invoice-body .flex-table .flex-column .table-subtotal tbody tr td {
-  text-align: right !important;
+    text-align: right !important;
 }
-.rtl .invoice-body .flex-table .flex-column .table-subtotal tbody tr td:nth-child(2) {
-  text-align: left !important;
+.rtl
+    .invoice-body
+    .flex-table
+    .flex-column
+    .table-subtotal
+    tbody
+    tr
+    td:nth-child(2) {
+    text-align: left !important;
 }
 .rtl .invoice-body .invoice-total-amount p {
-  text-align: left !important;
+    text-align: left !important;
 }
 
 /*# sourceMappingURL=invoice.css.map */

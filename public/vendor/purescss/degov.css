@@ -1,61 +1,64 @@
 .background-gold {
-  background-color: gold !important;
+    background-color: gold !important;
 }
 
 .mt-5 {
-  margin-top: 5rem;
+    margin-top: 5rem;
 }
 
 .item-meeting {
-  display: none;
+    display: none;
 }
 
 .item-meeting.on {
-  display: block;
+    display: block;
 }
 
 .item-webinar {
-  display: none;
+    display: none;
 }
 
 .item-webinar.on {
-  display: block;
+    display: block;
 }
 
 .item-zoompro {
-  display: none;
+    display: none;
 }
 
 .item-zoompro.on {
-  display: block;
+    display: block;
 }
-
-input[type=radio] {
-  cursor: pointer !important;
+.logo-invoice {
+    max-width: 280px;
+    width: 100%;
+}
+input[type="radio"] {
+    cursor: pointer !important;
 }
 
 .tr-mt-5 {
-  margin-top: 2rem;
+    margin-top: 2rem;
 }
 
 .text-wrapper p {
-  max-width: 300px !important;
-  width: 100%;
-  box-sizing: border-box;
-  margin-left: 0;
+    max-width: 300px !important;
+    width: 100%;
+    box-sizing: border-box;
+    margin-left: 0;
 }
 
 .bg-custom-light {
-  background-color: #f2f2f2;
+    background-color: #f2f2f2;
 }
 
 .button {
-  padding: 10px;
-  width: 100%;
-  box-sizing: border-box;
-  border: none;
-  color: #5a8dee;
-  border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    color: #5a8dee;
+    border-radius: 4px;
 }
 
 /*# sourceMappingURL=degov.css.map */
