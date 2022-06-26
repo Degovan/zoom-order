@@ -51,7 +51,13 @@ $total = ($invoice->items->cost - $invoice->items->discount);
                                     <tr class="table-light">
 
                                         <td><b>Balance Due:</b></td>
-                                        <td><b> {{ $total }}</b></td>
+                                        <td>
+                                            @if ($invoice->status == 'unpaid')
+                                            <b>@money($invoice->total, 'IDR')</b>
+                                            @else
+                                            <b>@money(0, 'IDR')</b>
+                                            @endif
+                                        </td>
                                     </tr>
 
                                 </tbody>
@@ -74,8 +80,8 @@ $total = ($invoice->items->cost - $invoice->items->discount);
                                         Pilih Kapasitas: {{ $invoice->items->max_audience }} Attendee
                                     </td>
                                     <td>{{ $invoice->items->packets }}</td>
-                                    <td class="text-end">IDR {{ $invoice->items->cost }}</td>
-                                    <td class="text-end">{{ $invoice->total }}</td>
+                                    <td class="text-end">@money($invoice->items->cost, 'IDR')</td>
+                                    <td class="text-end">@money($invoice->total, 'IDR')</td>
                                 </tr>
 
 
@@ -91,7 +97,7 @@ $total = ($invoice->items->cost - $invoice->items->discount);
                                 <tbody>
                                     <tr>
                                         <td class="text-muted">Subtotal: </td>
-                                        <td class="text-end">IDR {{ $total * $invoice->items->packets }}</td>
+                                        <td class="text-end">@money($total * $invoice->items->packets, 'IDR')</td>
 
                                     </tr>
                                     <tr>
@@ -100,11 +106,15 @@ $total = ($invoice->items->cost - $invoice->items->discount);
                                     </tr>
                                     <tr>
                                         <td class="text-muted">Total:</td>
-                                        <td class="text-end">IDR {{ $total * $invoice->items->packets }}</td>
+                                        <td class="text-end">@money($total * $invoice->items->packets, 'IDR')</td>
                                     </tr>
                                     <tr>
                                         <td class="text-muted">Amount Paid:</td>
-                                        <td class="text-end">IDR {{ $total * $invoice->items->packets }}</td>
+                                        @if ($invoice->status == 'complete')
+                                        <td class="text-end">@money($total * $invoice->items->packets, 'IDR')</td>
+                                        @else
+                                        <td class="text-end">@money(0, 'IDR')</td>
+                                        @endif
                                     </tr>
                                 </tbody>
                             </table>
