@@ -60,7 +60,7 @@ class MeetingRepository
     public static function save(Order $order, ZoomAccount $account, object $data): ZoomMeeting
     {
         return ZoomMeeting::create([
-            'zoom_meeting_id' => $data->id,
+            'zoom_meeting_id' => (string)$data->id,
             'user_id' => $order->user->id,
             'zoom_account_id' => $account->id,
             'order_id' => $order->id,
