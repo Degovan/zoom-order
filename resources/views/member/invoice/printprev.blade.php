@@ -10,17 +10,18 @@ $total = ($invoice->items->cost - $invoice->items->discount);
     <div class="invoice-information">
       <h1><b>INVOICE</b></h1>
       <p>#{{ $invoice->code }}</p>
+      <br>
       <span class="badge" id="invoice-status">{{ $invoice->status }}</span>
-      <br />
+      <br /><br>
       <table class="table-date">
         <tr>
           <td>Date:</td>
           <td>{{ $invoice->created_at->format('d/m/Y') }}</td>
         </tr>
         <tr>
-            <td>Due Date:</td>
-            <td>{{ $invoice->due->diffForHumans() }}</td>
-          </tr>
+          <td>Due Date:</td>
+          <td>{{ $invoice->due->diffForHumans() }}</td>
+        </tr>
         <tr>
           <td><b>Balance Due:</b></td>
           <td><b>IDR {{ $total }}</b></td>
@@ -30,10 +31,7 @@ $total = ($invoice->items->cost - $invoice->items->discount);
     <!-- logo brand invoice -->
     <div class="invoice-logo-brand">
       <!-- <h2>Tampsh.</h2> -->
-      <img
-        src="{{asset('invoice/img/RapatVirtual.png')}}"
-        alt="RapatVirtual (Logo Horizontal)"
-      />
+      <img src="{{asset('invoice/img/RapatVirtual.png')}}" alt="RapatVirtual (Logo Horizontal)" />
     </div>
     <!-- invoice head -->
     <div class="invoice-head">
@@ -50,7 +48,7 @@ $total = ($invoice->items->cost - $invoice->items->discount);
         <p><b>{{ $invoice->user->name }}</b></p>
         <p>{{ $invoice->user->institution }}</p>
         <p>
-            {{ $invoice->user->full_address }}
+          {{ $invoice->user->full_address }}
         </p>
       </div>
     </div>
@@ -79,7 +77,7 @@ $total = ($invoice->items->cost - $invoice->items->discount);
       </table>
       <div class="flex-table">
         <div class="flex-column">
-            <img src="{{ asset('/invoice/img/sign.jpeg')}}" class="signature" alt="" />
+          <img src="{{ asset('/invoice/img/sign.jpeg')}}" class="signature" alt="" />
         </div>
         <div class="flex-column">
           <table class="table-subtotal">

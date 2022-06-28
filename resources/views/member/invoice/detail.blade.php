@@ -123,8 +123,9 @@ $total = ($invoice->items->cost - $invoice->items->discount);
                 </div>
             </div>
         </div>
-        @if($invoice->status == 'unpaid')
+
         <div class="col-md-3">
+            @if($invoice->status == 'unpaid')
             <div class="card">
                 <div class="card-header bg-primary">
                     <p class="text-white">Total due</p>
@@ -135,6 +136,7 @@ $total = ($invoice->items->cost - $invoice->items->discount);
                     </button>
                 </div>
             </div>
+            @endif
             <div class="mt-4">
                 <h4>Actions</h4>
                 <a href="{{ route('member.invoice.print', $invoice)}}"><svg xmlns="http://www.w3.org/2000/svg"
@@ -146,7 +148,7 @@ $total = ($invoice->items->cost - $invoice->items->discount);
                     </svg> Download</a>
             </div>
         </div>
-        @endif
+
     </div>
 </div>
 </section>
