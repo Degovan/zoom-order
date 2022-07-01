@@ -17,7 +17,7 @@ class XenditController extends Controller
     }
 
     public function index()
-    {   
+    {
         return view('admin.xendit.index', [
             'secret' => XenditSecretRepository::get(),
             'balance' => $this->service->balance()
