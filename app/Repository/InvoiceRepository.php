@@ -12,6 +12,8 @@ class InvoiceRepository
     public static function create(Package $package, Pricing $pricing, int $packets): Invoice
     {
         $xService = new XenditService;
+        $due = (int) option()->get('invoice_due');
+
         $items = json_encode([
             'title' => $package->title,
             'max_audience' => $pricing->max_audience,
@@ -22,7 +24,7 @@ class InvoiceRepository
 
         $invoice = Invoice::create([
             'code' => static::codeGen(),
-            'due' => Carbon::now()->addMinutes(30),
+            'due' => Carbon::now()->addMinutes($due),
             'user_id' => Auth::user()->id,
             'items' => $items,
             'total' => ($pricing->cost - $pricing->discount) * $packets,

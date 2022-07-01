@@ -17,16 +17,19 @@ class XenditController extends Controller
     }
 
     public function index()
-    {   
+    {
         return view('admin.xendit.index', [
             'secret' => XenditSecretRepository::get(),
-            'balance' => $this->service->balance()
+            'balance' => $this->service->balance(),
+            'due' => (int) option()->get('invoice_due')
         ]);
     }
 
     public function store(XenditRequest $request)
     {
+        option()->save('invoice_due', "$request->invoice_due");
         XenditSecretRepository::put($request->secret);
+        
         return back()->with('alert_s', 'Berhasil menyimpan data');
     }
 }

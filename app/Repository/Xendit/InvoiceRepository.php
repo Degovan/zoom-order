@@ -23,12 +23,14 @@ class InvoiceRepository
 
     public static function create(InvoiceModel $invoice, User $user): object
     {
+        $due = (int) option()->get('invoice_due');
+
         $xInvoice = Invoice::create([
             'external_id' => "{$invoice->code}",
             'payer_email' => $user->email,
             'amount' => $invoice->total,
             'description' => $invoice->items->title,
-            'invoice_duration' => 1800,
+            'invoice_duration' => ($due * 60),
             'customer' => [
                 'given_names' => $user->name,
                 'email' => $user->email

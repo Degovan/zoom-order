@@ -24,7 +24,8 @@ class XenditRequest extends FormRequest
     public function rules()
     {
         return [
-            'secret' => 'required|string'
+            'secret' => 'required|string',
+            'invoice_due' => 'required|numeric'
         ];
     }
 }
