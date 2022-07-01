@@ -24,7 +24,13 @@ $total = ($invoice->items->cost - $invoice->items->discount);
         </tr>
         <tr>
           <td><b>Balance Due:</b></td>
-          <td><b>IDR {{ $total }}</b></td>
+          <td>
+            @if ($invoice->status == 'unpaid')
+            <b>@money($invoice->total, 'IDR')</b>
+            @else
+            <b>@money(0, 'IDR')</b>
+            @endif
+          </td>
         </tr>
       </table>
     </div>
@@ -75,6 +81,7 @@ $total = ($invoice->items->cost - $invoice->items->discount);
           </tr>
         </tbody>
       </table>
+      @php $total = $total * $invoice->items->packets @endphp
       <div class="flex-table">
         <div class="flex-column">
           <img src="{{ asset('/invoice/img/sign.jpeg')}}" class="signature" alt="" />
@@ -84,7 +91,7 @@ $total = ($invoice->items->cost - $invoice->items->discount);
             <tbody>
               <tr>
                 <td>Subtotal :</td>
-                <td>IDR {{ $total * $invoice->items->packets }}</td>
+                <td>@money($total, 'IDR')</td>
               </tr>
               <tr>
                 <td>Tax (0%) :</td>
@@ -92,11 +99,15 @@ $total = ($invoice->items->cost - $invoice->items->discount);
               </tr>
               <tr>
                 <td>Amount :</td>
-                <td>IDR {{ $total * $invoice->items->packets }}</td>
+                <td>@money($total, 'IDR')</td>
               </tr>
               <tr>
                 <td>Amount Paid :</td>
-                <td>IDR {{ $total * $invoice->items->packets }}</td>
+                @if ($invoice->status == 'complete')
+                <td class="text-end">@money($total, 'IDR')</td>
+                @else
+                <td class="text-end">@money(0, 'IDR')</td>
+                @endif
               </tr>
             </tbody>
           </table>
