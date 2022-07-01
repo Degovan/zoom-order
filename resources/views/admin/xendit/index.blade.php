@@ -25,6 +25,10 @@
                     @enderror
                 </div>
                 <div class="mb-3">
+                    <label for="invoice_due">Batas Waktu (menit)</label>
+                    <input type="number" name="invoice_due" id="invoice_due" class="form-control" value="{{ $due }}">
+                </div>
+                <div class="mb-3">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
                 </div>
                 </form>

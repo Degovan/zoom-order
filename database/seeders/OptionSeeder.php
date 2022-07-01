@@ -17,7 +17,7 @@ class OptionSeeder extends Seeder
     {
         Option::create([
             'key' => 'invoice_due',
-            'value' => '3600'
+            'value' => '30'
         ]);
     }
 }
