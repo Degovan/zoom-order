@@ -23,8 +23,11 @@
                             <div class="input-group-text">
                                 <i class="fas fa-fw fa-key"></i>
                             </div>
-                            <input type="text" id="host-key" class="form-control" value="{{ $account->host_key }}" readonly>
+                            <input type="text" id="host-key" name="host_key" class="form-control @error('host_key') is-invalid @enderror" value="{{ $account->host_key }}" autofocus>
                         </div>
+                        @error('host_key')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="capacity">Kapasitas</label>
@@ -32,7 +35,7 @@
                             <div class="input-group-text">
                                 <i class="fas fa-fw fa-users"></i>
                             </div>
-                            <input type="number" id="capacity" class="form-control @error('capacity') is-invalid @enderror" value="{{ $account->capacity }}" name="capacity" autofocus>
+                            <input type="number" id="capacity" class="form-control @error('capacity') is-invalid @enderror" value="{{ $account->capacity }}" name="capacity">
                             <div class="input-group-text">
                                 peserta
                             </div>

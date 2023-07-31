@@ -14,21 +14,23 @@
             <div class="card-body">
                 <form action="{{ route('admin.zoom.accounts.store') }}" method="post">
                     @csrf
-                    <div class="mb-4">
-                        <label for="zoom_app_id">Aplikasi Zoom</label>
-                        <select name="zoom_app_id" id="zoom_app_id" class="form-control @error('zoom_app_id') is-invalid @enderror">
-                            @forelse ($apps as $app)
-                            <option value="{{ $app->id }}">{{ $app->name }}</option>
-                            @empty
-                            <option value="">--Buat App--</option>
-                            @endforelse
-                        </select>
-
-                        @error('zoom_app_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
                     <div class="row">
+                        <div class="col-md-8">
+                            <div class="mb-4">
+                                <label for="zoom_app_id">Aplikasi Zoom</label>
+                                <select name="zoom_app_id" id="zoom_app_id" class="form-control @error('zoom_app_id') is-invalid @enderror">
+                                    @forelse ($apps as $app)
+                                    <option value="{{ $app->id }}">{{ $app->name }}</option>
+                                    @empty
+                                    <option value="">--Buat App--</option>
+                                    @endforelse
+                                </select>
+
+                                @error('zoom_app_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="col-md-4">
                             <div class="mb-4">
                                 <label for="capacity">Kapasitas Peserta</label>
@@ -39,12 +41,24 @@
                                 @enderror
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-8">
                             <div class="mb-4">
                                 <label for="email">Email</label>
                                 <input type="text" name="email" id="email" class="form-control @error('email') is-invalid @enderror">
 
                                 @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-4">
+                                <label for="host_key">Host Key</label>
+                                <input type="text" name="host_key" id="host_key" class="form-control @error('host_key') is-invalid @enderror">
+
+                                @error('host_key')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

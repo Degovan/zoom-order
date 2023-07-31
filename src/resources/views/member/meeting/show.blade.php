@@ -54,7 +54,7 @@
                             <label for="host-key">Host Key</label>
                         </div>
                         <div class="col-md-8 has-icon-right">
-                            <input type="text" id="host-key" class="form-control" value="{{ $meeting->host_key() }}" readonly>
+                            <input type="text" id="host-key" class="form-control" value="{{ $meeting->zoom_account->host_key }}" readonly>
                             <div class="form-control-icon me-2" id="btn-copy-hostkey" title="copy" data-clipboard-target="#host-key">
                                 <i data-feather="copy"></i>
                             </div>

@@ -27,14 +27,16 @@ class ZoomAccountRequest extends FormRequest
 
         if(in_array($method, ['PUT', 'PATCH'])) {
             return [
-                'capacity' => 'required|numeric'
+                'capacity' => 'required|numeric',
+                'host_key' => 'required|min:6|max:6',
             ];
         }
 
         return [
             'zoom_app_id' => 'required|exists:zoom_apps,id|unique:zoom_accounts,zoom_app_id',
             'capacity' => 'required|numeric',
-            'email' => 'required|unique:zoom_accounts,email'
+            'email' => 'required|unique:zoom_accounts,email',
+            'host_key' => 'required|min:6|max:6',
         ];
     }
 }

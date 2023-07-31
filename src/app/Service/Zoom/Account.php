@@ -19,21 +19,6 @@ class Account
         return !is_null(ZoomAccount::where('email', $email)->first());
     }
 
-    public static function syncHostkey(ZoomAccount $account): ZoomAccount
-    {
-        $token = (new ZoomAccessTokenRepository)->get($account);
-
-        if(($account->last_synced + 7200) < time()) {
-            $user = (new ZoomAuthFactory($account->zoomApp))->getAccount($token);
-            $account->update([
-                'host_key' => $user['host_key'],
-                'last_synced' => date('Y-m-d H:i:s')
-            ]);
-        }
-
-        return $account;
-    }
-
     private static function refreshTokenIfExpired(ZoomAccount $account, object $token)
     {
         if(($token->expires_in - time()) < 900) {

@@ -35,7 +35,6 @@ class ZoomService implements ZoomServiceContract
         $location = $this->tokenRepo->store($user['email'], $token);
 
         $this->account->update([
-            'host_key' => $user['host_key'],
             'auth_filename' => $location,
             'status' => 'connected',
             'last_synced' => Carbon::now()

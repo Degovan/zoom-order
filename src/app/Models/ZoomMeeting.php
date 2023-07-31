@@ -43,14 +43,4 @@ class ZoomMeeting extends Model
     {
         return $this->belongsTo(ZoomAccount::class);
     }
-
-    public function host_key()
-    {
-        if($this->zoom_account) {
-            $account = (new ZoomService($this->zoom_account))->syncHostkey();
-            return $account->host_key;
-        }
-
-        return null;
-    }
 }

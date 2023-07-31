@@ -35,10 +35,7 @@ class ZoomAccountController extends Controller
 
     public function store(ZoomAccountRequest $request)
     {
-        $this->accRepo->store($request->only([
-            'zoom_app_id', 'capacity', 'email'
-        ]));
-
+        $this->accRepo->store($request->validated());
         return back()->with('alert_s', 'Berhasil menambahkan akun');
     }
 
@@ -49,7 +46,7 @@ class ZoomAccountController extends Controller
 
     public function update(ZoomAccountRequest $request, ZoomAccount $account)
     {
-        $this->accRepo->update($account, $request->only('capacity'));
+        $this->accRepo->update($account, $request->only('capacity', 'host_key'));
         return back()->with('alert_s', 'Berhasil mengupdate akun');
     }
 
