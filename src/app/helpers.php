@@ -13,3 +13,14 @@ if(!function_exists('option')) {
         return new OptionRepository;
     }
 }
+
+if(!function_exists('whatsappNumber')) {
+    function whatsappNumber($number): string {
+        $firstChar = substr($number, 0, 2);
+
+        if($firstChar == "08") return "62" . substr($number, 1);
+        if($firstChar == "+6") return substr($number, 1);
+
+        return $number;
+    }
+}

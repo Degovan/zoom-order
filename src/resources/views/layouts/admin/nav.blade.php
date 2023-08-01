@@ -88,6 +88,14 @@
                     <span class="sidebar-text">Xendit</span>
                 </a>
             </li>
+            <li class="nav-item @active('admin.whatsapp')">
+                <a href="{{ route('admin.whatsapp.index') }}" class="nav-link">
+                    <span class="sidebar-icon">
+                        <i class="fab fa-fw fa-whatsapp"></i>
+                    </span>
+                    <span class="sidebar-text">WhatsApp</span>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

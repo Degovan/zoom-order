@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\MeetingController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\TutorialController;
+use App\Http\Controllers\Admin\WhatsappController;
 use App\Http\Controllers\Admin\XenditController;
 use App\Http\Controllers\Admin\ZoomAccountController;
 use App\Http\Controllers\Admin\ZoomAppController;
@@ -31,6 +32,11 @@ Route::middleware(['auth', 'role:admin'])->group(function() {
     Route::controller(XenditController::class)->group(function() {
         Route::get('xendit/index', 'index')->name('xendit.index');
         Route::post('xendit/store', 'store')->name('xendit.store');
+    });
+
+    Route::controller(WhatsappController::class)->group(function() {
+        Route::get('whatsapp/index', 'index')->name('whatsapp.index');
+        Route::post('whatsapp/store', 'store')->name('whatsapp.store');
     });
 
     Route::controller(InvoiceController::class)->name('invoice.')->group(function(){

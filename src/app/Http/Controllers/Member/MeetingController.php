@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Member;
 
 use App\Exceptions\MeetingException;
+use App\Factory\MeetingMessageFactory;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\Member\MeetingMiddleware;
 use App\Http\Requests\Member\MeetingRequest;
 use App\Models\{Order, ZoomMeeting};
 use App\Service\MeetingService;
+use App\Service\WhatsAppService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -54,7 +56,11 @@ class MeetingController extends Controller
         }
 
         try {
+            $user = Auth::user();
             $meeting = MeetingService::create($order, $request);
+            $message = new MeetingMessageFactory($user, $meeting);
+
+            (new WhatsAppService)->sendMessage($message, $user->phone);
             $order->decrement('remaining');
 
             return redirect()->route('member.meetings.show', $meeting);
