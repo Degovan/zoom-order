@@ -15,8 +15,8 @@ class WhatsAppService
 
     public function __construct()
     {
-        $this->apikey = WhatsAppRepository::getApikey();
-        $this->deviceID = WhatsAppRepository::getDeviceID();
+        $this->apikey = WhatsAppRepository::getApikey() ?? '';
+        $this->deviceID = WhatsAppRepository::getDeviceID() ?? '';
 
         $this->client = Http::withHeaders([
             'Authorization' => $this->apikey,
